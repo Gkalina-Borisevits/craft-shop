@@ -1,0 +1,98 @@
+{
+  "header": {
+    "home": "Головна",
+    "products": "Продукти",
+    "services": "Послуги",
+    "contacts": "Контакти",
+    "about": "Про нас",
+    "registration": "Реєстрація",
+    "login": "Увійти",
+    "contactUs" : "Зв'яжіться з нами",
+    "contactInfo" : "Контактна інформація",
+    "whoWeAre" : "Хто ми",
+    "careers" : "Кар'єра",
+    "ourProject" : "Наші проекти",
+    "faq" : "Питання, які часто задаються"
+  },
+  "footer": {
+    "findUsOn": "Знайдіть нас на",
+    "mayHelpYou": " Можемо вам допомогти",
+    "aboutCompany": "Про компанію",
+    "contactUs": "Зв'яжіться з нами",
+    "emailUnsubscribe": " Відписатися від розсилки електронною поштою",
+    "paymentOptions": "Варіанти оплати",
+    "shippingServices": "Послуги доставки",
+    "aboutHarmanCoal": "Про компанію Harman Coal",
+    "careers": "Кар'єра",
+    "contacts": "Контакти",
+    "signUpUpdates": "Підпишіться на оновлення від Harman Coal.",
+    "emailFormText": "Введіть свою адресу електронної пошти нижче, ви погоджуєтеся на отримання нашого інформаційного бюлетеня з доступом до наших останніх колекцій, подій та ініціатив. Додаткові відомості про це",
+    "emailAddress": "Адреса електронної пошти",
+    "subscribing": "Дякуємо за підписку з"
+  },
+  "contacts": {
+    "name": "Ім'я",
+    "surname": "Прізвище",
+    "email": "Електронна пошта",
+    "feedbackForm": "Форма зворотнього зв'язку, ми відповімо на всі ваші питання",
+    "yourQuestion": "Ваше запитання",
+    "send": "Надіслати",
+    "ourSocialMedia": "Наші соціальні мережі",
+    "fillAllFields": "Будь ласка, заповніть всі поля",
+    "thankQuestion": "Дякую за ваше питання!"
+  },
+  "registration": {
+    "registration": "Реєстрація",
+    "password": "Пароль",
+    "notRobot": "Я не робот",
+    "passwordMismatch": "Паролі не співпадають",
+    "passwordNotSecure": "Пароль не надійний, будь ласка, використовуйте пароль, довжиною не менше 8 символів.",
+    "repeatPassword": "Повторіть пароль",
+    "requiredFields": "* - обов'язкові поля",
+    "showPassword": "Показати пароль",
+    "pleaseVerify": "Будь ласка, підтвердіть, що ви людина!",
+    "signToAccount": "Увійти до облікового запису",
+    "signIn": "Увійти"
+  },
+  "personalPage": {
+    "viewEditAccount": "Переглянути або змінити свій обліковий запис",
+    "reset": "Скидання",
+    "update": "Оновлення",
+    "personalData": "Особисті дані",
+    "updatePersonalData": "Оновіть свої особисті дані",
+    "emailHeader": " Ваша електронна адреса для входу ",
+    "emailFooter": " (не може бути змінено)",
+    "name": "Ім'я",
+    "phone": "Телефон",
+    "street": "Вулиця",
+    "code": "Поштовий індекс",
+    "lastName": "Прізвище",
+    "dataOfBirth": "Дата народження",
+    "city": "Місто",
+    "country": "Країна"
+  },
+  "toasty": {
+    "contactUpdated": "Контактні дані змінені",
+    "noUpdatedContact": "Не вдалося оновити контактні дані. Спробуйте знову пізніше",
+    "personalDataDeleted": "Персональні дані видалені",
+    "personalDataNoDeleted": "Персональні дані не видалені. Спробуйте знову пізніше",
+    "login": "Ви успішно увійшли в систему. Вам доступний весь функціонал сайту"
+  },
+  "storeProduct": {
+    "title": "Назва",
+    "description": "Опис",
+    "size": "Розмір",
+    "dimensions": "Розміри",
+    "material": "Матеріал",
+    "price": "Ціна",
+    "quantity": "Кількість",
+    "file": "Файл",
+    "buttonAddCard" : "Додати картку",
+    "closeForm" : "Закрити форму"
+  },
+  "whoWeAre" : {
+    "uploadPhoto" : "Завантажити фото",
+    "addDescription" : "Додати опис",
+    "linkToVideo" : "Посилання на відео"
+  }
+}

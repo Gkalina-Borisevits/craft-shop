@@ -1,0 +1,98 @@
+{
+  "header": {
+    "home": "Главная",
+    "products": "Продукты",
+    "services": "Услуги",
+    "contacts": "Контакты",
+    "about": "О нас",
+    "registration": "Регистрация",
+    "login": "Вход",
+    "contactUs" : "Свяжитесь с нами",
+    "contactInfo" : "Контактная информация",
+    "whoWeAre" : "Кто мы",
+    "careers" : "Карьера",
+    "ourProject" : "Наши проекты",
+    "faq" : "Часто задаваемые вопросы"
+  },
+  "footer": {
+    "findUsOn": "Найдите нас на",
+    "mayHelpYou": "Можем ли мы вам помочь",
+    "aboutCompany": "О компании",
+    "contactUs": "Свяжитесь с нами",
+    "emailUnsubscribe": "Отписаться от рассылки по электронной почте",
+    "paymentOptions": "Варианты оплаты",
+    "shippingServices": "Службы доставки",
+    "aboutHarmanCoal": "О компании Harman Coal",
+    "careers": "Карьера",
+    "contacts": "Контакты",
+    "signUpUpdates": "Подпишитесь на обновления от Harman Coal. ",
+    "emailFormText": "Введя свой адрес электронной почты ниже, вы соглашаетесь на получение нашего информационного бюллетеня с доступом к нашим последним коллекциям, мероприятиям и инициативам. Дополнительные сведения об этом",
+    "emailAddress": "Адрес электронной почты",
+    "subscribing": "Спасибо за подписку с"
+  },
+  "contacts": {
+    "name": "Имя",
+    "surname": "Фамилия",
+    "email": "Электронная почта",
+    "feedbackForm": "Форма обратной связи, мы ответим на все ваши вопросы",
+    "yourQuestion": "Ваш вопрос",
+    "send": "Отправить",
+    "ourSocialMedia": "Наши социальные сети",
+    "fillAllFields": "Пожалуйста, заполните все поля",
+    "thankQuestion": "Спасибо за ваш вопрос!"
+  },
+  "registration": {
+    "registration": "Регистрация",
+    "password": "Пароль",
+    "notRobot": "Я не робот",
+    "passwordMismatch": "Пароли не совпадают",
+    "passwordNotSecure": "Пароль ненадежен, используйте пароль длиной не менее 8 символов.",
+    "repeatPassword": "Повторите пароль",
+    "requiredFields": "* - обязательные поля",
+    "showPassword": "Показать пароль",
+    "pleaseVerify": "Пожалуйста, подтвердите, что вы человек!",
+    "signToAccount": "Войти в аккаунт",
+    "signIn": "Войти"
+  },
+  "personalPage": {
+    "viewEditAccount": "Посмотреть или изменить свой аккаунт",
+    "reset": "Сбросить",
+    "update": "Обновить",
+    "personalData": "Персональные данные",
+    "updatePersonalData": "Обновите ваши персональные данные",
+    "emailHeader": "Ваш адрес электронной почты для входа ",
+    "emailFooter": " (не может быть изменен)",
+    "name": "Имя",
+    "phone": "Телефон",
+    "street": "Улица",
+    "code": "Индекс",
+    "lastName": "Фамилия",
+    "dataOfBirth": "Дата рождения",
+    "city": "Город",
+    "country": "Страна"
+  },
+  "toasty": {
+    "contactUpdated": "Контактные данные изменены",
+    "noUpdatedContact": "Не получилось изменить контактные данные. Попробуйте позже",
+    "personalDataDeleted": "Персональные данные удалены",
+    "personalDataNoDeleted": "Персональные данные не удалены. Попробуйте позже",
+    "login": "Вы успешно вошли в систему. Вам доступен весь функционал сайта."
+  },
+  "storeProduct": {
+    "title": "Название",
+    "description": "Описание",
+    "size": "Размер",
+    "dimensions": "Габариты",
+    "material": "Материал",
+    "price": "Цена",
+    "quantity": "Количество",
+    "file": "Файл",
+    "buttonAddCard" : "Добавить карточку",
+    "closeForm" : "Закрыть форму"
+  },
+  "whoWeAre" : {
+    "uploadPhoto" : "Загрузить фото",
+    "addDescription" : "Добавить описание",
+    "linkToVideo" : "Ссылка на видео"
+  }
+}

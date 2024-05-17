@@ -1,0 +1,7 @@
+.loginFormContainer {
+  margin-top: 150px;
+}
+.loginFormContainer input {
+  margin-bottom: 20px;
+  height: 40px;
+}

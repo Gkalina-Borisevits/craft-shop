@@ -1,0 +1,71 @@
+.bigContactsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  border: 1px solid rgb(254, 255, 255);
+  margin-top: 30px;
+  background-color: black;
+}
+.contactsContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.formContainer {
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+}
+.textContainer {
+  width: 40%;
+  margin-top: 30px;
+  color: rgb(23, 108, 254);
+}
+.inputFormContainer {
+  width: 340px;
+}
+.socialLinkContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  align-self: flex-end;
+  padding-top: 20px;
+  padding: 20px;
+  gap: 12px;
+  color: aliceblue;
+}
+.socialLinkContainer h2 {
+  color: rgb(249, 249, 246);
+  font-size: 34px;
+  font-weight: bold;
+}
+.textContainer h1 {
+  font-size: 34px;
+  font-weight: bold;
+}
+@media screen and (max-width: 768px) {
+  .bigContactsContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .socialLinkContainer {
+    width: 100%;
+  }
+  .socialLinkContainer h2 {
+    font-size: 24px;
+  }
+  .textContainer {
+    width: 100%;
+  }
+  .textContainer h1 {
+    font-size: 20px;
+    margin: 6px;
+    padding: 6px;
+  }
+}

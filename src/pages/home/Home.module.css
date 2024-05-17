@@ -1,0 +1,6 @@
+.logoHome {
+    position: absolute;
+    margin-top:480px;
+    left: 60px;
+    z-index: 999;
+}

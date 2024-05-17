@@ -1,0 +1,36 @@
+.burgerMenu {
+  position: fixed;
+  margin-left: 50px;
+  top: 0;
+  margin-top: 10px;
+  z-index: 1000;
+}
+.icon {
+  cursor: pointer;
+  font-size: 34px;
+  color: rgb(33, 32, 32);
+}
+.menu {
+  position: absolute;
+  top: 70px;
+
+  left: -20px;
+  background-color: rgb(244, 243, 243);
+  padding: 1px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgb(248, 243, 243);
+  width: 180px;
+  text-align: left;
+}
+.menu a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  font-size: large;
+  color: rgb(5, 5, 5);
+}
+
+.menu a:hover {
+  color: rgb(147, 147, 145);
+  font-weight: 300;
+}

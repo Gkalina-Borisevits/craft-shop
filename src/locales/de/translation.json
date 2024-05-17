@@ -1,0 +1,98 @@
+{
+  "header": {
+    "home": "Startseite",
+    "products": "Produkte",
+    "services": "Dienstleistungen",
+    "contacts": "Kontakte",
+    "about": "Über uns",
+    "registration": "Registrierung",
+    "login": "Anmeldung",
+    "contactUs" : "Kontaktieren Sie uns",
+    "contactInfo" : "Kontaktinformationen",
+    "whoWeAre" : "Wer wir sind",
+    "careers" : "Karriere",
+    "ourProject" : "Unsere Projekte",
+    "faq" : "Häufig gestellte Fragen"
+  },
+  "footer": {
+    "findUsOn": "Finden Sie uns auf",
+    "mayHelpYou": "Können wir Ihnen helfen",
+    "aboutCompany": "Über das Unternehmen",
+    "contactUs": "Kontaktieren Sie uns",
+    "emailUnsubscribe": "E-Mail abmelden",
+    "paymentOptions": "Zahlungsoptionen",
+    "shippingServices": "Versanddienstleistungen",
+    "aboutHarmanCoal": "Über Harman Coal",
+    "careers": "Karriere",
+    "contacts": "Kontakte",
+    "signUpUpdates": "Melden Sie sich für Updates von Harman Coal an.",
+    "emailFormText": "Geben Sie unten Ihre E-Mail-Adresse ein, um unseren Newsletter mit Zugang zu unseren neuesten Kollektionen, Veranstaltungen und Initiativen zu erhalten. Weitere Details dazu",
+    "emailAddress": "E-Mail-Adresse",
+    "subscribing": "Vielen Dank für die Anmeldung mit"
+  },
+  "contacts": {
+    "name": "Vorname",
+    "surname": "Nachname",
+    "email": "E-Mail",
+    "feedbackForm": "Rückmeldungsformular, wir beantworten alle Ihre Fragen",
+    "yourQuestion": "Ihre Frage",
+    "send": "Senden",
+    "ourSocialMedia": "Unsere sozialen Medien",
+    "fillAllFields": "Bitte füllen Sie alle Felder aus",
+    "thankQuestion": "Vielen Dank für Ihre Frage!"
+  },
+  "registration": {
+    "registration": "Sign up",
+    "password": "Password",
+    "notRobot": "I'm not a robot",
+    "passwordMismatch": "Passwort wiederholen",
+    "passwordNotSecure": "Das Passwort ist nicht sicher. Bitte verwenden Sie ein Passwort mit mindestens 8 Zeichen.",
+    "repeatPassword": "Passwörter stimmen nicht überein",
+    "requiredFields": " * - Pflichtfelder",
+    "showPassword": "Passwort anzeigen",
+    "pleaseVerify": "Bitte bestätigen Sie, dass Sie ein Mensch sind!",
+    "signToAccount": "Anmelden",
+    "signIn": "Anmelden"
+  },
+  "personalPage": {
+    "viewEditAccount": "Ihren Account anzeigen oder bearbeiten",
+    "reset": "Zurücksetzen",
+    "update": "Aktualisieren",
+    "personalData": "Persönliche Daten",
+    "updatePersonalData": "Aktualisieren Sie Ihre persönlichen Daten",
+    "emailHeader": "Ihre Login-E-Mail-Adresse ",
+    "emailFooter": " (kann nicht geändert werden)",
+    "name": "Vorname",
+    "phone": "Telefon",
+    "street": "Straße",
+    "code": " Postleitzahl",
+    "lastName": "Nachname",
+    "dataOfBirth": "Geburtsdatum",
+    "city": "Stadt",
+    "country": "Land"
+  },
+  "toasty": {
+    "contactUpdated": "Kontaktdaten aktualisiert",
+    "noUpdatedContact": "Fehler beim Aktualisieren der Kontaktdaten. Bitte versuchen Sie es später erneut",
+    "personalDataDeleted": "Persönliche Daten gelöscht",
+    "personalDataNoDeleted": "Persönliche Daten nicht gelöscht. Bitte versuchen Sie es später erneut",
+    "login": "Sie haben sich erfolgreich angemeldet. Ihnen steht der volle Funktionsumfang der Website zur Verfügung."
+  },
+  "storeProduct": {
+    "title": "Titel",
+    "description": "Beschreibung",
+    "size": "Größe",
+    "dimensions": "Abmessungen",
+    "material": "Material",
+    "price": "Preis",
+    "quantity": "Menge",
+    "file" :"Datei",
+    "buttonAddCard" : "Karte hinzufügen",
+    "closeForm" : "Formular schließen"
+  },
+  "whoWeAre" : {
+    "uploadPhoto" : "Foto hochladen",
+    "addDescription" : "Beschreibung hinzufügen",
+    "linkToVideo" : "Link zum Video"
+  }
+}

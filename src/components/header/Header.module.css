@@ -1,0 +1,101 @@
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(0, 0, 0);
+  height: 100px;
+  position: relative;
+  box-sizing: border-box;
+}
+.headerContainer p{
+  border-bottom: 1px solid black;
+ }
+
+.languageIcon {
+  position: absolute;
+  top: 30 px;
+  right: 0;
+  z-index: 1000;
+  color: rgb(249, 249, 245);
+  margin-right: 20px;
+  cursor: pointer;
+}
+.languageDropdown {
+  position: fixed;
+  top: 0 px;
+  right: 0;
+  z-index: 1000;
+  color: rgb(24, 24, 23);
+  cursor: pointer;
+  background-color: rgb(170, 170, 168);
+  border: 1px solid black;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1vw;
+  white-space: nowrap;
+  height: 100px;
+  padding: 86px;
+  width: 100%;
+  padding: 0 110px;
+}
+
+.navbar > a {
+  text-decoration: none;
+  color: rgb(252, 250, 250);
+  display: flex;
+  white-space: nowrap;
+  margin-right: 6px;
+}
+.navbar > a:hover {
+  text-decoration: underline;
+}
+
+.navbar > a:global.active {
+  text-decoration: underline;
+  color: rgb(255, 255, 255);
+}
+.logoHeader {
+  width: 100%;
+  height: auto;
+}
+
+.personalPageHeader {
+  color: rgb(255, 255, 255);
+  margin-right: 120px;
+  position: sticky;
+}
+
+@media screen and (max-width: 900px) {
+  .headerContainer {
+    width: 100%;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  .navbar {
+    display: none;
+  }
+  .burgerMenuContainer {
+    position: absolute;
+    margin-left: -30px;
+  }
+  .logoHeader {
+    margin-left: -30px;
+  }
+  .languageIcon {
+    margin-right: 10px;
+  }
+  .navbar > a {
+    margin: 10px;
+    margin-right: 5px;
+  }
+  .languageDropdown {
+    margin-top: 28px;
+    font-size: 10px;
+  }
+}

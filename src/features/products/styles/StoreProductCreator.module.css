@@ -1,0 +1,22 @@
+.addCardContainer {
+  background-color: black;
+}
+.containerAddInfoImage input,
+textarea {
+  border: none;
+  height: 50px;
+  border-bottom: 2px solid rgb(254, 251, 251);
+  display: inline-block;
+}
+
+.addImage {
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #e2f7c5;
+  color: rgb(75, 73, 73);
+  border: none;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 12px;
+  transition: background-color 0.3s;
+}

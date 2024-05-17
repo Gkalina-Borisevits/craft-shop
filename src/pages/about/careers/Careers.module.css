@@ -1,0 +1,19 @@
+.careersContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+.buttonAddNewJob {
+  align-self: flex-start;
+  margin-left: 20px;
+}
+.buttonAddNewJob button {
+  width: 200px;
+  
+}
+.logoCareers {
+  align-self: flex-end;
+  margin-bottom: 150px;
+ 
+}

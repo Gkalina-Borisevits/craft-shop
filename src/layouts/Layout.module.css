@@ -1,0 +1,15 @@
+.layoutContainer {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: black;
+}
+.main {
+  min-height: 100vh;
+ 
+}
+@media screen and (max-width: 768px) {
+  .main {
+    width: 100%;
+  }
+}
