@@ -7,12 +7,12 @@
     "about": "Über uns",
     "registration": "Registrierung",
     "login": "Anmeldung",
-    "contactUs" : "Kontaktieren Sie uns",
-    "contactInfo" : "Kontaktinformationen",
-    "whoWeAre" : "Wer wir sind",
-    "careers" : "Karriere",
-    "ourProject" : "Unsere Projekte",
-    "faq" : "Häufig gestellte Fragen"
+    "contactUs": "Kontaktieren Sie uns",
+    "contactInfo": "Kontaktinformationen",
+    "whoWeAre": "Wer wir sind",
+    "careers": "Karriere",
+    "ourProject": "Unsere Projekte",
+    "faq": "Häufig gestellte Fragen"
   },
   "footer": {
     "findUsOn": "Finden Sie uns auf",
@@ -86,13 +86,22 @@
     "material": "Material",
     "price": "Preis",
     "quantity": "Menge",
-    "file" :"Datei",
-    "buttonAddCard" : "Karte hinzufügen",
-    "closeForm" : "Formular schließen"
+    "file": "Datei",
+    "buttonAddCard": "Karte hinzufügen",
+    "closeForm": "Formular schließen"
   },
-  "whoWeAre" : {
-    "uploadPhoto" : "Foto hochladen",
-    "addDescription" : "Beschreibung hinzufügen",
-    "linkToVideo" : "Link zum Video"
+  "whoWeAre": {
+    "uploadPhoto": "Foto hochladen",
+    "addDescription": "Beschreibung hinzufügen",
+    "linkToVideo": "Link zum Video"
+  },
+  "selectRole": {
+    "emailRequired": "E-Mail ist erforderlich",
+    "invalidEmail": "Ungültige E-Mail-Adresse",
+    "roleRequired": "Rolle ist erforderlich",
+    "roleChoose": "Wählen Sie eine Rolle",
+    "administrator": "Administrator",
+    "user": "Benutzer",
+    "changeRole": "Rolle ändern"
   }
 }

@@ -1,6 +1,6 @@
 export interface User {
   id: number
-  name: string
+  firstName: string
   lastName: string
   phone: string
   birthdate: string
@@ -8,6 +8,7 @@ export interface User {
   city: string
   country: string
   postalCode: string
+  role: string
 }
 
 

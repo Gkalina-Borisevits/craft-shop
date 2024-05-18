@@ -94,5 +94,14 @@
     "uploadPhoto" : "Завантажити фото",
     "addDescription" : "Додати опис",
     "linkToVideo" : "Посилання на відео"
+  },
+  "selectRole": {
+    "emailRequired": "Email обов'язковий",
+    "invalidEmail": "Невірна адреса електронної пошти",
+    "roleRequired": "Роль обов'язкова",
+    "roleChoose": "Виберіть роль",
+    "administrator": "Адміністратор",
+    "user": "Користувач",
+    "changeRole": "Змінити роль"
   }
 }

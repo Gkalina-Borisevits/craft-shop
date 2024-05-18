@@ -1,5 +1,5 @@
 import { useState } from "react"
-import type { CareersFormData } from "./api/types"
+import type { CareersFormData } from "./api"
 import { useTranslation } from "react-i18next"
 
 type Props = {

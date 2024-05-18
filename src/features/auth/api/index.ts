@@ -46,7 +46,7 @@ export async function user(): Promise<{
 }
 
 export async function registerUser(formData: RegistrationData): Promise<User> {
-  const res = await fetch("api/user", {
+  const res = await fetch("api/v1/registration", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export async function registerUser(formData: RegistrationData): Promise<User> {
 }
 
 export async function deletePersonalPageUser(): Promise<void> {
-  const res = await fetch("api/user", {
+  const res = await fetch("api/v1/user", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

@@ -4,20 +4,22 @@ import { useEffect, useState } from "react"
 import styles from "./styles/PersonalPage.module.css"
 import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { deleteUser, selectUser, updateUser } from "./userSlice"
+import { deleteUser, selectRole, selectUser, updateUser } from "./userSlice"
 import type { User } from "./types/PersonalPageData"
 import { toast } from "react-toastify"
 import logo from "../../assets/logo.png"
+import UserRoleForm from "../../components/form/UserRoleForm"
 
 const PersonalPage: FC = () => {
   const today = new Date().toISOString().split("T")[0]
   const { t } = useTranslation("translation")
   const user = useAppSelector(selectUser)
+  const role = useAppSelector(selectRole)
   const dispatch = useAppDispatch()
 
   const [formData, setFormData] = useState<User>({
     id: 0,
-    name: "",
+    firstName: "",
     lastName: "",
     phone: "",
     birthdate: '1990-01-01',
@@ -25,6 +27,7 @@ const PersonalPage: FC = () => {
     city: "",
     country: "",
     postalCode: "",
+    role: ""
   })
 
   useEffect(() => {
@@ -62,8 +65,12 @@ const PersonalPage: FC = () => {
       })
   }
 
+  const viewUserRoleForm = role === "ADMINISTRATOR" || role === "MODERATOR"
+
   return (
     <div className={styles.personalPageContainer}>
+{viewUserRoleForm &&  <UserRoleForm/>}
+      
       <div className="container mx-auto px-4">
         <div className="text-right">
           <div className={styles.headerUpdateAccount}></div>
@@ -85,9 +92,9 @@ const PersonalPage: FC = () => {
           <div className="space-y-4 w-1/2 pr-2 mt-6">
             <input
               type="text"
-              name="name"
+              name="firstName"
               placeholder={t("personalPage.name")}
-              value={formData.name}
+              value={formData.firstName}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded "
             />

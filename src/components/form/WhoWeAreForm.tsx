@@ -1,6 +1,6 @@
 import type React from "react"
 import { useState } from "react"
-import type { WhoWeAreFormData } from "./api/types"
+import type { WhoWeAreFormData } from "./api"
 import { useTranslation } from "react-i18next"
 
 type Props = {

@@ -26,7 +26,7 @@ export const ContactFormSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.loading = false
-          state.contactsData = action.payload
+    
         },
         rejected: state => {
           state.loading = false

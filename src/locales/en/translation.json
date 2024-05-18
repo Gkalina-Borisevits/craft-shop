@@ -94,5 +94,14 @@
     "uploadPhoto" : "Upload Photo",
     "addDescription" : "Add Description",
     "linkToVideo" : "Link to Video"
+  },
+  "selectRole": {
+    "emailRequired": "Email is required",
+    "invalidEmail": "Invalid email address",
+    "roleRequired": "Role is required",
+    "roleChoose": "Choose a role",
+    "administrator": "Administrator",
+    "user": "User",
+    "changeRole": "Change role"
   }
 }

@@ -14,7 +14,7 @@ const Registration: React.FC = () => {
   const dispatch = useAppDispatch()
 
   const [formData, setFormData] = useState<RegistrationData>({
-    name: "",
+    firstName: "",
     lastName: "",
     email: "",
     password: "",
@@ -64,9 +64,9 @@ const Registration: React.FC = () => {
           >
             <input
               type="text"
-              name="name"
+              name="firstName"
               placeholder={`${t("contacts.name")} *`}
-              value={formData.name}
+              value={formData.firstName}
               onChange={handleChange}
               required
               className="px-4 py-2 border-none border-b-2 border-black focus:border-blue-500 focus:outline-none w-full"
