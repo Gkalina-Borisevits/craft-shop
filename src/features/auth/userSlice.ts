@@ -11,7 +11,7 @@ import {
 import type { LoginData } from "./types/LoginData"
 import type { RegistrationData } from "./types/RegistrationData"
 import type { UserRoleData } from "../../components/form/types/UserRoleData"
-import { updateUser } from "../../components/form/api"
+import { updateUserFormRole } from "../../components/form/api"
 
 const initialState: UserState = {
   user: null,
@@ -110,7 +110,7 @@ export const userSlice = createAppSlice({
     ),
     updateUserRole: create.asyncThunk(
       async (formData: UserRoleData) => {
-        const response = await updateUser(formData)
+        const response = await updateUserFormRole(formData)
         return response
       },
       {
@@ -154,7 +154,7 @@ export const userSlice = createAppSlice({
   },
 })
 
-export const { updateUserRole, login, registration, deleteUser, activateAccount } =
+export const { updateUserRole, updateUser, login, registration, deleteUser, activateAccount } =
   userSlice.actions
 
 export const { selectUser, selectRole, selectIsAuthenticated } =

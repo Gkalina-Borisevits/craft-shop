@@ -1,9 +1,9 @@
 import type React from "react"
 import type { UserRoleData } from "./types/UserRoleData"
 import { useAppDispatch } from "../../app/hooks"
-import { updateUser } from "./api"
 import { useCallback, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { updateUserRole } from "../../features/auth/userSlice"
 
 const UserRoleForm: React.FC = () => {
   const { t } = useTranslation("translation")
@@ -40,7 +40,7 @@ const UserRoleForm: React.FC = () => {
       e.preventDefault()
       if (validate()) {
         try {
-          await dispatch(updateUser(formData))
+          await dispatch(updateUserRole(formData))
           setFormData({ email: "", role: "" })
         } catch (error) {
           console.error("Failed user:", error)

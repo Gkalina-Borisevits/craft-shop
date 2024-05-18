@@ -1,7 +1,7 @@
 import type { User } from "../../../features/auth/types/PersonalPageData"
 import type { UserRoleData } from "../types/UserRoleData"
 
-export async function updateUser(formData: UserRoleData): Promise<User> {
+export async function updateUserFormRole(formData: UserRoleData): Promise<User> {
   const res = await fetch("/user", {
     method: "PUT",
     headers: {

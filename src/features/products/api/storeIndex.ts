@@ -32,3 +32,18 @@ export async function fetchStoreProducts(): Promise<StoreProduct[]> {
 
   return res.json()
 }
+
+export async function fetchStoreProductById(id: string): Promise<StoreProduct> {
+  const res = await fetch(`/api/storeProduct/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch store products")
+  }
+
+  return res.json()
+}

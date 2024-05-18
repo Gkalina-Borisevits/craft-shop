@@ -3,7 +3,7 @@ import type { User } from "../types/PersonalPageData"
 import type { RegistrationData } from "../types/RegistrationData"
 
 export async function personalPageUser(formData: User): Promise<User> {
-  const res = await fetch("api/user", {
+  const res = await fetch("api/v1/user", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -17,7 +17,7 @@ export async function personalPageUser(formData: User): Promise<User> {
 	return res.json();
 }
 export async function loginUser(formData: LoginData): Promise<User> {
-  const res = await fetch("api/user", {
+  const res = await fetch("api/v1/user", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export async function user(): Promise<{
 	email: string;
 	role: string;
 }> {
-	const res = await fetch('/api/user/');
+	const res = await fetch('/api/v1/user/');
 	if (res.status >= 400) {
 		const { message }: { message: string } = await res.json();
 		throw new Error(message);

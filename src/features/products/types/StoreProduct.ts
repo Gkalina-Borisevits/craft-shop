@@ -10,7 +10,8 @@ export interface StoreProduct {
 }
 
 export interface StoreProductState {
-  products: StoreProduct[]
+  products: StoreProduct[] 
+  product: StoreProduct | undefined
   loading: boolean
   error: string | null
 }

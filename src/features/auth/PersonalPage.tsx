@@ -22,12 +22,12 @@ const PersonalPage: FC = () => {
     firstName: "",
     lastName: "",
     phone: "",
-    birthdate: '1990-01-01',
+    birthdate: "1990-01-01",
     street: "",
     city: "",
     country: "",
     postalCode: "",
-    role: ""
+    role: "",
   })
 
   useEffect(() => {
@@ -41,10 +41,10 @@ const PersonalPage: FC = () => {
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log("Personal Page: ", formData)
-    dispatch(updateUser(formData))
+    await dispatch(updateUser(formData))
       .unwrap()
       .then(() => {
         toast.info(t("toasty.contactUpdated"))
@@ -69,8 +69,8 @@ const PersonalPage: FC = () => {
 
   return (
     <div className={styles.personalPageContainer}>
-{viewUserRoleForm &&  <UserRoleForm/>}
-      
+      {viewUserRoleForm && <UserRoleForm />}
+
       <div className="container mx-auto px-4">
         <div className="text-right">
           <div className={styles.headerUpdateAccount}></div>

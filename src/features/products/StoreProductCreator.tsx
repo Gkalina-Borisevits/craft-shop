@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../app/hooks"
 import { useState } from "react"
 import type { StoreProduct } from "./types/StoreProduct"
 import { toast } from "react-toastify"
-import { addProduct } from "./storeProductSlice"
+import { addNewStoreProduct } from "./storeProductSlice"
 import styles from "./styles/StoreProductCreator.module.css"
 import { useTranslation } from "react-i18next"
 
@@ -73,7 +73,7 @@ const StoreProductCreator: React.FC<Props> = ({ onClose }) => {
         }
       })
 
-      dispatch(addProduct(formData))
+      dispatch(addNewStoreProduct(formData))
         .unwrap()
         .then(() => {
           toast.success("Store product added successfully")

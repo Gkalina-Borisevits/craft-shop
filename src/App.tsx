@@ -16,6 +16,7 @@ import ContactInfo from "./pages/contacts/contactInfo/ContactInfo"
 import Questions from "./pages/contacts/askedQuestions/Questions"
 import About from "./pages/about/about/About"
 import OurProjects from "./pages/about/ourProject/OurProjects"
+import ProductDetails from "./features/products/ProductDetails"
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/payment-info" element={<PaymentInfo />} />
           <Route path="/personal-page" element={<PersonalPage />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
 
           <Route path="/contacts/contact-us" element={<Contacts />} />
           <Route path="/contacts/support" element={<ContactInfo />} />
