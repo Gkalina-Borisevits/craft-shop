@@ -11,7 +11,7 @@ export interface StoreProduct {
 
 export interface StoreProductState {
   products: StoreProduct[] 
-  product: StoreProduct | undefined
+  product: StoreProduct | null
   loading: boolean
   error: string | null
 }

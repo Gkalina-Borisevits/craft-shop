@@ -34,7 +34,7 @@ export async function fetchStoreProducts(): Promise<StoreProduct[]> {
 }
 
 export async function fetchStoreProductById(id: string): Promise<StoreProduct> {
-  const res = await fetch(`/api/storeProduct/${id}`, {
+  const res = await fetch(`/api/store-product/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -4,7 +4,7 @@ import { createAppSlice } from "../../app/createAppSlice"
 
 const initialState: StoreProductState = {
   products: [],
-  product: undefined,
+  product: null,
   loading: false,
   error: null,
 }

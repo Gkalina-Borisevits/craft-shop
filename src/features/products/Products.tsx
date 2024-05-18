@@ -22,7 +22,7 @@ const Products: FC = () => {
     setIsAddingProduct(false)
   }
 
-  const viewUserRoleForm = role === "ADMINISTRATOR" || role === "MODERATOR"
+  const viewUserRoleForm = role !== "ADMINISTRATOR" 
 
   return (
     <>

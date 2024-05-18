@@ -65,7 +65,7 @@ const PersonalPage: FC = () => {
       })
   }
 
-  const viewUserRoleForm = role === "ADMINISTRATOR" || role === "MODERATOR"
+  const viewUserRoleForm = role !== "ADMINISTRATOR" 
 
   return (
     <div className={styles.personalPageContainer}>
