@@ -103,5 +103,9 @@
     "administrator": "Administrator",
     "user": "Benutzer",
     "changeRole": "Rolle ändern"
+  },
+  "errorPage": {
+    "accessDenied": "Zugriff verweigert",
+    "notPermission": "Sie haben keine Berechtigung, diese Seite anzuzeigen."
   }
 }

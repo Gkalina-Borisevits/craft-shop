@@ -1,13 +1,13 @@
 import { useAppSelector } from "../../app/hooks"
-import { selectProducts } from "../../features/products/productSlice"
 import { useTranslation } from "react-i18next"
 import CartItem from "./CartItem"
 import { useNavigate } from "react-router-dom"
 import type { FC} from "react";
 import { useState } from "react"
+import { selectCartItems } from "./cartSlice"
 
 const ProductCart: FC = () => {
-  const products = useAppSelector(selectProducts)
+  const products = useAppSelector(selectCartItems)
 
   const { t } = useTranslation("translation")
   const [isCartSent, setIsCartSent] = useState(false)
@@ -30,15 +30,12 @@ const ProductCart: FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6">
+    <div className="max-w-4xl mx-auto px-4 py-6 bg-red-300">
       {products.map((product, index) => (
         <CartItem
-          product={{
-            id: "",
-            title: "",
-            price: 0,
-            cartQuantity: 0,
-          }}
+        key={product.id}
+        product={product}
+         
         />
       ))}
       {products.length > 0 && (

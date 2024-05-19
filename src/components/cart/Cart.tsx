@@ -32,7 +32,7 @@ interface CartProduct extends Product {
               </div>
             ))
           ) : (
-            <span className="text-gray-500 text-center w-full block py-6">
+            <span className="text-black text-center w-full block py-6">
               {t("text.cartIsEmpty")}
             </span>
           )}
@@ -42,7 +42,7 @@ interface CartProduct extends Product {
           <div className="mt-6 p-6 bg-white rounded-lg shadow">
             <div className="flex justify-between items-center">
               <span className="text-lg font-semibold">{t("menu.total")}:</span>
-              <span className="text-lg font-bold">
+              <span className="text-lg font-bold text-black">
                 {cartTotalAmount(products)} {t("menu.currency")}
               </span>
             </div>

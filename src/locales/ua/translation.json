@@ -7,12 +7,12 @@
     "about": "Про нас",
     "registration": "Реєстрація",
     "login": "Увійти",
-    "contactUs" : "Зв'яжіться з нами",
-    "contactInfo" : "Контактна інформація",
-    "whoWeAre" : "Хто ми",
-    "careers" : "Кар'єра",
-    "ourProject" : "Наші проекти",
-    "faq" : "Питання, які часто задаються"
+    "contactUs": "Зв'яжіться з нами",
+    "contactInfo": "Контактна інформація",
+    "whoWeAre": "Хто ми",
+    "careers": "Кар'єра",
+    "ourProject": "Наші проекти",
+    "faq": "Питання, які часто задаються"
   },
   "footer": {
     "findUsOn": "Знайдіть нас на",
@@ -87,13 +87,13 @@
     "price": "Ціна",
     "quantity": "Кількість",
     "file": "Файл",
-    "buttonAddCard" : "Додати картку",
-    "closeForm" : "Закрити форму"
+    "buttonAddCard": "Додати картку",
+    "closeForm": "Закрити форму"
   },
-  "whoWeAre" : {
-    "uploadPhoto" : "Завантажити фото",
-    "addDescription" : "Додати опис",
-    "linkToVideo" : "Посилання на відео"
+  "whoWeAre": {
+    "uploadPhoto": "Завантажити фото",
+    "addDescription": "Додати опис",
+    "linkToVideo": "Посилання на відео"
   },
   "selectRole": {
     "emailRequired": "Email обов'язковий",
@@ -103,5 +103,9 @@
     "administrator": "Адміністратор",
     "user": "Користувач",
     "changeRole": "Змінити роль"
+  },
+  "errorPage": {
+    "accessDenied": "Відмовлено у доступі",
+    "notPermission": "Ви не маєте дозволу переглядати цю сторінку."
   }
 }

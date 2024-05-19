@@ -2,15 +2,15 @@ import type { FC } from "react"
 import "@fortawesome/fontawesome-free/css/all.min.css"
 import type { CartItemProps } from "./types/CartItemProps"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { selectProducts } from "../../features/products/productSlice"
 import {
   addToCart,
   deleteItemFromCart,
   removeOneItemFromCart,
+  selectCartItems,
 } from "./cartSlice"
 
 const ProductInCart: FC<CartItemProps> = ({ product }) => {
-  const products = useAppSelector(selectProducts)
+  const products = useAppSelector(selectCartItems)
   const isItemInCart = products.some(item => item.id === product.id)
 
   const dispatch = useAppDispatch()
@@ -34,7 +34,7 @@ const ProductInCart: FC<CartItemProps> = ({ product }) => {
             onClick={handleAddToCart}
             className="text-blue-500 hover:text-blue-700"
           >
-            <i className="fas fa-plus"></i>
+            <i className="fas fa-cart-plus"></i>
           </button>
           <button
             onClick={handleRemoveOne}

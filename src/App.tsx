@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom"
 import Layout from "./layouts/Layout"
 import Home from "./pages/home/Home"
 import Login from "./features/auth/Login"
-
 import Careers from "./pages/about/careers/Careers"
 import OrderServices from "./pages/orderServices/OrderServices"
 import PaymentInfo from "./pages/paymentInfo/PaymentInfo"
@@ -17,6 +16,7 @@ import Questions from "./pages/contacts/askedQuestions/Questions"
 import About from "./pages/about/about/About"
 import OurProjects from "./pages/about/ourProject/OurProjects"
 import ProductDetails from "./features/products/ProductDetails"
+import ErrorPage from "./components/error/ErrorPage"
 
 
 const App = () => {
@@ -43,6 +43,8 @@ const App = () => {
           <Route path="/contacts/asked-questions" element={<Questions />} />
 
           <Route path="/shipping-services" element={<ShippingServices />} />
+        
+          <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
     </div>

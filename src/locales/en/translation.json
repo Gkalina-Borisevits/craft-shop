@@ -7,12 +7,12 @@
     "about": "About",
     "registration": "Registration",
     "login": "Login",
-    "contactUs" : "Contact Us",
-    "contactInfo" : "Contact Information",
-    "whoWeAre" : "Who We Are",
-    "careers" : "Careers",
-    "ourProject" : "Our Projects",
-    "faq" : "Frequently Asked Questions"
+    "contactUs": "Contact Us",
+    "contactInfo": "Contact Information",
+    "whoWeAre": "Who We Are",
+    "careers": "Careers",
+    "ourProject": "Our Projects",
+    "faq": "Frequently Asked Questions"
   },
   "footer": {
     "findUsOn": "Find us on",
@@ -86,14 +86,14 @@
     "material": "Material",
     "price": "Price",
     "quantity": "Quantity",
-    "file" :"File",
-    "buttonAddCard" : "Add card",
-    "closeForm" : "Close form"
+    "file": "File",
+    "buttonAddCard": "Add card",
+    "closeForm": "Close form"
   },
-  "whoWeAre" : {
-    "uploadPhoto" : "Upload Photo",
-    "addDescription" : "Add Description",
-    "linkToVideo" : "Link to Video"
+  "whoWeAre": {
+    "uploadPhoto": "Upload Photo",
+    "addDescription": "Add Description",
+    "linkToVideo": "Link to Video"
   },
   "selectRole": {
     "emailRequired": "Email is required",
@@ -103,5 +103,9 @@
     "administrator": "Administrator",
     "user": "User",
     "changeRole": "Change role"
+  },
+  "errorPage": {
+    "accessDenied": "Access Denied",
+    "notPermission": "You do not have permission to view this page."
   }
 }
