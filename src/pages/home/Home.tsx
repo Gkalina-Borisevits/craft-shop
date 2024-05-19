@@ -1,53 +1,60 @@
 import { useState, type FC } from "react"
-import type { HomePageProduct } from "../../features/products/types/HomePageProduct"
 import styles from "./Home.module.css"
 import { useTranslation } from "react-i18next"
 import logo from "../../assets/logo.png"
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { selectRole } from "../../features/auth/userSlice";
+
+interface Profile {
+  id: string;
+  image: string;
+  description: string;
+}
 
 const Home: FC = () => {
   const { t } = useTranslation("translation")
-  const [products, setProducts] = useState<HomePageProduct[]>([
-    { id: "1", url: "", description: "" },
-    { id: "2", url: "", description: "" },
-    { id: "3", url: "", description: "" },
+  const role = useAppSelector(selectRole)
+  const [profiles, setProfiles] = useState<Profile[]>([
+    { id: "1", image: "", description: "" },
+    { id: "2", image: "", description: "" },
+    { id: "3", image: "", description: "" },
   ])
   const [files, setFiles] = useState<File[]>([])
   const [isAdmin, setIsAdmin] = useState<boolean>(true)
+  const dispatsh = useAppDispatch()
+  const viewProfileForm = role === "ADMINISTRATOR" || role === "MODERATOR"
 
-  const handleFileChange =
-    (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0]
-      if (file) {
-        const url = URL.createObjectURL(file)
-        const updatedProducts = [...products]
-        updatedProducts[index].url = url
-        setProducts(updatedProducts)
+  const handleFileChange = (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      const updatedProfiles = [...profiles];
+      updatedProfiles[index].image = url;
+      setProfiles(updatedProfiles);
 
-        const updatedFiles = [...files]
-        updatedFiles[index] = file
-        setFiles(updatedFiles)
-      }
+      const updatedFiles = [...files];
+      updatedFiles[index] = file;
+      setFiles(updatedFiles);
+    }
     }
 
-  const handleInputChange =
-    (index: number, field: keyof HomePageProduct) =>
-    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const updatedProducts = [...products]
-      updatedProducts[index][field] = event.target.value
-      setProducts(updatedProducts)
-    }
+    const handleInputChange = (index: number, field: keyof Profile) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const updatedProfiles = [...profiles];
+      updatedProfiles[index][field] = event.target.value;
+      setProfiles(updatedProfiles);
+    };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const formData = new FormData()
 
-    products.forEach((product, index) => {
-      formData.append(`products[${index}][id]`, product.id)
-      formData.append(`products[${index}][description]`, product.description)
+    profiles.forEach((profile, index) => {
+      formData.append(`profiles[${index}][id]`, profile.id);
+      formData.append(`profiles[${index}][description]`, profile.description);
       if (files[index]) {
-        formData.append(`products[${index}][file]`, files[index])
+        formData.append(`profiles[${index}][file]`, files[index]);
       }
-    })
+    });
     try {
       const response = await fetch("/api/upload", {
         method: "POST",
@@ -89,17 +96,17 @@ const Home: FC = () => {
               >
                 {t("storeProduct.file")}
               </label>
-              {products[0].url && (
+              {profiles[0].image && (
                 <img
-                  src={products[0].url}
-                  alt="Product"
+                  src={profiles[0].image}
+                  alt="Profile"
                   className="w-24 h-auto absolute sm:w-24 md:w-40 lg:w-32 xl:w-48"
                 />
               )}
             </div>
             <div className="mt-4 w-full lg:w-3/4 mx-auto bg-black">
               <textarea
-                value={products[0].description}
+                value={profiles[0].description}
                 onChange={handleInputChange(0, "description")}
                 placeholder="Product Description"
                 className="w-full h-48 p-4 border border-gray-300 rounded text-white bg-black mt-12 text-right"
@@ -107,16 +114,15 @@ const Home: FC = () => {
             </div>
           </div>
 
-
           {/* 2 Product */}
           <div className="flex flex-col items-center w-full ">
             <div className="relative w-full lg:w-3/4 mx-auto flex lg:flex-row">
-            <div className=" lg:w-1/4 bg-black"></div>
-            <div className="flex-1 mt-4 lg:w-3/4">
+              <div className=" lg:w-1/4 bg-black"></div>
+              <div className="flex-1 mt-4 lg:w-3/4">
                 <textarea
-                  value={products[1].description}
+                  value={profiles[1].description}
                   onChange={handleInputChange(1, "description")}
-                  placeholder="Product Description"
+                  placeholder="Profile Description"
                   className="w-full p-4 h-56 border border-gray-300 rounded"
                 />
               </div>
@@ -134,18 +140,20 @@ const Home: FC = () => {
                 >
                   {t("storeProduct.file")}
                 </label>
-                {products[1].url && (
+                {profiles[1].image && (
                   <img
-                    src={products[1].url}
-                    alt="Product"
+                    src={profiles[1].image}
+                    alt="Profile"
                     className="w-24 h-auto absolute right-0 top-0 z-100 sm:w-24 md:w-40 lg:w-32 xl:w-48"
                   />
                 )}
               </div>
-              
             </div>
           </div>
-          <div className="w-full bg-black h-auto mx-auto my-4" style={{height: '80px'}}></div>
+          <div
+            className="w-full bg-black h-auto mx-auto my-4"
+            style={{ height: "80px" }}
+          ></div>
 
           {/* 3 Product */}
           <div className="flex flex-col items-center w-full text- black bg-white">
@@ -163,175 +171,29 @@ const Home: FC = () => {
               >
                 {t("storeProduct.file")}
               </label>
-              {products[2].url && (
+              {profiles[2].image && (
                 <img
-                  src={products[2].url}
-                  alt="Product"
+                  src={profiles[2].image}
+                  alt="Profiles"
                   className="w-36 h-auto absolute sm:w-36 md:w-40 lg:w-32 xl:w-48"
                 />
               )}
               <div className="mt-4 w-full lg:w-3/4 mx-auto">
                 <textarea
-                  value={products[2].description}
+                  value={profiles[2].description}
                   onChange={handleInputChange(2, "description")}
                   placeholder="Product Description"
                   className="w-full h-56 p-4 border border-gray-300 rounded text-black bg-white mt-12 text-right"
                 />
               </div>
             </div>
+        
           </div>
-          {isAdmin && <button type="submit">Submit</button>}
+          {isAdmin && <button type="submit"
+          className="w-full h-56 p-4 border border-gray-300 rounded text-black bg-white mt-12 text-right">Submit</button>}
         </form>
       </div>
     </div>
   )
 }
-//     <div className={styles.homeContainer}>
-//       <div className={styles.logoHome}>
-//             <img src={logo} alt="Logo" className="max-w-full" />
-//           </div>
-//     <div className="addCardContainer">
-//       <div className="container mx-auto p-9 relative">
-//         <form
-//           onSubmit={handleSubmit}
-//           className="flex flex-col bg-black shadow-md rounded-lg p-6 relative"
-//         >
-//           <div className={styles.firstContainer}>
-//           <div className="relative mb-4 ml-56">
-//             <div className="flex flex-col md:flex-row md:items-start">
-//               <div className="flex flex-col items-center md:w-1/3 relative">
-
-//                 <div className="mb-4 ml-9">
-//                   <input
-//                     type="file"
-//                     accept="image/*"
-//                     onChange={handleFileChange(0)}
-//                     id="file-upload-0"
-//                     className="hidden"
-//                   />
-//                   <label
-//                     htmlFor="file-upload-0"
-//                     className="bg-blue-500 text-white p-2 rounded cursor-pointer  "
-//                   >
-//                  {t("storeProduct.file")}
-//                   </label>
-//                   {products[0].url && (
-//                     <img
-//                       src={products[0].url}
-//                       alt="Product"
-//                       className="mt-2 absolute top-4 right-0 z-10 w-56"
-//                     />
-//                   )}
-//                 </div>
-//               </div>
-//               </div>
-//               <div className="flex flex-col md:w-2/3 md:ml-4 relative ">
-//                 <textarea
-//                   value={products[0].description}
-//                   onChange={handleInputChange(0, "description")}
-//                   placeholder="Product Description"
-//                   className="mb-2 p-8 rounded border border-gray-300 bg-black text-white l-9 "
-//                 />
-//               </div>
-//             </div>
-//           </div>
-
-//   {/* 2 Product */}
-//          <div className={styles.twoContainer}>
-//           <div className="relative mb-4 bg-white ml-56">
-//             <div className="flex flex-col md:flex-row-reverse md:items-start">
-//               <div className="flex flex-col items-center md:w-1/3 relative">
-//                 <div className="mb-4 ml-9">
-//                   <input
-//                     type="file"
-//                     accept="image/*"
-//                     onChange={handleFileChange(1)}
-//                     id="file-upload-1"
-//                     className="hidden"
-//                   />
-//                   <label
-//                     htmlFor="file-upload-1"
-//                     className="bg-blue-500 text-white p-2 rounded cursor-pointer"
-//                   >
-//                    {t("storeProduct.file")}
-//                   </label>
-//                   {products[1].url && (
-//                     <img
-//                       src={products[1].url}
-//                       alt="Product"
-//                       className="mt-2 absolute top-4 right-0 z-10 w-56"
-
-//                     />
-//                   )}
-//                 </div>
-//               </div>
-//               </div>
-
-//               <div className="flex flex-col md:w-2/3 md:mr-4 relative ">
-//                 <textarea
-//                   value={products[1].description}
-//                   onChange={handleInputChange(1, "description")}
-//                   placeholder="Product Description"
-//                   className="mb-2 p-5 rounded border border-gray-300"
-//                 />
-
-//             </div>
-//           </div>
-//           </div>
-
-//           {/* 3 Product */}
-//           <div className={styles.threeContainer}>
-//           <div className="relative mb-9">
-//             <div className="flex flex-col md:flex-row md:items-start w-full">
-//               <div className="flex flex-col items-center md:w-1/3 relative">
-//                 <div className="mb-4 ml-8">
-//                 <div className={styles.twoThree}></div>
-//                   <input
-//                     type="file"
-//                     accept="image/*"
-//                     onChange={handleFileChange(2)}
-//                     id="file-upload-2"
-//                     className="hidden"
-//                   />
-//                   <label
-//                     htmlFor="file-upload-2"
-//                     className="bg-blue-500 text-white p-3 mr-7 rounded cursor-pointer"
-//                   >
-//                    {t("storeProduct.file")}
-//                   </label>
-//                   {products[2].url && (
-//                     <img
-//                       src={products[2].url}
-//                       alt="Product"
-//                       className="mt-9 max-w-xs absolute top-0 lg:left-40 z-10 w-72 h-auto lg:top-[-60px]"
-
-//                     />
-//                   )}
-//                 </div>
-//               </div>
-//               <div className={styles.twoThree}></div>
-//               <div className="flex flex-col md:w-2/3 md:ml-4 relative">
-//                 <textarea
-//                   value={products[2].description}
-//                   onChange={handleInputChange(2, "description")}
-//                   placeholder="Product Description"
-//                   className="mb-2 p-5 rounded border border-gray-300 text-center h-400 w-full md:w-300"
-//                 />
-//               </div>
-//               </div>
-//             </div>
-//           </div>
-
-//           {isAdmin && (
-//               <button type="submit" className="bg-green-500 text-white p-3 rounded mt-4">
-//                 Submit
-//               </button>
-//             )}
-//         </form>
-//       </div>
-//     </div>
-//     </div>
-//   )
-// }
-
 export default Home

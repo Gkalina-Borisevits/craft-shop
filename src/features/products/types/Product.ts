@@ -1,6 +1,6 @@
-export interface StoreProduct {
+export interface Product {
   id: string
-  imageFiles: (File | null)[]
+  imageFiles: File[]
   title: string
   description: string
   size: string
@@ -9,9 +9,9 @@ export interface StoreProduct {
   price: string
 }
 
-export interface StoreProductState {
-  products: StoreProduct[] 
-  product: StoreProduct | null
+export interface ProductState {
+  products: Product[]
+  product: Product | undefined
   loading: boolean
   error: string | null
 }

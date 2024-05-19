@@ -1,22 +1,27 @@
-import { addStoreProduct, fetchStoreProductById, fetchStoreProducts } from "./api/storeIndex"
-import type { StoreProduct, StoreProductState } from "./types/StoreProduct"
+import {
+  addStoreProduct,
+  fetchStoreProductById,
+  fetchStoreProducts,
+  updateStateProduct,
+} from "./api"
+import type { Product, ProductState } from "./types/Product"
 import { createAppSlice } from "../../app/createAppSlice"
 
-const initialState: StoreProductState = {
+const initialState: ProductState = {
   products: [],
-  product: null,
+  product: undefined,
   loading: false,
   error: null,
 }
 
-export const storeProductSlice = createAppSlice({
+export const productSlice = createAppSlice({
   name: "storeProducts",
 
   initialState,
 
   reducers: create => ({
-    addNewStoreProduct: create.asyncThunk(
-      async (formData: StoreProduct) => {
+    addNewProduct: create.asyncThunk(
+      async (formData: Product) => {
         const response = await addStoreProduct(formData)
 
         return response
@@ -36,8 +41,8 @@ export const storeProductSlice = createAppSlice({
         },
       },
     ),
-    getStoreProducts: create.asyncThunk(
-      async (_) => {
+    getProducts: create.asyncThunk(
+      async _ => {
         const response = await fetchStoreProducts()
         return response
       },
@@ -56,7 +61,28 @@ export const storeProductSlice = createAppSlice({
         },
       },
     ),
-    getStoreProductById: create.asyncThunk(
+    updateProduct: create.asyncThunk(
+      async (formData: Product) => {
+        const response = await updateStateProduct(formData)
+
+        return response
+      },
+      {
+        pending: state => {
+          state.loading = true
+          state.error = null
+        },
+        fulfilled: (state, action) => {
+          state.loading = false
+          state.products.push(action.payload)
+        },
+        rejected: (state, action) => {
+          state.loading = false
+          state.error = action.payload as string
+        },
+      },
+    ),
+    getProductById: create.asyncThunk(
       async (id: string) => {
         const response = await fetchStoreProductById(id)
         return response
@@ -72,7 +98,7 @@ export const storeProductSlice = createAppSlice({
         },
         rejected: (state, action) => {
           state.loading = false
-          state.error = action.payload as string;
+          state.error = action.payload as string
         },
       },
     ),
@@ -80,9 +106,10 @@ export const storeProductSlice = createAppSlice({
 
   selectors: {
     selectProducts: state => state.products,
-    selectProductById: state => state.product
+    selectProductById: state => state.product,
   },
 })
 
-export const { addNewStoreProduct, getStoreProducts, getStoreProductById } = storeProductSlice.actions
-export const { selectProducts, selectProductById } = storeProductSlice.selectors
+export const { addNewProduct, getProducts, getProductById, updateProduct } =
+  productSlice.actions
+export const { selectProducts, selectProductById } = productSlice.selectors

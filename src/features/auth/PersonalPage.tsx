@@ -16,6 +16,7 @@ const PersonalPage: FC = () => {
   const user = useAppSelector(selectUser)
   const role = useAppSelector(selectRole)
   const dispatch = useAppDispatch()
+  const viewUserRoleForm = role === "ADMINISTRATOR" || role === "MODERATOR"
 
   const [formData, setFormData] = useState<User>({
     id: 0,
@@ -65,7 +66,7 @@ const PersonalPage: FC = () => {
       })
   }
 
-  const viewUserRoleForm = role !== "ADMINISTRATOR" 
+  
 
   return (
     <div className={styles.personalPageContainer}>

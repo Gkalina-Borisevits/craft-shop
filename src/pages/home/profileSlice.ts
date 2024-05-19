@@ -1,25 +1,23 @@
-import type {
-  HomePageProduct,
-  HomePageProductState,
-} from "./types/HomePageProduct"
-import { addHomePageProduct, fetchHomePageProducts } from "./api"
+import type { ProfileState, Profile } from "./types/Profile"
+import { addNewProfile, fetchProfile } from "./api"
 import { createAppSlice } from "../../app/createAppSlice"
 
-const initialState: HomePageProductState = {
-  products: [],
+const initialState: ProfileState = {
+  profiles: [],
+  profile: undefined,
   loading: false,
   error: null,
 }
 
-export const homePageProductSlice = createAppSlice({
-  name: "homePageProducts",
+export const profileSlice = createAppSlice({
+  name: "profile",
 
   initialState,
 
   reducers: create => ({
-    addProduct: create.asyncThunk(
-      async (formData: HomePageProduct) => {
-        const response = await addHomePageProduct(formData)
+    addProfile: create.asyncThunk(
+      async (formData: Profile) => {
+        const response = await addNewProfile(formData)
 
         return response
       },
@@ -30,16 +28,18 @@ export const homePageProductSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.loading = false
-          state.products.push(action.payload)
+          if (state.profiles) {
+            state.profiles.push(action.payload)
+          }
         },
         rejected: state => {
           state.loading = false
         },
       },
     ),
-    getStoreProducts: create.asyncThunk(
+    getProfile: create.asyncThunk(
       async _ => {
-        const response = await fetchHomePageProducts()
+        const response = await fetchProfile()
         return response
       },
       {
@@ -49,7 +49,7 @@ export const homePageProductSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.loading = false
-          state.products = action.payload
+          state.profiles = action.payload.profiles
         },
         rejected: state => {
           state.loading = false
@@ -59,9 +59,9 @@ export const homePageProductSlice = createAppSlice({
   }),
 
   selectors: {
-    selectProduct: state => state.products,
+    selectProfile: state => state.profiles,
   },
 })
 
-export const { addProduct, getStoreProducts } = homePageProductSlice.actions
-export const { selectProduct } = homePageProductSlice.selectors
+export const { addProfile, getProfile } = profileSlice.actions
+export const { selectProfile } = profileSlice.selectors

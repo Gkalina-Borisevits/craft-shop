@@ -1,12 +1,12 @@
 import { useState, type FC } from "react"
-import StoreProductCreator from "./StoreProductCreator"
 import styles from "./styles/Products.module.css"
 import { useTranslation } from "react-i18next"
 import { useAppSelector } from "../../app/hooks"
 import { selectRole } from "../auth/userSlice"
-import { selectProducts } from "./storeProductSlice"
+import { selectProducts } from "./productSlice"
 import { Link } from "react-router-dom"
 import "@fortawesome/fontawesome-free/css/all.min.css"
+import ProductDetails from "./ProductDetails"
 
 const Products: FC = () => {
   const [isAddingProduct, setIsAddingProduct] = useState(false)
@@ -22,11 +22,11 @@ const Products: FC = () => {
     setIsAddingProduct(false)
   }
 
-  const viewUserRoleForm = role !== "ADMINISTRATOR" 
+  const viewProductsForm = role === "ADMINISTRATOR" || role === "MODERATOR"
 
   return (
     <>
-      {viewUserRoleForm && (
+      {viewProductsForm && (
         <div className={styles.buttonAddNewImage}>
           <button
             id="addCard"
@@ -36,7 +36,7 @@ const Products: FC = () => {
             {t("storeProduct.buttonAddCard")}
           </button>
           {isAddingProduct && (
-            <StoreProductCreator onClose={handleCloseProductCreator} />
+            <ProductDetails onClose={handleCloseProductCreator} />
           )}
         </div>
       )}
@@ -56,11 +56,14 @@ const Products: FC = () => {
                   const imageSizeClass = isFourthImage
                     ? "w-44 h-44"
                     : "w-32 h-32"
+
+                    
+                    const imageUrl = typeof file === 'string' ? file : URL.createObjectURL(file);
                   return (
                     // eslint-disable-next-line jsx-a11y/img-redundant-alt
                     <img
                       key={fileIndex}
-                      src={file}
+                      src={imageUrl}
                       alt={`Product ${index + 1} Image ${fileIndex + 1}`}
                       className={`${imageSizeClass} md:w-48 md:h-48 lg:w-64 lg:h-64 object-cover m-1 rounded`}
                     />
