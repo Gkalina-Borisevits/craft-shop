@@ -57,8 +57,8 @@ const Products: FC = () => {
                     ? "w-44 h-44"
                     : "w-32 h-32"
 
-                    
-                    const imageUrl = typeof file === 'string' ? file : URL.createObjectURL(file);
+                  const imageUrl =
+                    typeof file === "string" ? file : URL.createObjectURL(file)
                   return (
                     // eslint-disable-next-line jsx-a11y/img-redundant-alt
                     <img

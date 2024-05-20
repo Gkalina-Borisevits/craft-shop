@@ -17,7 +17,7 @@ export async function personalPageUser(formData: User): Promise<User> {
 	return res.json();
 }
 export async function loginUser(formData: LoginData): Promise<User> {
-  const res = await fetch("api/v1/user", {
+  const res = await fetch("api/v1/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

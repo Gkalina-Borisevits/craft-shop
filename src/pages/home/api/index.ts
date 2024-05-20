@@ -3,7 +3,7 @@ import type { Profile, ProfileState } from "../types/Profile"
 export async function addNewProfile(
   product: Profile,
 ): Promise<Profile> {
-  const res = await fetch("/api/homepageProduct", {
+  const res = await fetch("/api/homepage", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

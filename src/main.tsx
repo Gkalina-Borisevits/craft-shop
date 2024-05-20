@@ -5,11 +5,12 @@ import App from "./App"
 import { store } from "./app/store"
 import "./index.css"
 import { BrowserRouter } from "react-router-dom"
-import { I18nextProvider } from "react-i18next";
-import i18next from "./i18next.ts/i18next";
-import { ToastContainer } from "react-toastify";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { I18nextProvider } from "react-i18next"
+import i18next from "./i18next.ts/i18next"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const container = document.getElementById("root")
 
@@ -20,7 +21,12 @@ if (container) {
     <React.StrictMode>
       <BrowserRouter>
         <I18nextProvider i18n={i18next}>
-          <ToastContainer position="top-center" autoClose={4000} />
+          <ToastContainer
+            position="top-center"
+            autoClose={4000}
+            className="toastContainer"
+            theme="light"
+          />
           <Provider store={store}>
             <App />
           </Provider>

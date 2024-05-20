@@ -9,6 +9,5 @@ export interface User {
   country: string
   postalCode: string
   role: string
+  email?: string
 }
-
-

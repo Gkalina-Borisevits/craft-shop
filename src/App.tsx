@@ -18,7 +18,6 @@ import OurProjects from "./pages/about/ourProject/OurProjects"
 import ProductDetails from "./features/products/ProductDetails"
 import ErrorPage from "./components/error/ErrorPage"
 
-
 const App = () => {
   return (
     <div className="App">
@@ -43,7 +42,7 @@ const App = () => {
           <Route path="/contacts/asked-questions" element={<Questions />} />
 
           <Route path="/shipping-services" element={<ShippingServices />} />
-        
+
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>

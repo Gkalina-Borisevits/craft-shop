@@ -10,6 +10,7 @@ import { toast } from "react-toastify"
 import logo from "../../assets/logo.png"
 import UserRoleForm from "../../components/form/UserRoleForm"
 
+
 const PersonalPage: FC = () => {
   const today = new Date().toISOString().split("T")[0]
   const { t } = useTranslation("translation")

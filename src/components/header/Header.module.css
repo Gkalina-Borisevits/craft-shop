@@ -8,9 +8,9 @@
   position: relative;
   box-sizing: border-box;
 }
-.headerContainer p{
+.headerContainer p {
   border-bottom: 1px solid black;
- }
+}
 
 .languageIcon {
   position: absolute;

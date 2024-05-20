@@ -35,7 +35,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
     dimensions: "",
     material: "",
     price: "",
-    imageFiles: [undefined, undefined, undefined, undefined],
+    imageFiles: [],
   })
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
         dimensions: "",
         material: "",
         price: "",
-        imageFiles: [undefined, undefined, undefined, undefined],
+        imageFiles: [],
       })
       setUrlPreviews([undefined, undefined, undefined, undefined])
     }
@@ -167,7 +167,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
         dimensions: "",
         material: "",
         price: "",
-        imageFiles: [undefined, undefined, undefined, undefined],
+        imageFiles: [],
       })
     } catch (error) {
       console.error("Failed add/update:", error)
