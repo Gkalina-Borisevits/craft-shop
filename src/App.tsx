@@ -17,8 +17,18 @@ import About from "./pages/about/about/About"
 import OurProjects from "./pages/about/ourProject/OurProjects"
 import ProductDetails from "./features/products/ProductDetails"
 import ErrorPage from "./components/error/ErrorPage"
+import { useAppDispatch, useAppSelector } from "./app/hooks"
+import { getUser, selectIsAuthenticated } from "./features/auth/userSlice"
+import { useEffect } from "react"
 
 const App = () => {
+  const isAuthenticated = useAppSelector(selectIsAuthenticated)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(getUser())
+  }, [dispatch, isAuthenticated])
+
   return (
     <div className="App">
       <Routes>

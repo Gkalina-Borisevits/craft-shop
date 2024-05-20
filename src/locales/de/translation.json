@@ -69,14 +69,20 @@
     "lastName": "Nachname",
     "dataOfBirth": "Geburtsdatum",
     "city": "Stadt",
-    "country": "Land"
+    "country": "Land",
+    "logOut": "Abmelden",
+    "roleChangeForm": "Formular zur Änderung der Mitarbeiterrolle",
+    "enterEmail": "Geben Sie die E-Mail-Adresse des Mitarbeiters ein"
   },
   "toasty": {
     "contactUpdated": "Kontaktdaten aktualisiert",
     "noUpdatedContact": "Fehler beim Aktualisieren der Kontaktdaten. Bitte versuchen Sie es später erneut",
     "personalDataDeleted": "Persönliche Daten gelöscht",
     "personalDataNoDeleted": "Persönliche Daten nicht gelöscht. Bitte versuchen Sie es später erneut",
-    "login": "Sie haben sich erfolgreich angemeldet. Ihnen steht der volle Funktionsumfang der Website zur Verfügung."
+    "login": "Sie haben sich erfolgreich angemeldet. Ihnen steht der volle Funktionsumfang der Website zur Verfügung.",
+    "unknownError": "Registrierung fehlgeschlagen. Bitte versuchen Sie es später erneut.",
+    "registeredSuccessfully": "Erfolgreich registriert! 👌",
+    "instructionsForActivating": "Anweisungen zur Aktivierung Ihres Kontos wurden an Ihre E-Mail-Adresse gesendet. 📧"
   },
   "storeProduct": {
     "title": "Titel",

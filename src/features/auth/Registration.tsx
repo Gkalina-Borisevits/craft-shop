@@ -2,18 +2,18 @@ import type React from "react"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import styles from "./styles/Registration.module.css"
-import type { RegistrationData } from "./types/RegistrationData"
 import { toast } from "react-toastify"
 import logo from "../../assets/logo.png"
 import { useAppDispatch } from "../../app/hooks"
 import { registration } from "./userSlice"
+import type { User } from "./types/User"
 
 const Registration: React.FC = () => {
   const { t } = useTranslation("translation")
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useAppDispatch()
 
-  const [formData, setFormData] = useState<RegistrationData>({
+  const [formData, setFormData] = useState<User>({
     firstName: "",
     lastName: "",
     email: "",
@@ -44,10 +44,11 @@ const Registration: React.FC = () => {
     dispatch(registration(formData))
       .unwrap()
       .then(() => {
-        toast.info(t("toasty.login"))
+        toast.info(t("toasty.registeredSuccessfully"))
+        toast.info(t("toasty.instructionsForActivating"))
       })
       .catch(() => {
-        toast.error(t("toasty.noUpdatedContact"))
+        toast.error(t("toasty.unknownError"))
       })
   }
 

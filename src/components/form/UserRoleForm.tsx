@@ -52,10 +52,13 @@ const UserRoleForm: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center mb-8">
+    
       <form
+      
         onSubmit={handleSubmitCallback}
         className="space-y-4 w-1/2 pr-2 mt-6"
       >
+          <p className=" text-sm font-medium text-gray-300 mb-9">{t("personalPage.roleChangeForm")}</p>
         <div>
           <label
             htmlFor="email"
@@ -66,6 +69,7 @@ const UserRoleForm: React.FC = () => {
           <input
             type="email"
             name="email"
+            placeholder={t("personalPage.enterEmail")}
             value={formData.email}
             onChange={handleChange}
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
@@ -88,8 +92,8 @@ const UserRoleForm: React.FC = () => {
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
           >
             <option value="">{t("selectRole.roleChoose")}</option>
-            <option value="admin">{t("selectRole.administrator")}</option>
-            <option value="user">{t("selectRole.user")}</option>
+            <option value="ADMINISTRATOR">{t("selectRole.administrator")}</option>
+            <option value="USER">{t("selectRole.user")}</option>
           </select>
           {errors.role && (
             <div className="text-red-500 text-xs italic">{errors.role}</div>
@@ -98,7 +102,7 @@ const UserRoleForm: React.FC = () => {
         <button
           id="send-role"
           type="submit"
-          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md  text-sm font-medium text-white bg-indigo-600  hover:bg-yellow-400 "
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md  text-sm font-medium text-white bg-indigo-600  hover:bg-yellow-400"
         >
           {t("selectRole.changeRole")}
         </button>

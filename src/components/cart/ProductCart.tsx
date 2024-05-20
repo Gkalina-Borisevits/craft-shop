@@ -2,7 +2,7 @@ import { useAppSelector } from "../../app/hooks"
 import { useTranslation } from "react-i18next"
 import CartItem from "./CartItem"
 import { useNavigate } from "react-router-dom"
-import type { FC} from "react";
+import type { FC } from "react"
 import { useState } from "react"
 import { selectCartItems } from "./cartSlice"
 
@@ -32,11 +32,7 @@ const ProductCart: FC = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-6 bg-red-300">
       {products.map((product, index) => (
-        <CartItem
-        key={product.id}
-        product={product}
-         
-        />
+        <CartItem key={product.id} product={product} />
       ))}
       {products.length > 0 && (
         <div className="flex justify-center mt-6">

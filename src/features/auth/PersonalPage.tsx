@@ -4,12 +4,18 @@ import { useEffect, useState } from "react"
 import styles from "./styles/PersonalPage.module.css"
 import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { deleteUser, selectRole, selectUser, updateUser } from "./userSlice"
-import type { User } from "./types/PersonalPageData"
+import {
+  deleteUser,
+  logout,
+  selectRole,
+  selectUser,
+  updateUser,
+} from "./userSlice"
+import type { User } from "./types/User"
 import { toast } from "react-toastify"
 import logo from "../../assets/logo.png"
 import UserRoleForm from "../../components/form/UserRoleForm"
-
+import { useNavigate } from "react-router-dom"
 
 const PersonalPage: FC = () => {
   const today = new Date().toISOString().split("T")[0]
@@ -17,6 +23,7 @@ const PersonalPage: FC = () => {
   const user = useAppSelector(selectUser)
   const role = useAppSelector(selectRole)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const viewUserRoleForm = role === "ADMINISTRATOR" || role === "MODERATOR"
 
   const [formData, setFormData] = useState<User>({
@@ -24,12 +31,16 @@ const PersonalPage: FC = () => {
     firstName: "",
     lastName: "",
     phone: "",
-    birthdate: "1990-01-01",
-    street: "",
-    city: "",
-    country: "",
-    postalCode: "",
     role: "",
+    birthdate: "1990-01-01",
+    addressDto: {
+      street: "",
+      building: null,
+      numberApartment: null,
+      indexNum: "",
+      country: "",
+      city: "",
+    },
   })
 
   useEffect(() => {
@@ -67,11 +78,23 @@ const PersonalPage: FC = () => {
       })
   }
 
-  
+  const handleLogout = () => {
+    dispatch(logout())
+    navigate("/")
+  }
 
   return (
     <div className={styles.personalPageContainer}>
       {viewUserRoleForm && <UserRoleForm />}
+      <div className="container mx-auto px-4 flex items-center justify-start mb-3 ">
+        <button
+          id="logout"
+          className="text-xl mb-4 text-white p-2 hover:bg-red-400 border rounded mt-3"
+          onClick={handleLogout}
+        >
+          {t("personalPage.logOut")}
+        </button>
+      </div>
 
       <div className="container mx-auto px-4">
         <div className="text-right">
@@ -85,7 +108,7 @@ const PersonalPage: FC = () => {
             {t("personalPage.updatePersonalData")}
           </p>
           <p className="text-xl mb-3 text-white">
-            {t("personalPage.emailHeader")} $`{formData.phone}{" "}
+            {t("personalPage.emailHeader")} {user?.email} {user?.role}
             {t("personalPage.emailFooter")}
           </p>
         </div>
@@ -113,15 +136,15 @@ const PersonalPage: FC = () => {
               type="text"
               name="street"
               placeholder={t("personalPage.street")}
-              value={formData.street}
+              value={formData.addressDto?.street}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded"
             />
             <input
               type="text"
-              name="postalCode"
+              name="indexNum"
               placeholder={t("personalPage.code")}
-              value={formData.postalCode}
+              value={formData.addressDto?.indexNum}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded"
             />
@@ -150,7 +173,7 @@ const PersonalPage: FC = () => {
               type="text"
               name="city"
               placeholder={t("personalPage.city")}
-              value={formData.city}
+              value={formData.addressDto?.city}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded"
             />
@@ -158,7 +181,7 @@ const PersonalPage: FC = () => {
               type="text"
               name="country"
               placeholder={t("personalPage.country")}
-              value={formData.country}
+              value={formData.addressDto?.country}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded"
             />
@@ -167,15 +190,15 @@ const PersonalPage: FC = () => {
 
         <div className="mt-4 text-right">
           <button
-            id="resetPersonalPageButton"
+            id="reset-button"
             type="button"
             onClick={handleDeleteUser}
-            className="px-6 py-2 rounded mr-2 bg-blue-400 hover:bg-yellow-400"
+            className="px-6 py-2 rounded mr-6 bg-blue-400 hover:bg-yellow-400"
           >
             {t("personalPage.reset")}
           </button>
           <button
-            id="updatePersonalPageButton"
+            id="update-button"
             type="submit"
             form="updateForm"
             className="px-4 py-2 rounded bg-blue-500 text-white bg-yellow-400 hover:bg-blue-400"

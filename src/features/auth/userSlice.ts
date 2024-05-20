@@ -1,25 +1,23 @@
 import { createAppSlice } from "../../app/createAppSlice"
-import type { User } from "../../features/auth/types/PersonalPageData"
+import type { User } from "./types/User"
 import type { UserState } from "./types/UserState"
 import {
   activateAccountUser,
   deletePersonalPageUser,
+  getUserData,
   loginUser,
+  logoutUser,
   personalPageUser,
   registerUser,
 } from "./api"
-import type { LoginData } from "./types/LoginData"
-import type { RegistrationData } from "./types/RegistrationData"
+
 import type { UserRoleData } from "../../components/form/types/UserRoleData"
 import { updateUserFormRole } from "../../components/form/api"
 
 const initialState: UserState = {
   user: null,
   isAuthenticated: false,
-  role: null,
   status: "idle",
-  loginData: null,
-  registrationData: null,
   loading: false,
   error: null,
 }
@@ -49,7 +47,7 @@ export const userSlice = createAppSlice({
       },
     ),
     login: create.asyncThunk(
-      async (formData: LoginData) => {
+      async (formData: User) => {
         const response = await loginUser(formData)
         return response
       },
@@ -62,7 +60,26 @@ export const userSlice = createAppSlice({
           state.loading = false
           state.user = action.payload
           state.isAuthenticated = true
-          state.role = action.payload.role
+        },
+        rejected: state => {
+          state.loading = false
+        },
+      },
+    ),
+    logout: create.asyncThunk(
+      async (_, thunkApi) => {
+        const response = await logoutUser()
+        return response
+      },
+      {
+        pending: state => {
+          state.loading = true
+          state.error = null
+        },
+        fulfilled: (state, action) => {
+          state.loading = false
+          state.user = null
+          state.isAuthenticated = false
         },
         rejected: state => {
           state.loading = false
@@ -70,7 +87,7 @@ export const userSlice = createAppSlice({
       },
     ),
     registration: create.asyncThunk(
-      async (formData: RegistrationData) => {
+      async (formData: User) => {
         const response = await registerUser(formData)
         return response
       },
@@ -82,6 +99,26 @@ export const userSlice = createAppSlice({
         fulfilled: (state, action) => {
           state.loading = false
           state.user = action.payload
+        },
+        rejected: state => {
+          state.loading = false
+        },
+      },
+    ),
+    getUser: create.asyncThunk(
+      async (_, thunkApi) => {
+        const response = await getUserData()
+        return response
+      },
+      {
+        pending: state => {
+          state.loading = true
+          state.error = null
+        },
+        fulfilled: (state, action) => {
+          state.loading = false
+          state.user = action.payload
+          state.isAuthenticated = true
         },
         rejected: state => {
           state.loading = false
@@ -154,8 +191,16 @@ export const userSlice = createAppSlice({
   },
 })
 
-export const { updateUserRole, updateUser, login, registration, deleteUser, activateAccount } =
-  userSlice.actions
+export const {
+  updateUserRole,
+  updateUser,
+  login,
+  logout,
+  registration,
+  deleteUser,
+  activateAccount,
+  getUser,
+} = userSlice.actions
 
 export const { selectUser, selectRole, selectIsAuthenticated } =
   userSlice.selectors

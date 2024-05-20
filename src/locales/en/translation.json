@@ -69,14 +69,20 @@
     "lastName": "Last Name",
     "dataOfBirth": "Date of Birth",
     "city": "City",
-    "country": "Country"
+    "country": "Country",
+    "logOut": "Log out",
+    "roleChangeForm": "Form for changing employee role",
+    "enterEmail": "Enter employee's email"
   },
   "toasty": {
     "contactUpdated": "Contact details updated",
     "noUpdatedContact": "Failed to update contact details. Please try again later",
     "personalDataDeleted": "Personal data deleted",
     "personalDataNoDeleted": "Personal data not deleted. Please try again later",
-    "login": "You have successfully logged in. You have access to all website functionality."
+    "login": "You have successfully logged in. You have access to all website functionality.",
+    "unknownError": "Registration failed. Please try again later.",
+    "registeredSuccessfully": "Registered successfully! 👌",
+    "instructionsForActivating": "Instructions for activating your account have been sent to your email. 📧"
   },
   "storeProduct": {
     "title": "Title",

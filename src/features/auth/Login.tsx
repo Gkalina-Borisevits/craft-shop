@@ -1,16 +1,16 @@
 import type { FC } from "react"
 import type React from "react"
 import { useState } from "react"
-import type { LoginData } from "./types/LoginData"
 import styles from "./styles/Login.module.css"
 import { useTranslation } from "react-i18next"
 import { login } from "./userSlice"
 import { useAppDispatch } from "../../app/hooks"
 import { toast } from "react-toastify"
+import type { User } from "./types/User"
 
 const Login: FC = () => {
   const { t } = useTranslation("translation")
-  const [formData, setFormData] = useState<LoginData>({
+  const [formData, setFormData] = useState<User>({
     email: "",
     password: "",
   })
