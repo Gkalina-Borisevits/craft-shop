@@ -1,34 +1,27 @@
+import api from "../../../../axios.config"
 import type { Profile, ProfileState } from "../types/Profile"
 
-export async function addNewProfile(
-  product: Profile,
+export async function updateProfilePage(
+  name: string,
+  formData: ProfileState,
 ): Promise<Profile> {
-  const res = await fetch("/api/homepage", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(product),
-  })
-
-  if (!res.ok) {
-    throw new Error("Failed to add homepage product")
+  try {
+    const response = await api.put<Profile>(
+      `/profile/card?name=${encodeURIComponent(name)}`,
+      formData,
+    )
+    return response.data
+  } catch (error) {
+    throw new Error("An unexpected error occurred")
   }
-
-  return res.json()
 }
 
 export async function fetchProfile(): Promise<ProfileState> {
-  const res = await fetch("/api/homepageProducts", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  try {
+    const response = await api.get("/profile/cards")
 
-  if (!res.ok) {
+    return response.data
+  } catch (error) {
     throw new Error("Failed to fetch homepage products")
   }
-
-  return res.json()
 }

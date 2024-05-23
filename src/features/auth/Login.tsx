@@ -7,6 +7,7 @@ import { login } from "./userSlice"
 import { useAppDispatch } from "../../app/hooks"
 import { toast } from "react-toastify"
 import type { User } from "./types/User"
+import { useNavigate } from "react-router-dom"
 
 const Login: FC = () => {
   const { t } = useTranslation("translation")
@@ -17,6 +18,7 @@ const Login: FC = () => {
 
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -37,6 +39,7 @@ const Login: FC = () => {
       .unwrap()
       .then(() => {
         toast.info(t("toasty.login"))
+        navigate("/")
       })
       .catch(() => {
         toast.error(t("toasty.noUpdatedContact"))

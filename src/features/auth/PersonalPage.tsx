@@ -80,7 +80,14 @@ const PersonalPage: FC = () => {
 
   const handleLogout = () => {
     dispatch(logout())
-    navigate("/")
+      .unwrap()
+      .then(() => {
+        toast.success(t("toasty.personalDataDeleted"))
+        navigate("/")
+      })
+      .catch(() => {
+        toast.error(t("toasty.personalDataNoDeleted"))
+      })
   }
 
   return (
@@ -113,7 +120,7 @@ const PersonalPage: FC = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="flex justify-between">
+        <form onSubmit={handleSubmit} id="updateForm" className="flex justify-between">
           <div className="space-y-4 w-1/2 pr-2 mt-6">
             <input
               type="text"

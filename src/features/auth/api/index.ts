@@ -1,72 +1,70 @@
+import axios from "axios"
 import type { User } from "../types/User"
+import api from "../../../../axios.config"
 
 export async function personalPageUser(formData: User): Promise<User> {
-  const res = await fetch("api/v1/user", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-  if (res.status >= 400) {
-    const { message }: { message: string } = await res.json()
-    throw new Error(message)
+  try {
+    const response = await api.put("/user", formData);
+    return response.data; 
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      
+      const message = error.response.data.message;
+      throw new Error(message);
+    } else {
+      throw new Error('An unexpected error occurred');
+    }
   }
-  return res.json()
-}
-export async function loginUser(formData: User): Promise<User> {
-  const res = await fetch("api/v1/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-  if (res.status >= 400) {
-    const { message }: { message: string } = await res.json()
-    throw new Error(message)
-  }
-  return res.json()
 }
 
-export async function user(): Promise<{
-  id: number
-  name: string
-  email: string
-  role: string
-}> {
-  const res = await fetch("/api/v1/user/")
-  if (res.status >= 400) {
-    const { message }: { message: string } = await res.json()
-    throw new Error(message)
+export async function loginUser(formData: User): Promise<User> {
+  try {
+    const response = await api.post("/login", formData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    return response.data
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      const message = error.response.data.message
+      throw new Error(message)
+    } else {
+      throw new Error("An unexpected error occurred")
+    }
   }
-  return res.json()
+}
+
+
+interface APIError {
+  message: string;
+  field?: string;      
+  rejectedValue?: any; 
 }
 
 export async function registerUser(formData: User): Promise<User> {
-  const res = await fetch("api/v1/registration", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-  interface Error {
-    message: string
-    field: string
-    rejectedValue: string
+  try {
+    const response = await api.post("/registration", formData);
+    return response.data; 
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      
+      const errors: APIError[] = error.response.data.errors;
+      if (errors && errors.length > 0) {
+       
+       
+        const errorMessage = errors.map(err => `${err.field} ${err.rejectedValue} ${err.message}`).join(", ");
+        throw new Error(errorMessage);
+      }
+      throw new Error("Registration failed with unknown error");
+    } else {
+      throw new Error('An unexpected error occurred');
+    }
   }
-  if (res.status >= 400) {
-    const { errors }: { errors: Error[] } = await res.json()
-    errors.forEach(err => {
-      throw new Error(`${err.field} ${err.rejectedValue} ${err.message}`)
-    })
-  }
-  return res.json()
 }
 
 export async function deletePersonalPageUser(): Promise<void> {
-  const res = await fetch("api/v1/user", {
+  const res = await fetch("/user", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -78,50 +76,25 @@ export async function deletePersonalPageUser(): Promise<void> {
   return res.json()
 }
 
-export async function activateAccountUser(
-  validationCode: string,
-): Promise<User> {
-  const res = await fetch("/api/activate", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ validationCode }),
-  })
-  interface Error {
-    message: string
-    field: string
-    rejectedValue: string
-  }
-  if (res.status >= 400) {
-    const { errors }: { errors: Error[] } = await res.json()
-    errors.forEach(err => {
-      throw new Error(`${err.field} ${err.rejectedValue} ${err.message}`)
-    })
-  }
-  return res.json()
-}
 export async function logoutUser(): Promise<void> {
-  const res = await fetch("api/v1/logout", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  if (!res.ok) {
-    throw new Error("Failed to loGOUT")
+  try {
+    await api.get("/logout")
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error("Failed to logout")
+    } else throw new Error("An unexpected error occurred")
   }
-  return res.json()
 }
+
 export async function getUserData(): Promise<User> {
-  const res = await fetch("api/v1/user", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  if (!res.ok) {
-    throw new Error("Failed to loGOUT")
+  try {
+    const response = await api.get("/user")
+    return response.data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new Error("Failed to get user data")
+    } else {
+      throw new Error("An unexpected error occurred")
+    }
   }
-  return res.json()
 }

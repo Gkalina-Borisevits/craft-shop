@@ -1,26 +1,33 @@
-import type { ProfileState, Profile } from "./types/Profile"
-import { addNewProfile, fetchProfile } from "./api"
+import type { ProfileState } from "./types/Profile"
+import { fetchProfile, updateProfilePage } from "./api"
 import { createAppSlice } from "../../app/createAppSlice"
 
 const initialState: ProfileState = {
   profiles: [],
-  profile: undefined,
   loading: false,
   error: null,
 }
+interface ThunkArg {
+  name: string
+  formData: ProfileState
+}
 
 export const profileSlice = createAppSlice({
-  name: "profile",
+  name: "profiles",
 
   initialState,
 
   reducers: create => ({
-    addProfile: create.asyncThunk(
-      async (formData: Profile) => {
-        const response = await addNewProfile(formData)
-
-        return response
+    updateProfile: create.asyncThunk(
+      async ({ name, formData }: ThunkArg, thunkAPI) => {
+        try {
+          const response = await updateProfilePage(name, formData)
+          return response
+        } catch (error) {
+          return thunkAPI.rejectWithValue("Failed to update profile")
+        }
       },
+
       {
         pending: state => {
           state.loading = true
@@ -28,9 +35,7 @@ export const profileSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.loading = false
-          if (state.profiles) {
-            state.profiles.push(action.payload)
-          }
+          state.profiles.push(action.payload)
         },
         rejected: state => {
           state.loading = false
@@ -38,9 +43,13 @@ export const profileSlice = createAppSlice({
       },
     ),
     getProfile: create.asyncThunk(
-      async _ => {
-        const response = await fetchProfile()
-        return response
+      async (_, thunkAPI) => {
+        try {
+          const response = await fetchProfile();
+          return response;
+        } catch (error) {
+          return thunkAPI.rejectWithValue("Failed to fetch profiles");
+        }
       },
       {
         pending: state => {
@@ -49,7 +58,7 @@ export const profileSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.loading = false
-          state.profiles = action.payload.profiles
+          state.profiles = action.payload
         },
         rejected: state => {
           state.loading = false
@@ -63,5 +72,5 @@ export const profileSlice = createAppSlice({
   },
 })
 
-export const { addProfile, getProfile } = profileSlice.actions
+export const { updateProfile, getProfile } = profileSlice.actions
 export const { selectProfile } = profileSlice.selectors

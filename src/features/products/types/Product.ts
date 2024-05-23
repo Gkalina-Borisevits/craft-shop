@@ -7,6 +7,7 @@ export interface Product {
   dimensions: string
   material: string
   price: string
+  count?: string
 }
 
 export interface ProductState {

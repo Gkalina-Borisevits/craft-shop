@@ -1,12 +1,13 @@
 export interface Profile {
-  id: string
-  image: File
-  description: string
+  name?: string
+  url?: string
+  id?: string
+  file?: File
+  description?: string
 }
 
 export interface ProfileState {
-  profiles: Profile[] 
-  profile: Profile | undefined
+  profiles: Profile[]
   loading: boolean
   error: string | null
 }

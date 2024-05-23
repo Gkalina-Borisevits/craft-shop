@@ -36,6 +36,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
     material: "",
     price: "",
     imageFiles: [],
+    count: "",
   })
 
   useEffect(() => {
@@ -48,6 +49,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
         dimensions: productById.dimensions || "",
         material: productById.material || "",
         price: productById.price || "",
+        count: productById.count || "",
         imageFiles: productById.imageFiles || [
           undefined,
           undefined,
@@ -168,6 +170,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
         material: "",
         price: "",
         imageFiles: [],
+        count: "",
       })
     } catch (error) {
       console.error("Failed add/update:", error)
@@ -271,6 +274,15 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                 value={formData.material}
                 onChange={handleChange}
                 placeholder={t("storeProduct.material")}
+                className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
+                required
+              />
+              <input
+                type="number"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+                placeholder={t("storeProduct.price")}
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
                 required
               />
