@@ -41,8 +41,14 @@ const Login: FC = () => {
         toast.info(t("toasty.login"))
         navigate("/")
       })
-      .catch(() => {
-        toast.error(t("toasty.noUpdatedContact"))
+      .catch(error => {
+        if (error === 403) {
+          toast.error(t("toasty.noAccount"))
+          navigate("/registration")
+        } else {
+          toast.error(t("toasty.noAccount"))
+          navigate("/registration")
+        }
       })
   }
 

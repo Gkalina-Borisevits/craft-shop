@@ -72,7 +72,9 @@
     "country": "Country",
     "logOut": "Log out",
     "roleChangeForm": "Form for changing employee role",
-    "enterEmail": "Enter employee's email"
+    "enterEmail": "Enter employee's email",
+    "building": "Building",
+    "numberApartment": "Apartment number"
   },
   "toasty": {
     "contactUpdated": "Contact details updated",
@@ -82,7 +84,8 @@
     "login": "You have successfully logged in. You have access to all website functionality.",
     "unknownError": "Registration failed. Please try again later.",
     "registeredSuccessfully": "Registered successfully! 👌",
-    "instructionsForActivating": "Instructions for activating your account have been sent to your email. 📧"
+    "instructionsForActivating": "Instructions for activating your account have been sent to your email. 📧",
+    "noAccount": "You do not have a created account. Registration is required."
   },
   "storeProduct": {
     "title": "Title",

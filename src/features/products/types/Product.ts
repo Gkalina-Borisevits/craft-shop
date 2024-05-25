@@ -1,13 +1,14 @@
 export interface Product {
-  id: string
-  imageFiles: File[]
+  id: number
+  files: File[]
   title: string
   description: string
   size: string
   dimensions: string
   material: string
-  price: string
-  count?: string
+  price: number
+  count: number
+  pagesUrl?: string
 }
 
 export interface ProductState {

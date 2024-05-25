@@ -16,7 +16,7 @@ const ProductCard: FC<Props> = ({ onClose }) => {
 
     useEffect(() => {
         if (productById) {
-            setUrlPreviews(productById.imageFiles.map(file => (file ? URL.createObjectURL(file) : undefined)));
+            setUrlPreviews(productById.files.map(file => (file ? URL.createObjectURL(file) : undefined)));
         }
       }, [productById]);
     

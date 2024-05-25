@@ -17,8 +17,8 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getProfile())
-    console.log("profile:", profile)
-  }, [dispatch, profile])
+    
+  }, [dispatch])
 
   const handleAddProductClick = () => {
     setIsAddingProduct(true)
@@ -28,9 +28,8 @@ const Home = () => {
     setIsAddingProduct(false)
   }
   return (
+    <div className="container mx-auto px-4 mt-9">
     <div className="container mx-auto px-4">
-    <div className="container mx-auto px-4">
-  <h1 className="text-xl font-bold text-gray-800 mb-4">Profiles</h1>
   <ul className="space-y-4">
     {profile?.map((profileItem, index) => (
       <li key={profileItem?.id} className="p-4 shadow-md rounded-lg bg-white flex items-center">

@@ -7,6 +7,7 @@ import {
 import type { Product, ProductState } from "./types/Product"
 import { createAppSlice } from "../../app/createAppSlice"
 
+
 const initialState: ProductState = {
   products: [],
   product: undefined,
@@ -18,14 +19,18 @@ export const productSlice = createAppSlice({
   name: "storeProducts",
 
   initialState,
-
+ 
   reducers: create => ({
     addNewProduct: create.asyncThunk(
-      async (formData: Product) => {
+      async (formData: Product, { rejectWithValue }) => {
+        try {
         const response = await addStoreProduct(formData)
 
         return response
-      },
+      } catch (error) {
+        return rejectWithValue('Failed to add store product slice');
+      }
+    },
       {
         pending: state => {
           state.loading = true

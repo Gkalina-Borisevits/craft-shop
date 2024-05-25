@@ -12,10 +12,10 @@ export interface User {
 }
 
 interface AddressDto {
-  street?: string
-  building?: number | null
-  numberApartment?: number | null
-  indexNum?: string
-  country?: string
-  city?: string
+  street?: string | undefined
+  building?: string | undefined
+  numberApartment?: string | undefined
+  indexNum?: string | undefined
+  country?: string | undefined
+  city?: string | undefined
 }

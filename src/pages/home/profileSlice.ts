@@ -4,16 +4,17 @@ import { createAppSlice } from "../../app/createAppSlice"
 
 const initialState: ProfileState = {
   profiles: [],
+  profile: null,
   loading: false,
   error: null,
 }
 interface ThunkArg {
   name: string
-  formData: ProfileState
+  formData: FormData
 }
 
 export const profileSlice = createAppSlice({
-  name: "profiles",
+  name: "profile",
 
   initialState,
 
@@ -35,7 +36,8 @@ export const profileSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.loading = false
-          state.profiles.push(action.payload)
+          // state.profiles.push(action.payload)
+          state.profile = action.payload
         },
         rejected: state => {
           state.loading = false

@@ -4,13 +4,7 @@ import { useEffect, useState } from "react"
 import styles from "./styles/PersonalPage.module.css"
 import { useTranslation } from "react-i18next"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import {
-  deleteUser,
-  logout,
-  selectRole,
-  selectUser,
-  updateUser,
-} from "./userSlice"
+import { logout, selectRole, selectUser, updateUser } from "./userSlice"
 import type { User } from "./types/User"
 import { toast } from "react-toastify"
 import logo from "../../assets/logo.png"
@@ -35,8 +29,8 @@ const PersonalPage: FC = () => {
     birthdate: "1990-01-01",
     addressDto: {
       street: "",
-      building: null,
-      numberApartment: null,
+      building: "",
+      numberApartment: "",
       indexNum: "",
       country: "",
       city: "",
@@ -51,7 +45,22 @@ const PersonalPage: FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
+    if (name.includes("addressDto.")) {
+      const fieldPath = name.split(".")
+      const field = fieldPath[1]
+      setFormData(prevData => ({
+        ...prevData,
+        addressDto: {
+          ...prevData.addressDto,
+          [field]: value,
+        },
+      }))
+    } else {
+      setFormData(prevData => ({
+        ...prevData,
+        [name]: value,
+      }))
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -64,17 +73,6 @@ const PersonalPage: FC = () => {
       })
       .catch(() => {
         toast.error(t("toasty.noUpdatedContact"))
-      })
-  }
-
-  const handleDeleteUser = () => {
-    dispatch(deleteUser())
-      .unwrap()
-      .then(() => {
-        toast.success(t("toasty.personalDataDeleted"))
-      })
-      .catch(() => {
-        toast.error(t("toasty.personalDataNoDeleted"))
       })
   }
 
@@ -91,124 +89,138 @@ const PersonalPage: FC = () => {
   }
 
   return (
-    <div className={styles.personalPageContainer}>
-      {viewUserRoleForm && <UserRoleForm />}
-      <div className="container mx-auto px-4 flex items-center justify-start mb-3 ">
-        <button
-          id="logout"
-          className="text-xl mb-4 text-white p-2 hover:bg-red-400 border rounded mt-3"
-          onClick={handleLogout}
-        >
-          {t("personalPage.logOut")}
-        </button>
-      </div>
-
-      <div className="container mx-auto px-4">
-        <div className="text-right">
-          <div className={styles.headerUpdateAccount}></div>
-        </div>
-        <div className="mt-9 mb-6">
-          <h3 className="text-xl font-bold mb-4 text-white">
-            {t("personalPage.personalData")}
-          </h3>
-          <p className="text-xl mb-3 text-white">
-            {t("personalPage.updatePersonalData")}
-          </p>
-          <p className="text-xl mb-3 text-white">
-            {t("personalPage.emailHeader")} {user?.email} {user?.role}
-            {t("personalPage.emailFooter")}
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit} id="updateForm" className="flex justify-between">
-          <div className="space-y-4 w-1/2 pr-2 mt-6">
-            <input
-              type="text"
-              name="firstName"
-              placeholder={t("personalPage.name")}
-              value={formData.firstName}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded "
-            />
-            <input
-              type="text"
-              name="phone"
-              placeholder={t("personalPage.phone")}
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded mt-10"
-            />
-            <div className={styles.addressForm}></div>
-            <input
-              type="text"
-              name="street"
-              placeholder={t("personalPage.street")}
-              value={formData.addressDto?.street}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-            />
-            <input
-              type="text"
-              name="indexNum"
-              placeholder={t("personalPage.code")}
-              value={formData.addressDto?.indexNum}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-            />
-          </div>
-          <div className="space-y-4 w-1/2 pl-2 mt-6">
-            <input
-              type="text"
-              name="lastName"
-              placeholder={t("personalPage.lastName")}
-              value={formData.lastName}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-            />
-            <input
-              type="date"
-              name="birthdate"
-              placeholder={t("personalPage.dataOfBirth")}
-              value={formData.birthdate}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-              max={today}
-            />
-            <div className={styles.addressForm}></div>
-
-            <input
-              type="text"
-              name="city"
-              placeholder={t("personalPage.city")}
-              value={formData.addressDto?.city}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-            />
-            <input
-              type="text"
-              name="country"
-              placeholder={t("personalPage.country")}
-              value={formData.addressDto?.country}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-            />
-          </div>
-        </form>
-
-        <div className="mt-4 text-right">
+    <>
+      <div className={styles.personalPageContainer}>
+        {viewUserRoleForm && <UserRoleForm />}
+        <div className="container mx-auto px-4 flex items-center justify-start mb-3 ">
           <button
-            id="reset-button"
-            type="button"
-            onClick={handleDeleteUser}
-            className="px-6 py-2 rounded mr-6 bg-blue-400 hover:bg-yellow-400"
+            id="logout"
+            className="text-xl mb-4 text-white p-2 hover:bg-red-400 border rounded mt-3"
+            onClick={handleLogout}
           >
-            {t("personalPage.reset")}
+            {t("personalPage.logOut")}
           </button>
+        </div>
+
+        <div className="container mx-auto px-4">
+          <div className="text-right">
+            <div className={styles.headerUpdateAccount}></div>
+          </div>
+          <div className="mt-9 mb-6">
+            <h3 className="text-xl font-bold mb-4 text-white">
+              {t("personalPage.personalData")}
+            </h3>
+            <p className="text-xl mb-3 text-white">
+              {t("personalPage.updatePersonalData")}
+            </p>
+            <p className="text-xl mb-3 text-white">
+              {t("personalPage.emailHeader")} {user?.email} {user?.role}
+              {t("personalPage.emailFooter")}
+            </p>
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            id="updateForm"
+            className="flex justify-between"
+          >
+            <div className="space-y-4 w-1/2 pr-2 mt-6">
+              <input
+                type="text"
+                name="firstName"
+                placeholder={t("personalPage.name")}
+                value={formData.firstName}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded "
+              />
+              <input
+                type="text"
+                name="phone"
+                placeholder={t("personalPage.phone")}
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded mt-10"
+              />
+              <div className={styles.addressForm}></div>
+              <input
+                type="text"
+                name="addressDto.street"
+                placeholder={t("personalPage.street")}
+                value={formData?.addressDto?.street}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded"
+              />
+
+              <input
+                type="number"
+                name="addressDto.building"
+                placeholder={t("personalPage.building")}
+                value={formData?.addressDto?.building}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded"
+              />
+              <input
+                type="number"
+                name="addressDto.numberApartment"
+                placeholder={t("personalPage.numberApartment")}
+                value={formData.addressDto?.numberApartment}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded"
+              />
+            </div>
+            <div className="space-y-4 w-1/2 pl-2 mt-6">
+              <input
+                type="text"
+                name="lastName"
+                placeholder={t("personalPage.lastName")}
+                value={formData.lastName}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded"
+              />
+              <input
+                type="date"
+                name="birthdate"
+                placeholder={t("personalPage.dataOfBirth")}
+                value={formData.birthdate}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded"
+                max={today}
+              />
+              <div className={styles.addressForm}></div>
+
+              <input
+                type="text"
+                name="addressDto.indexNum"
+                placeholder={t("personalPage.code")}
+                value={formData?.addressDto?.indexNum}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded"
+              />
+
+              <input
+                type="text"
+                name="addressDto.city"
+                placeholder={t("personalPage.city")}
+                value={formData?.addressDto?.city}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded"
+              />
+              <input
+                type="text"
+                name="addressDto.country"
+                placeholder={t("personalPage.country")}
+                value={formData?.addressDto?.country}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded"
+              />
+            </div>
+          </form>
+
           <button
             id="update-button"
             type="submit"
             form="updateForm"
-            className="px-4 py-2 rounded bg-blue-500 text-white bg-yellow-400 hover:bg-blue-400"
+            className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-yellow-400 mt-9"
           >
             {t("personalPage.update")}
           </button>
@@ -217,7 +229,7 @@ const PersonalPage: FC = () => {
       <div className={styles.logoPersonalPage}>
         <img src={logo} alt="Logo" className="max-w-full" />
       </div>
-    </div>
+    </>
   )
 }
 

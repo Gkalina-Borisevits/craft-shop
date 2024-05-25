@@ -13,11 +13,25 @@ type Props = {
   onClose?: () => void
 }
 
+
+
 const ProductDetails: React.FC<Props> = ({ onClose }) => {
   const { t } = useTranslation("translation")
   const role = useAppSelector(selectRole)
   const productById = useAppSelector(selectProductById)
   const viewUserRoleForm = role === "ADMINISTRATOR" || role === "MODERATOR"
+
+  const [product, setProduct] = useState<Product>({
+    id: 0,
+    title: '',
+    description: '',
+    size: '',
+    dimensions: '',
+    material: '',
+    price: 0,
+    files: [],
+    count: 0
+  });
 
   const dispatch = useAppDispatch()
   const [urlPreviews, setUrlPreviews] = useState<(string | undefined)[]>([
@@ -27,155 +41,195 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
     undefined,
   ])
 
-  const [formData, setFormData] = useState<Product>({
-    id: "1",
-    title: "",
-    description: "",
-    size: "",
-    dimensions: "",
-    material: "",
-    price: "",
-    imageFiles: [],
-    count: "",
-  })
+  // const [formData, setFormData] = useState<Product>({
+  //   id: 1,
+  //   title: "",
+  //   description: "",
+  //   size: "",
+  //   dimensions: "",
+  //   material: "",
+  //   price: "",
+  //   files: [],
+  //   count: "",
+  // })
 
-  useEffect(() => {
-    if (productById) {
-      setFormData({
-        id: productById.id || "",
-        title: productById.title || "",
-        description: productById.description || "",
-        size: productById.size || "",
-        dimensions: productById.dimensions || "",
-        material: productById.material || "",
-        price: productById.price || "",
-        count: productById.count || "",
-        imageFiles: productById.imageFiles || [
-          undefined,
-          undefined,
-          undefined,
-          undefined,
-        ],
-      })
-      setUrlPreviews(
-        productById.imageFiles.map(file =>
-          file ? URL.createObjectURL(file) : undefined,
-        ),
-      )
-    } else {
-      setFormData({
-        id: "",
-        title: "",
-        description: "",
-        size: "",
-        dimensions: "",
-        material: "",
-        price: "",
-        imageFiles: [],
-      })
-      setUrlPreviews([undefined, undefined, undefined, undefined])
-    }
-  }, [productById])
+  // useEffect(() => {
+  //   if (productById) {
+  //     setFormData({
+  //       id: productById.id || 1,
+  //       title: productById.title || "",
+  //       description: productById.description || "",
+  //       size: productById.size || "",
+  //       dimensions: productById.dimensions || "",
+  //       material: productById.material || "",
+  //       price: productById.price || "",
+  //       count: productById.count || "",
+  //       files: productById.files || [
+  //         undefined,
+  //         undefined,
+  //         undefined,
+  //         undefined,
+  //       ],
+  //     })
+  //     setUrlPreviews(
+  //       productById.files.map(file =>
+  //         file ? URL.createObjectURL(file) : undefined,
+  //       ),
+  //     )
+  //   } else {
+  //     setFormData({
+  //       id: 1,
+  //       title: "",
+  //       description: "",
+  //       size: "",
+  //       dimensions: "",
+  //       material: "",
+  //       price: "",
+  //       count: "",
+  //       files: [],
+  //     })
+  //     setUrlPreviews([undefined, undefined, undefined, undefined])
+  //   }
+  // }, [productById])
 
   const handleChange = (e: React.ChangeEvent<FormElement>) => {
-    const { name, value } = e.target
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value,
-    }))
-  }
+    const { name, value } = e.target;
+    setProduct(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleFileChange = useCallback(
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files && e.target.files[0]) {
-        const file = e.target.files[0]
-        const url = URL.createObjectURL(file)
+      if (e.target.files && e.target.files.length > 0) {
+        const file = e.target.files[0];
+        const newUrlPreview = URL.createObjectURL(file)
+  
         setUrlPreviews(prev => {
-          const newPreviews = [...prev]
-          newPreviews[index] = url
-          return newPreviews
-        })
-        setFormData(prev => ({
+          const newPreviews = [...prev];
+          newPreviews[index] = newUrlPreview
+          console.log("Updated URL previews:", newPreviews)
+          return newPreviews;
+        });
+  
+        setProduct(prev => ({
           ...prev,
-          imageFiles: prev.imageFiles.map((image, i) =>
-            i === index ? file : image,
-          ),
-        }))
+          files: [...prev.files.slice(0, index), file, ...prev.files.slice(index + 1)]
+        }));
       }
     },
-    [],
-  )
+    []
+  );
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    console.log("Store Product add: ", formData)
-    try {
-      const productData = new FormData()
-      productData.append("id", formData.id)
-      productData.append("title", formData.title)
-      productData.append("description", formData.description)
-      productData.append("size", formData.size)
-      productData.append("dimensions", formData.dimensions)
-      productData.append("material", formData.material)
-      productData.append("price", formData.price.toString())
-      formData.imageFiles.forEach((file, index) => {
-        if (file) {
-          productData.append(`imageFile${index}`, file)
-        }
-      })
+//   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault()
+    
+//     try {
+//       const formData = new FormData();
+//       formData.append("id", product.id.toString() || "")
+//       formData.append("title", product.title || "")
+//       formData.append("description", product.description || "")
+//       formData.append("size", product.size || "")
+//       formData.append("dimensions", product.dimensions || "")
+//       formData.append("material", product.material || "")
+//       formData.append("count", product.count.toString() || "")
+//       formData.append("price", product.price.toString() || "")
+//       product.files.forEach((file, index) => {
+//         if (file instanceof File) {
+//           formData.append(`files`, file);
+//         }
+//       });
+//       for (let value of formData.entries()) {
+//         console.log(value[0] + ', ' + value[1]);
+//       }
+// console.log("formData: ",formData)
+//       if (!viewUserRoleForm) {
+//         // Добавление в корзину для обычных пользователей
+//         // dispatch(addToCart(formData.id))
+//         //   .unwrap()
+//         //   .then(() => {
+//         //     toast.success("Product added to cart successfully");
+//         //     onClose();
+//         //   })
+//         //   .catch(error => {
+//         //     toast.error("Failed to add product to cart");
+//         //   });
+//       } else if (productById) {
+//         dispatch(updateProduct(formData))
+//           .unwrap()
+//           .then(() => {
+//             toast.success("Store product updated successfully")
+//             if (onClose) {
+//               onClose()
+//             }
+//           })
+//           .catch(error => {
+//             toast.error("Failed to update store product")
+//           })
+//       } else {
+//         dispatch(addNewProduct(formData))
+//           .unwrap()
+//           .then(() => {
+//             toast.success("Store product added successfully")
+//             if (onClose) {
+//               onClose()
+//             }
+//             setUrlPreviews([undefined, undefined, undefined, undefined])
+//           })
+          
+//           .catch(error => {
+//             toast.error("Failed to add store product")
+//           })
+//       }
+//       // setFormData({
+//       //   id: 0,
+//       //   title: "",
+//       //   description: "",
+//       //   size: "",
+//       //   dimensions: "",
+//       //   material: "",
+//       //   price: "",
+//       //   files: [],
+//       //   count: "",
+//       // })
+//     } catch (error) {
+//       console.error("Failed add/update:", error)
+//     }
+//   }
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-      if (!viewUserRoleForm) {
-        // Добавление в корзину для обычных пользователей
-        // dispatch(addToCart(formData.id))
-        //   .unwrap()
-        //   .then(() => {
-        //     toast.success("Product added to cart successfully");
-        //     onClose();
-        //   })
-        //   .catch(error => {
-        //     toast.error("Failed to add product to cart");
-        //   });
-      } else if (productById) {
-        dispatch(updateProduct(formData))
-          .unwrap()
-          .then(() => {
-            toast.success("Store product updated successfully")
-            if (onClose) {
-              onClose()
-            }
-          })
-          .catch(error => {
-            toast.error("Failed to update store product")
-          })
-      } else {
-        dispatch(addNewProduct(formData))
-          .unwrap()
-          .then(() => {
-            toast.success("Store product added successfully")
-            if (onClose) {
-              onClose()
-            }
-            setUrlPreviews([undefined, undefined, undefined, undefined])
-          })
-          .catch(error => {
-            toast.error("Failed to add store product")
-          })
-      }
-      setFormData({
-        id: "",
-        title: "",
-        description: "",
-        size: "",
-        dimensions: "",
-        material: "",
-        price: "",
-        imageFiles: [],
-        count: "",
-      })
-    } catch (error) {
-      console.error("Failed add/update:", error)
+  const formData = new FormData();
+  formData.append("id", product.id.toString() || "");
+  formData.append("title", product.title || "");
+  formData.append("description", product.description || "");
+  formData.append("size", product.size || "");
+  formData.append("dimensions", product.dimensions || "");
+  formData.append("material", product.material || "");
+  formData.append("count", product.count.toString() || "");
+  formData.append("price", product.price.toString() || "");
+  
+  product.files.forEach((file, index) => {
+    if (file) {
+      formData.append(`files[${index}]`, file, file.name );
     }
+  });
+  
+  for (let entry of formData.entries()) {
+    console.log(entry[0], entry[1]);
   }
+
+  try {
+    const response = await dispatch(addNewProduct(formData)).unwrap();
+    console.log("Product added successfully:", response);
+    toast.success("Store product added successfully");
+    if (onClose) {
+      onClose();
+    }
+    setUrlPreviews([undefined, undefined, undefined, undefined]);
+  } catch (error) {
+    console.error("Failed to add the product:", error);
+    toast.error("Failed to add store product");
+  }
+};
 
   return (
     <div className="addCardContainer">
@@ -199,6 +253,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                 </label>
                 {urlPreviews[0] && (
                   <img
+                  
                     src={urlPreviews[0]}
                     alt="Main Product Preview"
                     className="w-full h-116 object-cover rounded-md shadow-md"
@@ -215,6 +270,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                     onChange={handleFileChange(index)}
                     id={`file-upload-${index}`}
                     className="hidden"
+                  
                   />
                   <label
                     htmlFor={`file-upload-${index}`}
@@ -236,7 +292,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
               <input
                 type="text"
                 name="title"
-                value={formData.title}
+                value={product.title}
                 onChange={handleChange}
                 placeholder={t("storeProduct.title")}
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
@@ -244,7 +300,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
               />
               <textarea
                 name="description"
-                value={formData.description}
+                value={product.description}
                 onChange={handleChange}
                 placeholder={t("storeProduct.description")}
                 className="textarea-underline mb-4 p-2 bg-black text-white rounded-none"
@@ -253,7 +309,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
               <input
                 type="text"
                 name="size"
-                value={formData.size}
+                value={product.size}
                 onChange={handleChange}
                 placeholder={t("storeProduct.size")}
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
@@ -262,7 +318,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
               <input
                 type="text"
                 name="dimensions"
-                value={formData.dimensions}
+                value={product.dimensions}
                 onChange={handleChange}
                 placeholder={t("storeProduct.dimensions")}
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
@@ -271,16 +327,16 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
               <input
                 type="text"
                 name="material"
-                value={formData.material}
+                value={product.material}
                 onChange={handleChange}
                 placeholder={t("storeProduct.material")}
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
                 required
               />
               <input
-                type="number"
+                type="text"
                 name="price"
-                value={formData.price}
+                value={product.price}
                 onChange={handleChange}
                 placeholder={t("storeProduct.price")}
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
@@ -288,10 +344,10 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
               />
               <input
                 type="number"
-                name="price"
-                value={formData.price}
+                name="count"
+                value={product.count}
                 onChange={handleChange}
-                placeholder={t("storeProduct.price")}
+                placeholder={t("storeProduct.count")}
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
                 required
               />

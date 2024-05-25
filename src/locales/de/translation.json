@@ -72,7 +72,9 @@
     "country": "Land",
     "logOut": "Abmelden",
     "roleChangeForm": "Formular zur Änderung der Mitarbeiterrolle",
-    "enterEmail": "Geben Sie die E-Mail-Adresse des Mitarbeiters ein"
+    "enterEmail": "Geben Sie die E-Mail-Adresse des Mitarbeiters ein",
+    "building": "Gebäude",
+    "numberApartment": "Wohnungsnummer"
   },
   "toasty": {
     "contactUpdated": "Kontaktdaten aktualisiert",
@@ -82,7 +84,8 @@
     "login": "Sie haben sich erfolgreich angemeldet. Ihnen steht der volle Funktionsumfang der Website zur Verfügung.",
     "unknownError": "Registrierung fehlgeschlagen. Bitte versuchen Sie es später erneut.",
     "registeredSuccessfully": "Erfolgreich registriert! 👌",
-    "instructionsForActivating": "Anweisungen zur Aktivierung Ihres Kontos wurden an Ihre E-Mail-Adresse gesendet. 📧"
+    "instructionsForActivating": "Anweisungen zur Aktivierung Ihres Kontos wurden an Ihre E-Mail-Adresse gesendet. 📧",
+    "noAccount": "Sie haben kein erstelltes Konto. Sie müssen sich registrieren."
   },
   "storeProduct": {
     "title": "Titel",

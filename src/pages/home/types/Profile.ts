@@ -8,6 +8,7 @@ export interface Profile {
 
 export interface ProfileState {
   profiles: Profile[]
+  profile: Profile | null
   loading: boolean
   error: string | null
 }

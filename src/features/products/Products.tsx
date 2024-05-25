@@ -47,28 +47,29 @@ const Products: FC = () => {
               <h3 className="text-lg font-semibold text-gray-700 mb-3">
                 Product {index + 1}
               </h3>
-              <Link
-                to={`/products/${product.id}`}
-                className="flex flex-wrap items-center justify-center bg-gray-300 p-2 rounded hover:bg-gray-400"
-              >
-                {product?.imageFiles?.map((file, fileIndex) => {
+             
+                {product?.files?.map((file, fileIndex) => {
                   const isFourthImage = (fileIndex + 1) % 4 === 0
                   const imageSizeClass = isFourthImage
                     ? "w-44 h-44"
                     : "w-32 h-32"
 
-                  const imageUrl =
+                  const pagesUrl =
                     typeof file === "string" ? file : URL.createObjectURL(file)
                   return (
                     // eslint-disable-next-line jsx-a11y/img-redundant-alt
                     <img
                       key={fileIndex}
-                      src={imageUrl}
+                      src={pagesUrl}
                       alt={`Product ${index + 1} Image ${fileIndex + 1}`}
                       className={`${imageSizeClass} md:w-48 md:h-48 lg:w-64 lg:h-64 object-cover m-1 rounded`}
                     />
                   )
                 })}
+                 <Link
+                to={`/products/${product.id}`}
+                className="flex flex-wrap items-center justify-center bg-gray-300 p-2 rounded hover:bg-gray-400"
+              >
                 <i className="fas fa-eye text-gray-700 hover:text-white ml-2"></i>
               </Link>
             </div>
