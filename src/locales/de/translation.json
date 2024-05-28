@@ -85,7 +85,12 @@
     "unknownError": "Registrierung fehlgeschlagen. Bitte versuchen Sie es später erneut.",
     "registeredSuccessfully": "Erfolgreich registriert! 👌",
     "instructionsForActivating": "Anweisungen zur Aktivierung Ihres Kontos wurden an Ihre E-Mail-Adresse gesendet. 📧",
-    "noAccount": "Sie haben kein erstelltes Konto. Sie müssen sich registrieren."
+    "noAccount": "Sie haben kein erstelltes Konto. Sie müssen sich registrieren.",
+    "updateCard": "Produktkarte erfolgreich aktualisiert",
+    "notUpdatedCard": "Produktkarte konnte nicht aktualisiert werden - bitte versuchen Sie es später erneut",
+    "addedToCart": "Produktkarte zum Warenkorb hinzugefügt",
+    "cardSuccessfully": "Neue Karte erfolgreich hinzugefügt",
+    "notAddCard": "Die Karte konnte nicht hinzugefügt werden, versuchen Sie es später erneut."
   },
   "storeProduct": {
     "title": "Titel",
@@ -97,6 +102,9 @@
     "quantity": "Menge",
     "file": "Datei",
     "buttonAddCard": "Karte hinzufügen",
+    "buttonUpdateCard": "Karte bearbeiten",
+    "addToCart": "In den Warenkorb",
+    "editPage": "Seite bearbeiten",
     "closeForm": "Formular schließen"
   },
   "whoWeAre": {
@@ -112,6 +120,16 @@
     "administrator": "Administrator",
     "user": "Benutzer",
     "changeRole": "Rolle ändern"
+  },
+  "careers": {
+    "deleteCard": "Karte löschen"
+  },
+  "form": {
+    "officeName": "Büroname",
+    "contactInformation": "Kontaktdaten, Büroadresse",
+    "googleMaps": "Screenshot von Google Maps des Büros",
+    "videoLink": "Link zum Video",
+    "description": "Beschreibung"
   },
   "errorPage": {
     "accessDenied": "Zugriff verweigert",

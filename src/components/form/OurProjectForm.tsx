@@ -2,6 +2,9 @@ import type React from "react"
 import { useState } from "react"
 import type { OurProjectData } from "./types/OurProjectData"
 import { useTranslation } from "react-i18next"
+import { useAppDispatch } from "../../app/hooks"
+import { addProject } from "./slice/projectsSlice"
+import { toast } from "react-toastify"
 
 type Props = {
   onClose: () => void
@@ -9,7 +12,8 @@ type Props = {
 
 const OurProjectForm: React.FC<Props> = ({ onClose }) => {
   const { t } = useTranslation("translation")
-  const [formData, setFormData] = useState<OurProjectData>({
+  const dispatch = useAppDispatch()
+  const [card, setCard] = useState<OurProjectData>({
     photos: [],
     description: "",
   })
@@ -18,7 +22,7 @@ const OurProjectForm: React.FC<Props> = ({ onClose }) => {
     if (event.target.files) {
       const fileArray = Array.from(event.target.files)
       const newPhotos = fileArray.map(file => URL.createObjectURL(file))
-      setFormData(prevState => ({
+      setCard(prevState => ({
         ...prevState,
         photos: [...prevState.photos, ...newPhotos],
       }))
@@ -28,22 +32,30 @@ const OurProjectForm: React.FC<Props> = ({ onClose }) => {
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    setFormData(prevState => ({
+    setCard(prevState => ({
       ...prevState,
       description: event.target.value,
     }))
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    console.log("Form Data:", formData)
+    console.log("Form Data:", card)
 
-    const formDataToSend = new FormData()
-    formData.photos.forEach((photo, index) => {
-      formDataToSend.append(`photos[${index}]`, photo)
+    const formData = new FormData()
+    card.photos.forEach((photo, index) => {
+      formData.append(`photos[${index}]`, photo)
     })
-    formDataToSend.append("description", formData.description)
-    onClose()
+    formData.append("description", card.description)
+    try {
+      await dispatch(addProject(formData)).unwrap()
+      toast.success(t("toasty.cardSuccessfully"))
+      if (onClose) {
+        onClose()
+      }
+    } catch (error) {
+      toast.error(t("toasty.notAddCard"))
+    }
   }
 
   return (
@@ -70,7 +82,7 @@ const OurProjectForm: React.FC<Props> = ({ onClose }) => {
             {t("whoWeAre.uploadPhoto")}
           </label>
           <div className="mt-3 flex flex-wrap gap-4">
-            {formData.photos.map((photo, index) => (
+            {card.photos.map((photo, index) => (
               // eslint-disable-next-line jsx-a11y/img-redundant-alt
               <img
                 key={index}
@@ -86,7 +98,7 @@ const OurProjectForm: React.FC<Props> = ({ onClose }) => {
             {t("whoWeAre.addDescription")}
           </label>
           <textarea
-            value={formData.description}
+            value={card.description}
             onChange={handleDescriptionChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
             rows={4}

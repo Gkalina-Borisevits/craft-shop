@@ -1,6 +1,6 @@
 export interface Product {
   id: number
-  files: File[]
+  files: File[] 
   title: string
   description: string
   size: string
@@ -8,7 +8,7 @@ export interface Product {
   material: string
   price: number
   count: number
-  pagesUrl?: string
+  pagesUrl?: string[] | undefined;
 }
 
 export interface ProductState {

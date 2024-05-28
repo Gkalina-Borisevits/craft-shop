@@ -1,6 +1,6 @@
 export interface CartItemProps {
   product: {
-    id: string
+    id: number
     title: string
     price: number
     cartQuantity: number

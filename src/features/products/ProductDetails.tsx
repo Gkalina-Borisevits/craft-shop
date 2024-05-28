@@ -3,35 +3,43 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { useCallback, useEffect, useState } from "react"
 import type { Product } from "./types/Product"
 import { toast } from "react-toastify"
-import { addNewProduct, selectProductById, updateProduct } from "./productSlice"
+import {
+  addNewProduct,
+  getProductById,
+  selectProductById,
+  updateProduct,
+} from "./productSlice"
 import styles from "./styles/ProductDetails.module.css"
 import { useTranslation } from "react-i18next"
 import { selectRole } from "../auth/userSlice"
+import { useNavigate, useParams } from "react-router-dom"
+import { addToCart } from "../../components/cart/cartSlice"
 
 type FormElement = HTMLInputElement | HTMLTextAreaElement
 type Props = {
   onClose?: () => void
 }
 
-
-
 const ProductDetails: React.FC<Props> = ({ onClose }) => {
   const { t } = useTranslation("translation")
+  const { id } = useParams()
   const role = useAppSelector(selectRole)
   const productById = useAppSelector(selectProductById)
   const viewUserRoleForm = role === "ADMINISTRATOR" || role === "MODERATOR"
+  const navigate = useNavigate()
 
   const [product, setProduct] = useState<Product>({
     id: 0,
-    title: '',
-    description: '',
-    size: '',
-    dimensions: '',
-    material: '',
+    title: "",
+    description: "",
+    size: "",
+    dimensions: "",
+    material: "",
     price: 0,
     files: [],
-    count: 0
-  });
+    count: 0,
+    pagesUrl: [],
+  })
 
   const dispatch = useAppDispatch()
   const [urlPreviews, setUrlPreviews] = useState<(string | undefined)[]>([
@@ -41,195 +49,164 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
     undefined,
   ])
 
-  // const [formData, setFormData] = useState<Product>({
-  //   id: 1,
-  //   title: "",
-  //   description: "",
-  //   size: "",
-  //   dimensions: "",
-  //   material: "",
-  //   price: "",
-  //   files: [],
-  //   count: "",
-  // })
+  useEffect(() => {
+    dispatch(getProductById(id))
+  }, [dispatch, id])
 
-  // useEffect(() => {
-  //   if (productById) {
-  //     setFormData({
-  //       id: productById.id || 1,
-  //       title: productById.title || "",
-  //       description: productById.description || "",
-  //       size: productById.size || "",
-  //       dimensions: productById.dimensions || "",
-  //       material: productById.material || "",
-  //       price: productById.price || "",
-  //       count: productById.count || "",
-  //       files: productById.files || [
-  //         undefined,
-  //         undefined,
-  //         undefined,
-  //         undefined,
-  //       ],
-  //     })
-  //     setUrlPreviews(
-  //       productById.files.map(file =>
-  //         file ? URL.createObjectURL(file) : undefined,
-  //       ),
-  //     )
-  //   } else {
-  //     setFormData({
-  //       id: 1,
-  //       title: "",
-  //       description: "",
-  //       size: "",
-  //       dimensions: "",
-  //       material: "",
-  //       price: "",
-  //       count: "",
-  //       files: [],
-  //     })
-  //     setUrlPreviews([undefined, undefined, undefined, undefined])
-  //   }
-  // }, [productById])
+  useEffect(() => {
+    if (productById) {
+      console.log("productById:", productById)
+      const urls = productById.pagesUrl || []
+      setProduct({
+        id: productById.id || 1,
+        title: productById.title || "",
+        description: productById.description || "",
+        size: productById.size || "",
+        dimensions: productById.dimensions || "",
+        material: productById.material || "",
+        price: productById.price || 0,
+        count: productById.count || 0,
+        files: productById.files || [],
+      })
+
+      const filePreviews = (productById.files || []).map(file =>
+        file ? URL.createObjectURL(file) : undefined,
+      )
+      const urlPreviews = urls.map(url => url || undefined)
+
+      setUrlPreviews([...filePreviews, ...urlPreviews])
+    } else {
+      setProduct({
+        id: 1,
+        title: "",
+        description: "",
+        size: "",
+        dimensions: "",
+        material: "",
+        price: 0,
+        count: 0,
+        files: [],
+      })
+      setUrlPreviews([])
+    }
+  }, [productById])
 
   const handleChange = (e: React.ChangeEvent<FormElement>) => {
-    const { name, value } = e.target;
-    setProduct(prev => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = e.target
+    setProduct(prev => ({ ...prev, [name]: value }))
+  }
 
   const handleFileChange = useCallback(
     (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files.length > 0) {
-        const file = e.target.files[0];
+        const file = e.target.files[0]
         const newUrlPreview = URL.createObjectURL(file)
-  
+
         setUrlPreviews(prev => {
-          const newPreviews = [...prev];
+          const newPreviews = [...prev]
           newPreviews[index] = newUrlPreview
           console.log("Updated URL previews:", newPreviews)
-          return newPreviews;
-        });
-  
+          return newPreviews
+        })
+
         setProduct(prev => ({
           ...prev,
-          files: [...prev.files.slice(0, index), file, ...prev.files.slice(index + 1)]
-        }));
+          files: [
+            ...prev.files.slice(0, index),
+            file,
+            ...prev.files.slice(index + 1),
+          ],
+        }))
       }
     },
-    []
-  );
+    [],
+  )
 
-//   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-//     e.preventDefault()
-    
-//     try {
-//       const formData = new FormData();
-//       formData.append("id", product.id.toString() || "")
-//       formData.append("title", product.title || "")
-//       formData.append("description", product.description || "")
-//       formData.append("size", product.size || "")
-//       formData.append("dimensions", product.dimensions || "")
-//       formData.append("material", product.material || "")
-//       formData.append("count", product.count.toString() || "")
-//       formData.append("price", product.price.toString() || "")
-//       product.files.forEach((file, index) => {
-//         if (file instanceof File) {
-//           formData.append(`files`, file);
-//         }
-//       });
-//       for (let value of formData.entries()) {
-//         console.log(value[0] + ', ' + value[1]);
-//       }
-// console.log("formData: ",formData)
-//       if (!viewUserRoleForm) {
-//         // Добавление в корзину для обычных пользователей
-//         // dispatch(addToCart(formData.id))
-//         //   .unwrap()
-//         //   .then(() => {
-//         //     toast.success("Product added to cart successfully");
-//         //     onClose();
-//         //   })
-//         //   .catch(error => {
-//         //     toast.error("Failed to add product to cart");
-//         //   });
-//       } else if (productById) {
-//         dispatch(updateProduct(formData))
-//           .unwrap()
-//           .then(() => {
-//             toast.success("Store product updated successfully")
-//             if (onClose) {
-//               onClose()
-//             }
-//           })
-//           .catch(error => {
-//             toast.error("Failed to update store product")
-//           })
-//       } else {
-//         dispatch(addNewProduct(formData))
-//           .unwrap()
-//           .then(() => {
-//             toast.success("Store product added successfully")
-//             if (onClose) {
-//               onClose()
-//             }
-//             setUrlPreviews([undefined, undefined, undefined, undefined])
-//           })
-          
-//           .catch(error => {
-//             toast.error("Failed to add store product")
-//           })
-//       }
-//       // setFormData({
-//       //   id: 0,
-//       //   title: "",
-//       //   description: "",
-//       //   size: "",
-//       //   dimensions: "",
-//       //   material: "",
-//       //   price: "",
-//       //   files: [],
-//       //   count: "",
-//       // })
-//     } catch (error) {
-//       console.error("Failed add/update:", error)
-//     }
-//   }
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
 
-  const formData = new FormData();
-  formData.append("id", product.id.toString() || "");
-  formData.append("title", product.title || "");
-  formData.append("description", product.description || "");
-  formData.append("size", product.size || "");
-  formData.append("dimensions", product.dimensions || "");
-  formData.append("material", product.material || "");
-  formData.append("count", product.count.toString() || "");
-  formData.append("price", product.price.toString() || "");
-  
-  product.files.forEach((file, index) => {
-    if (file) {
-      formData.append(`files[${index}]`, file, file.name );
+    const formData = new FormData()
+    formData.append("id", product.id.toString() || "")
+    formData.append("title", product.title || "")
+    formData.append("description", product.description || "")
+    formData.append("size", product.size || "")
+    formData.append("dimensions", product.dimensions || "")
+    formData.append("material", product.material || "")
+    formData.append("count", product.count.toString() || "")
+    formData.append("price", product.price.toString() || "")
+
+    product.files.forEach((file, index) => {
+      if (file) {
+        formData.append(`files[${index}]`, file, file.name)
+      }
+    })
+
+    for (let entry of formData.entries()) {
+      console.log(entry[0], entry[1])
     }
-  });
-  
-  for (let entry of formData.entries()) {
-    console.log(entry[0], entry[1]);
+
+    try {
+      if (!viewUserRoleForm) {
+        // Добавление в корзину для обычных пользователей
+        // dispatch(addToCart(product.id))
+        //   .unwrap()
+        //   .then(() => {
+        //     toast.success("Product added to cart successfully");
+        //     if (onClose) {
+        //       onClose();
+        //     }
+        //   })
+        //   .catch(error => {
+        //     console.error("Failed to add product to cart:", error);
+        //     toast.error("Failed to add product to cart");
+        //   });
+      } else if (productById) {
+        dispatch(updateProduct(formData))
+          .unwrap()
+          .then(() => {
+            toast.success(t("toasty.updateCard"))
+            if (onClose) {
+              onClose()
+            }
+          })
+          .catch(error => {
+            console.error("Failed to update store product:", error)
+            toast.error(t("toasty.notUpdatedCard"))
+          })
+      } else {
+        await dispatch(addNewProduct(formData)).unwrap()
+        toast.success(t("toasty.cardSuccessfully"))
+        if (onClose) {
+          onClose()
+        }
+        setUrlPreviews([undefined, undefined, undefined, undefined])
+      }
+    } catch (error) {
+      console.error("Failed to error product:", error)
+      toast.error(t("toasty.notUpdatedCard"))
+    }
   }
 
-  try {
-    const response = await dispatch(addNewProduct(formData)).unwrap();
-    console.log("Product added successfully:", response);
-    toast.success("Store product added successfully");
-    if (onClose) {
-      onClose();
-    }
-    setUrlPreviews([undefined, undefined, undefined, undefined]);
-  } catch (error) {
-    console.error("Failed to add the product:", error);
-    toast.error("Failed to add store product");
+  const handleNavigate = () => {
+    navigate("/products")
   }
-};
+
+  const addCardToCart = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    if (!product.id || !product.title || product.price === 0) {
+      toast.error(t("toasty.addedToCart"))
+      return
+    }
+    dispatch(
+      addToCart({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        cartQuantity: 1,
+      }),
+    )
+    toast.success(t("toasty.addedToCart"))
+  }
 
   return (
     <div className="addCardContainer">
@@ -253,7 +230,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 </label>
                 {urlPreviews[0] && (
                   <img
-                  
                     src={urlPreviews[0]}
                     alt="Main Product Preview"
                     className="w-full h-116 object-cover rounded-md shadow-md"
@@ -270,7 +246,6 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                     onChange={handleFileChange(index)}
                     id={`file-upload-${index}`}
                     className="hidden"
-                  
                   />
                   <label
                     htmlFor={`file-upload-${index}`}
@@ -351,16 +326,29 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
                 required
               />
-              <button
-                id="addCard"
-                type="submit"
-                className="bg-blue-400 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300"
-              >
-                {t("storeProduct.buttonAddCard")}
-              </button>
+              {viewUserRoleForm ? (
+                <button
+                  id="addCard"
+                  type="submit"
+                  className="bg-blue-400 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300"
+                >
+                  {productById
+                    ? t("storeProduct.buttonUpdateCard")
+                    : t("storeProduct.buttonAddCard")}
+                </button>
+              ) : (
+                <button
+                  id="addToCart"
+                  onClick={addCardToCart}
+                  type="button"
+                  className="bg-blue-400 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300"
+                >
+                  {t("storeProduct.addToCart")}
+                </button>
+              )}
               <button
                 id="closeWindow"
-                onClick={onClose}
+                onClick={productById ? handleNavigate : onClose}
                 className="mt-4 bg-yellow-400 text-white p-2 rounded-md hover:bg-yellow-600 transition duration-200"
               >
                 {t("storeProduct.closeForm")}

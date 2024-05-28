@@ -33,7 +33,7 @@ export async function fetchStoreProductById(id: string): Promise<Product> {
 
 export async function updateStateProduct(formData: Product): Promise<Product> {
   try {
-    const res = await api.put("/api/gallery", formData)
+    const res = await api.put("/gallery", formData)
 
     return res.data
   } catch (error) {

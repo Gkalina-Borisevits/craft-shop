@@ -1,5 +1,6 @@
 export interface ContactFormData {
-  name: string
+  id?: number
+  firstName: string
   lastName: string
   email: string
   question: string

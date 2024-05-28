@@ -20,7 +20,7 @@ const Contacts: FC = () => {
   const dispatch = useAppDispatch()
 
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
     lastName: "",
     email: "",
     question: "",
@@ -40,7 +40,7 @@ const Contacts: FC = () => {
     e.preventDefault()
     try {
       if (
-        !formData.name ||
+        !formData.firstName ||
         !formData.lastName ||
         !formData.email ||
         !formData.question
@@ -55,7 +55,7 @@ const Contacts: FC = () => {
         .then(() => {
           toast.success(t("contacts.thankQuestion"))
           setFormData({
-            name: "",
+            firstName: "",
             lastName: "",
             email: "",
             question: "",
@@ -88,7 +88,7 @@ const Contacts: FC = () => {
                   <input
                     type="text"
                     name="firstName"
-                    value={formData.name}
+                    value={formData.firstName}
                     onChange={handleChange}
                     required
                     className="px-4 py-2 border border-black rounded w-full pl-2"

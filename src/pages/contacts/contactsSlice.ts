@@ -1,7 +1,9 @@
 import { createAppSlice } from "../../app/createAppSlice"
-import type { ContactFormData, ContactFormState } from "./types/ContactFormData"
+import type {
+  ContactFormData,
+  ContactFormState,
+} from "../../components/contactForm/types/ContactFormData"
 import { submitContactForm } from "./api"
-
 
 const initialState: ContactFormState = {
   contactsData: null,
@@ -12,7 +14,7 @@ const initialState: ContactFormState = {
 export const ContactFormSlice = createAppSlice({
   name: "contactsData",
   initialState,
- 
+
   reducers: create => ({
     sendContacts: create.asyncThunk(
       async (formData: ContactFormData) => {
@@ -26,7 +28,6 @@ export const ContactFormSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.loading = false
-    
         },
         rejected: state => {
           state.loading = false

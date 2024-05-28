@@ -1,6 +1,9 @@
 import { useState } from "react"
-import type { CareersFormData } from "./api"
+import type { CareersFormData } from "./types/CareersFormData"
 import { useTranslation } from "react-i18next"
+import { useAppDispatch } from "../../app/hooks"
+import { addCareers } from "./slice/careersSlise"
+import { toast } from "react-toastify"
 
 type Props = {
   onClose: () => void
@@ -8,8 +11,8 @@ type Props = {
 
 const CareersForm: React.FC<Props> = ({ onClose }) => {
   const { t } = useTranslation("translation")
-
-  const [formData, setFormData] = useState<CareersFormData>({
+  const dispatch = useAppDispatch()
+  const [card, setCard] = useState<CareersFormData>({
     photo: "",
     description: "",
   })
@@ -17,7 +20,7 @@ const CareersForm: React.FC<Props> = ({ onClose }) => {
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const photoURL = URL.createObjectURL(event.target.files[0])
-      setFormData(prevState => ({
+      setCard(prevState => ({
         ...prevState,
         photo: photoURL,
       }))
@@ -27,21 +30,32 @@ const CareersForm: React.FC<Props> = ({ onClose }) => {
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
   ) => {
-    setFormData(prevState => ({
+    setCard(prevState => ({
       ...prevState,
       description: event.target.value,
     }))
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    console.log("Form Data:", formData)
+    console.log("Form Data:", card)
+
+    const formData = new FormData()
+    formData.append("photo", card.photo)
+    formData.append("description", card.description)
+    try {
+      await dispatch(addCareers(formData)).unwrap()
+      toast.success(t("toasty.cardSuccessfully"))
+      if (onClose) {
+        onClose()
+      }
+    } catch (error) {
+      toast.error(t("toasty.notAddCard"))
+    }
   }
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Job Application</h1>
-
       <form
         onSubmit={handleSubmit}
         className="space-y-9 border-2 border-white-200 p-6"
@@ -63,9 +77,9 @@ const CareersForm: React.FC<Props> = ({ onClose }) => {
               onChange={handlePhotoChange}
               className="hidden"
             />
-            {formData.photo && (
+            {card.photo && (
               <img
-                src={formData.photo}
+                src={card.photo}
                 alt="Uploaded"
                 className="mt-3 w-full h-auto object-cover rounded"
               />
@@ -76,7 +90,7 @@ const CareersForm: React.FC<Props> = ({ onClose }) => {
               {t("whoWeAre.addDescription")}
             </label>
             <textarea
-              value={formData.description}
+              value={card.description}
               onChange={handleDescriptionChange}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
               rows={6}
@@ -84,16 +98,16 @@ const CareersForm: React.FC<Props> = ({ onClose }) => {
           </div>
         </div>
         <button
-          id="addInCard"
+          id="add-card"
           type="submit"
-          className="bg-blue-400 text-white p-3 pl-5 pr-5 rounded-md hover:bg-blue-600 transition duration-300 mr-5"
+          className="bg-blue-400 text-white p-3 pl-5 pr-5 rounded-md hover:bg-yellow-400 transition duration-300 mr-5"
         >
           {t("storeProduct.buttonAddCard")}
         </button>
         <button
-          id="closeWidow"
+          id="close-window"
           onClick={onClose}
-          className="mt-4 bg-yellow-400 text-white p-3 pl-5 pr-5 rounded-md hover:bg-yellow-600 transition duration-200"
+          className="mt-4 bg-yellow-400 text-white p-3 pl-5 pr-5 rounded-md hover:bg-blue-400 transition duration-200"
         >
           {t("storeProduct.closeForm")}
         </button>

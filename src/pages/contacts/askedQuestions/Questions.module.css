@@ -1,0 +1,8 @@
+.buttonAddNewInfoCard {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+.buttonAddNewInfoCard button {
+  width: 200px;
+}

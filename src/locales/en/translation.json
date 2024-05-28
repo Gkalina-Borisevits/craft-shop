@@ -85,7 +85,12 @@
     "unknownError": "Registration failed. Please try again later.",
     "registeredSuccessfully": "Registered successfully! 👌",
     "instructionsForActivating": "Instructions for activating your account have been sent to your email. 📧",
-    "noAccount": "You do not have a created account. Registration is required."
+    "noAccount": "You do not have a created account. Registration is required.",
+    "updateCard": "Product card successfully updated",
+    "notUpdatedCard": "Failed to update product card - please try again later",
+    "addedToCart": "Product card added to cart",
+    "cardSuccessfully": "New card successfully added",
+    "notAddCard": "Failed to add the card, please try again later"
   },
   "storeProduct": {
     "title": "Title",
@@ -97,6 +102,9 @@
     "quantity": "Quantity",
     "file": "File",
     "buttonAddCard": "Add card",
+    "buttonUpdateCard": "Edit Card",
+    "addToCart": "Add to Cart",
+    "editPage": "Edit Page",
     "closeForm": "Close form"
   },
   "whoWeAre": {
@@ -112,6 +120,16 @@
     "administrator": "Administrator",
     "user": "User",
     "changeRole": "Change role"
+  },
+  "careers": {
+    "deleteCard": "Delete card"
+  },
+  "form": {
+    "officeName": "Office Name",
+    "contactInformation": "Contact Information, Office Address",
+    "googleMaps": "Google Maps Screenshot of the Office",
+    "videoLink": "Video Link",
+    "description": "Description"
   },
   "errorPage": {
     "accessDenied": "Access Denied",
