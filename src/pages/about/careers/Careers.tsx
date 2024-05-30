@@ -32,12 +32,10 @@ const Careers: FC = () => {
     setIsAddingProduct(false)
   }
 
-
-
   const handleDeleteCard = async (id: number) => {
     try {
-      await deleteCareer(id)
-      toast.success(t("toasty.cardSuccessfully"))
+      await dispatch(deleteCareer(id))
+      toast.success(t("toasty.deletedCard"))
     } catch (err) {
       toast.error(t("toasty.notUpdatedCard"))
     }
@@ -63,12 +61,22 @@ const Careers: FC = () => {
 
         <ul>
           {careersForm?.map(card => (
-            <li key={card.id}>
+            <li
+              key={card.id}
+              className="bg-gray-800 text-white p-4 rounded mb-4 flex items-center"
+            >
               <img src={card?.photo} alt={card.description} />
-              <p>{card?.description}</p>
-              <button onClick={() => handleDeleteCard(card.id!)}>
-                {t("careers.deleteCard")}
-              </button>
+              <div className="w-2/3 ml-4">
+                <p className="text-center font-semibold">{card?.description}</p>
+                {viewCareersForm && (
+                  <button
+                    onClick={() => handleDeleteCard(card.id!)}
+                    className="mt-2 bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                  >
+                    {t("careers.deleteCard")}
+                  </button>
+                )}
+              </div>
             </li>
           ))}
         </ul>

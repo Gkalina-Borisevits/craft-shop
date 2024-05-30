@@ -15,11 +15,11 @@
 .languageIcon {
   position: absolute;
   top: 30 px;
-  right: 0;
+  right: 20px;
   z-index: 1000;
   color: rgb(249, 249, 245);
-  margin-right: 20px;
   cursor: pointer;
+  font-size: 22px;
 }
 .languageDropdown {
   position: fixed;
@@ -30,6 +30,7 @@
   cursor: pointer;
   background-color: rgb(170, 170, 168);
   border: 1px solid black;
+  cursor: pointer;
 }
 
 .navbar {
@@ -66,8 +67,16 @@
 
 .personalPageHeader {
   color: rgb(255, 255, 255);
-  margin-right: 120px;
-  position: sticky;
+  cursor: pointer;
+  font-size: 22px;
+}
+.burgerMenuContainer{
+  display: none;
+}
+.personalLanguageMenu{
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 900px) {
@@ -82,7 +91,8 @@
   }
   .burgerMenuContainer {
     position: absolute;
-    margin-left: -30px;
+    margin-left: -40px;
+    display: block;
   }
   .logoHeader {
     margin-left: -30px;
@@ -97,5 +107,9 @@
   .languageDropdown {
     margin-top: 28px;
     font-size: 10px;
+  }
+  .personalPageHeader {
+    display: flex; 
+    display: block;
   }
 }

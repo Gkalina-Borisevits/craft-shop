@@ -9,8 +9,6 @@ import {
 } from "../../../components/contactForm/slice/contactInfoSlice"
 import { toast } from "react-toastify"
 import ContactInfoForm from "../../../components/contactForm/ContactInfoForm"
-import Carousel from "react-multi-carousel"
-import "react-multi-carousel/lib/styles.css"
 import styles from "./ContactInfo.module.css"
 
 const ContactInfo: FC = () => {
@@ -35,63 +33,59 @@ const ContactInfo: FC = () => {
 
   const handleDeleteCard = async (id: number) => {
     try {
-      await deleteContactInfo(id)
-      toast.success(t("toasty.cardSuccessfully"))
+      await dispatch(deleteContactInfo(id))
+      toast.success(t("toasty.deletedCard"))
     } catch (err) {
       toast.error(t("toasty.notUpdatedCard"))
     }
   }
 
   return (
-    <div className={styles.buttonAddNewInfoCard}>
-      {viewContactForm && (
-        <>
-          <button
-            id="addCard"
-            onClick={handleAddProductClick}
-            className="mt-4 bg-blue-500 text-white p-2 hover:bg-yellow-500 rounded"
-          >
-            {t("storeProduct.buttonAddCard")}
-          </button>
-          {isAddingWhoWeAre && (
-            <ContactInfoForm onClose={handleCloseProductCreator} />
-          )}
-        </>
-      )}
+    <>
+      <div className={styles.buttonAddNewInfoCard}>
+        {viewContactForm && (
+          <>
+            <button
+              id="addCard"
+              onClick={handleAddProductClick}
+              className="mt-4 bg-blue-500 text-white p-2 hover:bg-yellow-500 rounded"
+            >
+              {t("storeProduct.buttonAddCard")}
+            </button>
+            {isAddingWhoWeAre && (
+              <ContactInfoForm onClose={handleCloseProductCreator} />
+            )}
+          </>
+        )}
+      </div>
 
-      <Carousel
-        responsive={{
-          desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 3,
-            partialVisibilityGutter: 40,
-          },
-          tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2,
-            partialVisibilityGutter: 30,
-          },
-          mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1,
-            partialVisibilityGutter: 30,
-          },
-        }}
-      >
-        <ul>
-          {contactInfo?.map(card => (
-            <li key={card.id}>
-              <img src={card?.photo} alt={card.description} />
-              <p>{card?.name}</p>
+      <ul className="mt-4 text-white p-2 rounded flex flex-col items-center ">
+        {contactInfo?.map(card => (
+          <li
+            key={card.id}
+            className="rounded-lg p-4 m-2 flex flex-col sm:flex-row items-center justify-center border border-white w-full px-4 "
+          >
+            <img
+              src={card?.photo}
+              alt={card.description}
+              className="w-46 h-auto mr-14"
+            />
+            <div>
+              <p className="font-semibold">{card?.name}</p>
               <p>{card?.description}</p>
-              <button onClick={() => handleDeleteCard(card.id!)}>
-                {t("careers.deleteCard")}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </Carousel>
-    </div>
+              {viewContactForm && (
+                <button
+                  onClick={() => handleDeleteCard(card.id!)}
+                  className="mt-2 bg-red-400 text-white p-2 rounded hover:bg-red-600"
+                >
+                  {t("careers.deleteCard")}
+                </button>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </>
   )
 }
 

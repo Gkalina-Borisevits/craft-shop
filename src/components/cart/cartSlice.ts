@@ -2,7 +2,7 @@ import type { PayloadAction } from "@reduxjs/toolkit"
 import { createAppSlice } from "../../app/createAppSlice"
 
 interface CartItem {
-  id: string
+  id: number
   title: string
   price: number
   cartQuantity: number

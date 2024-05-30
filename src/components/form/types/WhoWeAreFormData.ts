@@ -1,6 +1,6 @@
 export interface WhoWeAreFormData {
   id?: number
-  photos: string[]
+  photos: File[]
   description: string
   videoLink: string
 }

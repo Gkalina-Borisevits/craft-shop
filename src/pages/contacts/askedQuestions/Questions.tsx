@@ -35,8 +35,8 @@ const Questions: FC = () => {
 
   const handleDeleteCard = async (id: number) => {
     try {
-      await deleteQuestion(id)
-      toast.success(t("toasty.cardSuccessfully"))
+      await dispatch(deleteQuestion(id))
+      toast.success(t("toasty.deletedCard"))
     } catch (err) {
       toast.error(t("toasty.notUpdatedCard"))
     }
@@ -58,14 +58,29 @@ const Questions: FC = () => {
         </>
       )}
 
-      <ul>
+      <ul className="mt-4 text-white p-2 rounded flex flex-col items-center ">
         {questions?.map(card => (
-          <li key={card.id}>
-            <img src={card?.photo} alt={card.description} />
-            <p>{card?.description}</p>
-            <button onClick={() => handleDeleteCard(card.id!)}>
-              {t("careers.deleteCard")}
-            </button>
+          <li
+            key={card.id}
+            className="rounded-lg p-4 m-2 flex flex-col sm:flex-row items-center justify-center border border-white w-full px-4 "
+          >
+            <img
+              src={card?.photo}
+              alt={card.description}
+              className="w-46 h-auto mr-14"
+            />
+            <div>
+              <p>{card?.description}</p>
+              <p className="font-semibold">{card?.videoLink}</p>
+              {questionForm && (
+                <button
+                  onClick={() => handleDeleteCard(card.id!)}
+                  className="mt-2 bg-red-400 text-white p-2 rounded hover:bg-red-600"
+                >
+                  {t("careers.deleteCard")}
+                </button>
+              )}
+            </div>
           </li>
         ))}
       </ul>

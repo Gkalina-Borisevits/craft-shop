@@ -90,7 +90,9 @@
     "notUpdatedCard": "Produktkarte konnte nicht aktualisiert werden - bitte versuchen Sie es später erneut",
     "addedToCart": "Produktkarte zum Warenkorb hinzugefügt",
     "cardSuccessfully": "Neue Karte erfolgreich hinzugefügt",
-    "notAddCard": "Die Karte konnte nicht hinzugefügt werden, versuchen Sie es später erneut."
+    "notAddCard": "Die Karte konnte nicht hinzugefügt werden, versuchen Sie es später erneut.",
+    "noCorrectData": "Stellen Sie sicher, dass die eingegebenen Daten korrekt sind",
+    "deletedCard": "Karte erfolgreich gelöscht"
   },
   "storeProduct": {
     "title": "Titel",

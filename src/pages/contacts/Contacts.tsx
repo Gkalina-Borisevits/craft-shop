@@ -146,25 +146,13 @@ const Contacts: FC = () => {
         <a target="_blank" href="https://www.instagram.com" rel="noreferrer">
           <FaInstagram />
         </a>
-        <a
-          target="_blank"
-          href="https://www.pinterest.com "
-          rel="noreferrer"
-        >
+        <a target="_blank" href="https://www.pinterest.com " rel="noreferrer">
           <FaPinterest />
         </a>
-        <a
-          target="_blank"
-          href="https://www.facebook.com "
-          rel="noreferrer"
-        >
+        <a target="_blank" href="https://www.facebook.com " rel="noreferrer">
           <FaFacebook />
         </a>
-        <a
-          target="_blank"
-          href="https://www.tiktok.com"
-          rel="noreferrer"
-        >
+        <a target="_blank" href="https://www.tiktok.com" rel="noreferrer">
           <FaTiktok />
         </a>
       </div>{" "}

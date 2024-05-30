@@ -35,14 +35,14 @@ const About: FC = () => {
 
   const handleDeleteCard = async (id: number) => {
     try {
-      await deleteWhoWeAre(id)
-      toast.success(t("toasty.cardSuccessfully"))
+      await dispatch(deleteWhoWeAre(id))
+      toast.success(t("toasty.deletedCard"))
     } catch (err) {
       toast.error(t("toasty.notUpdatedCard"))
     }
   }
   return (
-    <>
+    <div className={styles.aboutContainer}>
       <div className={styles.buttonAddNewInfoCard}>
         {viewWeAreForm && (
           <>
@@ -78,20 +78,35 @@ const About: FC = () => {
             },
           }}
         >
-          <ul>
+         <ul className="flex flex-col items-center bg-black p-4 rounded-md border border-white">
             {whoWeAreForm?.map(card => (
-              <li key={card.id}>
-                <img src={card?.photos} alt={card.description} />
-                <p>{card?.description}</p>
-                <button onClick={() => handleDeleteCard(card.id!)}>
-                  {t("careers.deleteCard")}
-                </button>
+              <li key={card.id} className="bg-gray-800 text-white p-4 rounded mb-4 flex items-center">
+                <div className="w-1/3">
+                  {card?.photos.map((photo, index) => (
+                    // eslint-disable-next-line jsx-a11y/img-redundant-alt
+                    <img
+                      key={index}
+                      src={photo}
+                      alt={`Photo ${index + 1}`}
+                      className="w-full h-auto object-cover rounded border border-white"
+                    />
+                  ))}
+                </div>
+                <div className="w-2/3 ml-4">
+                  <p className="text-center font-semibold">{card.description}</p>
+                  <button
+                    onClick={() => handleDeleteCard(card.id!)}
+                    className="mt-2 bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                  >
+                    {t("careers.deleteCard")}
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
         </Carousel>
       </div>
-    </>
+    </div>
   )
 }
 

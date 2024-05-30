@@ -1,6 +1,6 @@
 export interface Question {
   id?: number
-  photo: File | undefined
+  photo: File | string
   description: string
   videoLink: string
 }

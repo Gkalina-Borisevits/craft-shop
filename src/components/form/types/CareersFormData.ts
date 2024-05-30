@@ -1,6 +1,6 @@
 export interface CareersFormData {
   id?: number
-  photo: string
+  photo: File | null
   description: string
 }
 

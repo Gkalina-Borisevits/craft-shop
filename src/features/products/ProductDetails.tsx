@@ -217,7 +217,9 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
         >
           <div className="flex flex-col md:flex-row md:items-start w-full">
             <div className="flex flex-col items-center md:w-1/3">
-              <div className="mb-4">
+              <div className="mb-4">\
+              {viewUserRoleForm && (
+                    <>
                 <input
                   type="file"
                   accept="image/*"
@@ -225,9 +227,12 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                   id="file-upload-main"
                   className="hidden"
                 />
+
                 <label htmlFor="file-upload-main" className={styles.addImage}>
                   {t("storeProduct.file")}
                 </label>
+                </>
+              )}
                 {urlPreviews[0] && (
                   <img
                     src={urlPreviews[0]}
@@ -240,19 +245,23 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
             <div className="flex flex-col md:w-1/3 md:ml-12 space-y-4">
               {[1, 2, 3].map(index => (
                 <div key={index} className="flex-1">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange(index)}
-                    id={`file-upload-${index}`}
-                    className="hidden"
-                  />
-                  <label
-                    htmlFor={`file-upload-${index}`}
-                    className={styles.addImage}
-                  >
-                    {t("storeProduct.file")}
-                  </label>
+                  {viewUserRoleForm && (
+                    <>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleFileChange(index)}
+                        id={`file-upload-${index}`}
+                        className="hidden"
+                      />
+                      <label
+                        htmlFor={`file-upload-${index}`}
+                        className={styles.addImage}
+                      >
+                        {t("storeProduct.file")}
+                      </label>
+                    </>
+                  )}
                   {urlPreviews[index] && (
                     <img
                       src={urlPreviews[index]}
@@ -330,22 +339,23 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                 <button
                   id="addCard"
                   type="submit"
-                  className="bg-blue-400 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300"
+                  className="bg-indigo-500 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300"
                 >
                   {productById
                     ? t("storeProduct.buttonUpdateCard")
                     : t("storeProduct.buttonAddCard")}
                 </button>
-              ) : (
-                <button
-                  id="addToCart"
-                  onClick={addCardToCart}
-                  type="button"
-                  className="bg-blue-400 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300"
-                >
-                  {t("storeProduct.addToCart")}
-                </button>
-              )}
+              ) : null}
+
+              <button
+                id="addToCart"
+                onClick={addCardToCart}
+                type="button"
+                className="bg-blue-400 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300"
+              >
+                {t("storeProduct.addToCart")}
+              </button>
+
               <button
                 id="closeWindow"
                 onClick={productById ? handleNavigate : onClose}

@@ -90,7 +90,9 @@
     "notUpdatedCard": "Failed to update product card - please try again later",
     "addedToCart": "Product card added to cart",
     "cardSuccessfully": "New card successfully added",
-    "notAddCard": "Failed to add the card, please try again later"
+    "notAddCard": "Failed to add the card, please try again later",
+    "noCorrectData": "Ensure the correctness of the entered data",
+    "deletedCard": "Card successfully deleted"
   },
   "storeProduct": {
     "title": "Title",

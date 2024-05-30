@@ -13,7 +13,7 @@ import { selectCartItems } from "../cart/cartSlice"
 import ProductCart from "../cart/ProductCart"
 
 interface CartProduct extends Product {
-  cartQuantity: number; 
+  cartQuantity: number
 }
 
 const Header: FC = () => {
@@ -24,15 +24,19 @@ const Header: FC = () => {
   const contactsSubMenuRef = useRef<HTMLDivElement>(null)
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false)
   const [isContactsSubMenuOpen, setIsContactsSubMenuOpen] = useState(false)
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const cartRef = useRef<HTMLDivElement>(null);
-
- 
+  const [isCartOpen, setIsCartOpen] = useState(false)
+  const cartRef = useRef<HTMLDivElement>(null)
 
   const items = useAppSelector(selectCartItems)
-  const cartTotalAmount = (products: CartProduct[]): string => {
-    return products.reduce((total, product) => total + (parseFloat(product.price) * product.cartQuantity), 0).toFixed(2);
-  };
+  const cartTotalAmount = (products: CartProduct[]): any => {
+    return products
+      .reduce(
+        (total, product) =>
+          total + parseFloat(product.price) * product.cartQuantity,
+        0,
+      )
+      .toFixed(2)
+  }
 
   const languages = [
     { code: "en", name: "EN", flag: "🇬🇧" },
@@ -71,8 +75,8 @@ const Header: FC = () => {
       setIsContactsSubMenuOpen(false)
     }
     if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
-      setIsCartOpen(false);
-  }
+      setIsCartOpen(false)
+    }
   }
 
   useEffect(() => {
@@ -80,8 +84,8 @@ const Header: FC = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleMainItemClick = () => {
@@ -93,8 +97,8 @@ const Header: FC = () => {
   }
 
   const toggleCart = () => {
-    setIsCartOpen(!isCartOpen);
-  };
+    setIsCartOpen(!isCartOpen)
+  }
 
   return (
     <div className={styles.headerContainer}>
@@ -199,33 +203,38 @@ const Header: FC = () => {
           {t("header.login")}
         </NavLink>
       </div>
+      <div className="flex items-center justify-between p-4 mr-9">
+        <div className="flex items-center space-x-4">
+          <NavLink to="/personal-page" className={styles.personalPageHeader}>
+            {" "}
+            <FaUserAlt />
+          </NavLink>
 
-      <div>
-        <NavLink to="/personal-page" className={styles.personalPageHeader}>
-          {" "}
-          <FaUserAlt />
-        </NavLink>
-      </div>
-      <button onClick={toggleCart} className="flex items-center justify-center p-3 text-white">
-      
-      <i className="fas fa-cart-plus mr-8"></i>
-      </button> 
-      {isCartOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center absolute mt-56" ref={cartRef}>
-          <div className="bg-white w-1/3 p-6 rounded shadow-lg z-50 overflow-auto" style={{ maxHeight: '90vh' }}>
-            <ProductCart />
-            <p className="text-black">price</p>
+          <button
+            onClick={toggleCart}
+            className="flex items-center justify-center p-3 text-white"
+          >
+            <i className="fas fa-cart-plus text-2xl "></i>
+          </button>
+          {isCartOpen && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center absolute mt-36"
+              ref={cartRef}
+            >
+              <div className="bg-white  rounded shadow-lg z-50 overflow-auto">
+                <ProductCart />
+                <p className="text-black">price</p>
+              </div>
+            </div>
+          )}
+
+          <div
+            className={`flex items-center ${styles.languageIcon}`}
+            onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+          >
+            <FaGlobe />
           </div>
-        
         </div>
-      )}
-
-       
-      <div
-        className={styles.languageIcon}
-        onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
-      >
-        <FaGlobe />
       </div>
       {isLanguageDropdownOpen && (
         <div ref={languageMenuRef} className={styles.languageDropdown}>

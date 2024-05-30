@@ -34,7 +34,6 @@ const Login: FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log("Login:", formData)
     dispatch(login(formData))
       .unwrap()
       .then(() => {
@@ -42,12 +41,11 @@ const Login: FC = () => {
         navigate("/")
       })
       .catch(error => {
-        if (error === 403) {
+        if (error === 400) {
           toast.error(t("toasty.noAccount"))
           navigate("/registration")
         } else {
-          toast.error(t("toasty.noAccount"))
-          navigate("/registration")
+          toast.error(t("toasty.noCorrectData"))
         }
       })
   }

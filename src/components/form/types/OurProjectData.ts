@@ -1,6 +1,6 @@
 export interface OurProjectData {
   id?: number
-  photos: string[]
+  photos: File[]
   description: string
 }
 export interface ProjectState {

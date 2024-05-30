@@ -36,12 +36,18 @@ const ProfileCard: React.FC<Props> = ({ onClose }) => {
         ...profile,
         file: profileState?.profiles[index]?.file || undefined,
         url: profile?.url || profileState?.profiles[index]?.url || "",
-        description: profile?.description || profileState?.profiles[index]?.description || "",
-      }));
-      setProfileState(prevState => ({ ...prevState, profiles: updatedProfiles }));
+        description:
+          profile?.description ||
+          profileState?.profiles[index]?.description ||
+          "",
+      }))
+      setProfileState(prevState => ({
+        ...prevState,
+        profiles: updatedProfiles,
+      }))
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [profilePage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profilePage])
 
   const handleFileChange =
     (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,16 +63,16 @@ const ProfileCard: React.FC<Props> = ({ onClose }) => {
       }
     }
 
-    const handleInputChange =
+  const handleInputChange =
     (index: number, field: keyof Profile) =>
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const updatedProfiles = [...profileState.profiles];
+      const updatedProfiles = [...profileState.profiles]
       updatedProfiles[index] = {
         ...updatedProfiles[index],
         [field]: event.target.value,
-      };
-      setProfileState({ ...profileState, profiles: updatedProfiles });
-    };
+      }
+      setProfileState({ ...profileState, profiles: updatedProfiles })
+    }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -95,16 +101,15 @@ const ProfileCard: React.FC<Props> = ({ onClose }) => {
 
   return (
     <div className={styles.homeContainer}>
-       <button
-          id="closeWindow"
-          onClick={onClose}
-          className="mt-4 bg-yellow-400 text-white p-2 rounded-md hover:bg-yellow-600 transition duration-200"
-        >
-          {t("storeProduct.closeForm")}
-        </button>
+      <button
+        id="closeWindow"
+        onClick={onClose}
+        className="mt-4 bg-yellow-400 text-white p-2 rounded-md hover:bg-yellow-600 transition duration-200"
+      >
+        {t("storeProduct.closeForm")}
+      </button>
       <div className={styles.logoHome}>
         <img src={logo} alt="Logo" className="max-w-full" />
-        
       </div>
 
       <div className="bg-black mt-8">
@@ -158,12 +163,12 @@ const ProfileCard: React.FC<Props> = ({ onClose }) => {
             <div className="relative w-full lg:w-3/4 mx-auto flex lg:flex-row">
               <div className=" lg:w-1/4 bg-black"></div>
               <div className="flex-1 mt-4 lg:w-3/4">
-              <textarea
-                value={profileState.profiles[1].description}
-                onChange={handleInputChange(1, "description")}
-                placeholder="Profile Description"
-                className="w-full p-4 h-56 border border-gray-300 rounded"
-              />
+                <textarea
+                  value={profileState.profiles[1].description}
+                  onChange={handleInputChange(1, "description")}
+                  placeholder="Profile Description"
+                  className="w-full p-4 h-56 border border-gray-300 rounded"
+                />
               </div>
               <div className="flex-1 relative">
                 <input
@@ -252,7 +257,6 @@ const ProfileCard: React.FC<Props> = ({ onClose }) => {
             </button>
           )}
         </form>
-       
       </div>
     </div>
   )

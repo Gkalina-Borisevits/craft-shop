@@ -13,16 +13,16 @@ const CareersForm: React.FC<Props> = ({ onClose }) => {
   const { t } = useTranslation("translation")
   const dispatch = useAppDispatch()
   const [card, setCard] = useState<CareersFormData>({
-    photo: "",
+    photo: null,
     description: "",
   })
 
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const photoURL = URL.createObjectURL(event.target.files[0])
+    const files = event.target.files
+    if (files && files[0]) {
       setCard(prevState => ({
         ...prevState,
-        photo: photoURL,
+        photo: files[0],
       }))
     }
   }
@@ -41,7 +41,9 @@ const CareersForm: React.FC<Props> = ({ onClose }) => {
     console.log("Form Data:", card)
 
     const formData = new FormData()
-    formData.append("photo", card.photo)
+    if (card.photo) {
+      formData.append("photo", card.photo)
+    }
     formData.append("description", card.description)
     try {
       await dispatch(addCareers(formData)).unwrap()
@@ -62,29 +64,33 @@ const CareersForm: React.FC<Props> = ({ onClose }) => {
       >
         <div className="flex flex-col md:flex-row items-center gap-2">
           <div className="md:flex-none md:w-1/3 w-full">
-            <label
-              htmlFor="photo-upload"
-              className="block w-full bg-blue-500 text-white text-center py-2 px-4 rounded cursor-pointer"
-            >
-              <p className="mt-1 bg-blue-500 text-white text-center rounded cursor-pointer">
-                {t("whoWeAre.uploadPhoto")}
-              </p>
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              id="photo-upload"
-              onChange={handlePhotoChange}
-              className="hidden"
-            />
+          <label
+            htmlFor="file-upload"
+            className="block text-sm font-medium text-gray-700"
+          ></label>
+          <input
+            type="file"
+            accept="image/*"
+            id="file-upload"
+            onChange={handlePhotoChange}
+            className="hidden"
+          />
+          <label
+            htmlFor="file-upload"
+            className="mt-1 block w-full bg-blue-500 text-white text-center py-2 px-4 rounded cursor-pointer"
+          >
+             {t("whoWeAre.uploadPhoto")}
+          </label>
+          <div className="mt-3">
             {card.photo && (
               <img
-                src={card.photo}
-                alt="Uploaded"
-                className="mt-3 w-full h-auto object-cover rounded"
+                src={URL.createObjectURL(card.photo)}
+                alt="Selected"
+                className="w-56 h-56 object-cover rounded border border-white"
               />
             )}
           </div>
+        </div>
           <div className="md:flex-none md:w-2/3 w-full  p-2 rounded ">
             <label className="block text-sm font-medium text-gray-300">
               {t("whoWeAre.addDescription")}

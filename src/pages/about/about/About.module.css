@@ -6,3 +6,6 @@
 .buttonAddNewInfoCard button {
   width: 200px;
 }
+.aboutContainer {
+  height: 120vh;
+}

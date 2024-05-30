@@ -3,7 +3,7 @@ import { useAppDispatch } from "../../app/hooks"
 import type { ContactInfo } from "./types/ContactInfo"
 import { useState } from "react"
 import { toast } from "react-toastify"
-import { addQuestion } from "./slice/questionSlice"
+import { addContactInfo } from "./slice/contactInfoSlice"
 
 type Props = {
   onClose: () => void
@@ -55,7 +55,7 @@ const ContactInfoForm: React.FC<Props> = ({ onClose }) => {
     formData.append("description", card.description)
 
     try {
-      await dispatch(addQuestion(formData)).unwrap()
+      await dispatch(addContactInfo(formData)).unwrap()
       toast.success(t("toasty.cardSuccessfully"))
       if (onClose) {
         onClose()
