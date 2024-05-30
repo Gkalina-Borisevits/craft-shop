@@ -59,19 +59,23 @@ const Careers: FC = () => {
           </div>
         )}
 
-        <ul>
+        <ul className="flex flex-col">
           {careersForm?.map(card => (
             <li
               key={card.id}
-              className="bg-gray-800 text-white p-4 rounded mb-4 flex items-center"
+              className="bg-gray-800 text-white p-4 rounded mb-4 flex flex-col sm:flex-row items-center"
             >
-              <img src={card?.photo} alt={card.description} />
-              <div className="w-2/3 ml-4">
-                <p className="text-center font-semibold">{card?.description}</p>
+              <div className="flex justify-center items-center mb-4 sm:mb-0 sm:mr-4">
+                <img src={card?.photo} alt={card.description} />
+              </div>
+              <div className="w-full sm:w-2/3">
+                <p className="text-center sm:text-left font-semibold">
+                  {card?.description}
+                </p>
                 {viewCareersForm && (
                   <button
                     onClick={() => handleDeleteCard(card.id!)}
-                    className="mt-2 bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                    className="mt-9 bg-red-500 text-white p-2 rounded hover:bg-red-600"
                   >
                     {t("careers.deleteCard")}
                   </button>

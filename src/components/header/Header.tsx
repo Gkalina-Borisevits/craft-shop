@@ -218,7 +218,7 @@ const Header: FC = () => {
           </button>
           {isCartOpen && (
             <div
-              className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center absolute mt-36"
+              className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center absolute mt-48"
               ref={cartRef}
             >
               <div className="bg-white  rounded shadow-lg z-50 overflow-auto">

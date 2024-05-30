@@ -1,4 +1,4 @@
-import { useEffect, useState, type FC } from "react"
+import { useEffect, useState} from "react"
 import styles from "./styles/ProfileCard.module.css"
 import { useTranslation } from "react-i18next"
 import logo from "../../assets/logo.png"

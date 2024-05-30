@@ -26,48 +26,38 @@ const Contacts: FC = () => {
     question: "",
   })
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target
-    setFormData(prevState => ({
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
       ...prevState,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    try {
-      if (
-        !formData.firstName ||
-        !formData.lastName ||
-        !formData.email ||
-        !formData.question
-      ) {
-        alert(t("contacts.fillAllFields"))
-        return
-      }
-      console.log(formData)
-      console.log("Contacts: ", formData)
-      dispatch(sendContacts(formData))
-        .unwrap()
-        .then(() => {
-          toast.success(t("contacts.thankQuestion"))
-          setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            question: "",
-          })
-        })
-        .catch(() => {
-          toast.error(t("toasty.noUpdatedContact"))
-        })
-    } catch (error) {
-      alert(error)
+    e.preventDefault();
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.question) {
+      alert(t('contacts.fillAllFields'));
+      return;
     }
-  }
+
+    console.log('Contacts: ', formData);
+    dispatch(sendContacts(formData))
+      .unwrap()
+      .then(() => {
+        toast.success(t('contacts.thankQuestion'));
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          question: '',
+        });
+      })
+      .catch(() => {
+        toast.error(t('toasty.noUpdatedContact'));
+      });
+  };
+
 
   return (
     <div className={styles.bigContactsContainer}>
@@ -81,7 +71,7 @@ const Contacts: FC = () => {
           <div className={styles.inputFormContainer}>
             <div className="max-w-md mx-auto my-10 p-4 bg-black">
               <form onSubmit={handleSubmit}>
-                <div className="flex flex-col space-y-3 text-white">
+                <div className="flex flex-col space-y-3 text-black">
                   <p>
                     {t("contacts.name")} {"*"}
                   </p>

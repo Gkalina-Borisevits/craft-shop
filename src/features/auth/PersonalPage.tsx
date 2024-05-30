@@ -152,7 +152,7 @@ const PersonalPage: FC = () => {
               />
 
               <input
-                type="number"
+                type="text"
                 name="addressDto.building"
                 placeholder={t("personalPage.building")}
                 value={formData?.addressDto?.building}

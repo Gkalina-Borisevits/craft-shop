@@ -59,32 +59,32 @@ const ContactInfo: FC = () => {
         )}
       </div>
 
-      <ul className="mt-4 text-white p-2 rounded flex flex-col items-center ">
-        {contactInfo?.map(card => (
-          <li
+      <ul className="mt-4 text-white p-2 rounded flex flex-col items-center">
+    {contactInfo?.map(card => (
+        <li
             key={card.id}
-            className="rounded-lg p-4 m-2 flex flex-col sm:flex-row items-center justify-center border border-white w-full px-4 "
-          >
+            className="flex flex-col items-center justify-between border border-white w-full p-4 m-2 rounded-lg"
+        >
             <img
-              src={card?.photo}
-              alt={card.description}
-              className="w-46 h-auto mr-14"
+                src={card?.photo}
+                alt={card.description}
+                className="w-64 h-64 object-cover mr-4" 
             />
-            <div>
-              <p className="font-semibold">{card?.name}</p>
-              <p>{card?.description}</p>
-              {viewContactForm && (
-                <button
-                  onClick={() => handleDeleteCard(card.id!)}
-                  className="mt-2 bg-red-400 text-white p-2 rounded hover:bg-red-600"
-                >
-                  {t("careers.deleteCard")}
-                </button>
-              )}
+            <div className="flex flex-col justify-between flex-grow">
+                <p className="font-semibold">{card?.name}</p>
+                <p className="mb-4">{card?.description}</p>
+                {viewContactForm && (
+                    <button
+                        onClick={() => handleDeleteCard(card.id!)}
+                        className="bg-red-400 text-white p-1 mt-9 rounded hover:bg-red-600 self-start sm:self-auto text-sm"
+                    >
+                      {t("careers.deleteCard")}
+                    </button>
+                )}
             </div>
-          </li>
-        ))}
-      </ul>
+        </li>
+    ))}
+</ul>
     </>
   )
 }

@@ -41,6 +41,14 @@ const About: FC = () => {
       toast.error(t("toasty.notUpdatedCard"))
     }
   }
+
+  const responsive = {
+    superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 1 },
+    desktop: { breakpoint: { max: 3000, min: 1024 }, items: 1 },
+    tablet: { breakpoint: { max: 1024, min: 464 }, items: 1 },
+    mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
+  }
+
   return (
     <div className={styles.aboutContainer}>
       <div className={styles.buttonAddNewInfoCard}>
@@ -53,11 +61,13 @@ const About: FC = () => {
             >
               {t("storeProduct.buttonAddCard")}
             </button>
+           
             {isAddingWhoWeAre && (
               <WhoWeAreForm onClose={handleCloseProductCreator} />
             )}
           </>
         )}
+         </div>
 
         <Carousel
           responsive={{
@@ -82,7 +92,8 @@ const About: FC = () => {
             {whoWeAreForm?.map(card => (
               <li key={card.id} className="bg-gray-800 text-white p-4 rounded mb-4 flex items-center">
                 <div className="w-1/3">
-                  {card?.photos.map((photo, index) => (
+
+                  {card?.photos?.map((photo, index) => (
                     // eslint-disable-next-line jsx-a11y/img-redundant-alt
                     <img
                       key={index}
@@ -91,9 +102,16 @@ const About: FC = () => {
                       className="w-full h-auto object-cover rounded border border-white"
                     />
                   ))}
+                 
                 </div>
+                
                 <div className="w-2/3 ml-4">
-                  <p className="text-center font-semibold">{card.description}</p>
+                  <p className="text-center font-semibold">{card?.description}</p>
+                  {card?.videoLink && (
+                    <a href={card?.videoLink} target="_blank" rel="noopener noreferrer" className="mt-2 text-blue-500 hover:text-blue-700">
+                       {card.description}
+                    </a>
+                )}
                   <button
                     onClick={() => handleDeleteCard(card.id!)}
                     className="mt-2 bg-red-500 text-white p-2 rounded hover:bg-red-600"
@@ -105,7 +123,7 @@ const About: FC = () => {
             ))}
           </ul>
         </Carousel>
-      </div>
+      
     </div>
   )
 }

@@ -58,32 +58,46 @@ const Questions: FC = () => {
         </>
       )}
 
-      <ul className="mt-4 text-white p-2 rounded flex flex-col items-center ">
-        {questions?.map(card => (
-          <li
+<ul className="mt-4 text-white p-2 rounded flex flex-col items-center">
+    {questions?.map(card => (
+        <li
             key={card.id}
-            className="rounded-lg p-4 m-2 flex flex-col sm:flex-row items-center justify-center border border-white w-full px-4 "
-          >
+            className="flex flex-col sm:flex-row items-center justify-around border border-white w-full p-4 m-2 rounded-lg"
+        >
             <img
-              src={card?.photo}
-              alt={card.description}
-              className="w-46 h-auto mr-14"
+                src={card?.photo}
+                alt={card.description}
+                className="w-64 h-auto sm:mr-4 mb-4 sm:mb-0"
             />
-            <div>
-              <p>{card?.description}</p>
-              <p className="font-semibold">{card?.videoLink}</p>
-              {questionForm && (
-                <button
-                  onClick={() => handleDeleteCard(card.id!)}
-                  className="mt-2 bg-red-400 text-white p-2 rounded hover:bg-red-600"
-                >
-                  {t("careers.deleteCard")}
-                </button>
-              )}
+            <div className="text-center sm:text-left">
+                <p>{card?.description}</p>
+                {card?.videoLink && (
+                    <iframe
+                        title={`Video for ${card.description}`} 
+                        src={card?.videoLink}
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-64 mt-4" 
+                        style={{ border: 'none' }} 
+                    ></iframe>
+                )}
+                 {card?.videoLink && (
+                    <a href={card?.videoLink} target="_blank" rel="noopener noreferrer" className="mt-2 text-blue-500 hover:text-blue-700">
+                       {card.description}
+                    </a>
+                )}
+                {questionForm && (
+                    <button
+                        onClick={() => handleDeleteCard(card.id!)}
+                        className="mt-9 bg-red-400 text-white p-2 rounded hover:bg-red-600"
+                    >
+                      {t("careers.deleteCard")}
+                    </button>
+                )}
             </div>
-          </li>
-        ))}
-      </ul>
+        </li>
+    ))}
+</ul>
     </div>
   )
 }

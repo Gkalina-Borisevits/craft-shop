@@ -68,11 +68,11 @@ const OurProjects: FC = () => {
           </div>
         )}
 
-<div className="flex flex-col sm:flex-row flex-wrap justify-center items-stretch mr-4">
+        <div className="flex flex-col flex-wrap justify-center items-center mr-4">
           {projectsForm?.map((project, index) => (
             <div
               key={project.id}
-              className="w-full sm:w-1/2 md:w-1/3 border-2 border-white m-2 rounded p-9"
+              className="w-full border-2 border-white m-2 rounded p-9 bg-gray-800"
             >
               <Carousel
                 responsive={responsive}
@@ -90,7 +90,7 @@ const OurProjects: FC = () => {
                     key={idx}
                     src={photo}
                     alt={`Project ${index} Photo ${idx}`}
-                    className="w-full h-auto object-cover"
+                    className="mx-auto w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 h-auto object-cover"
                   />
                 ))}
               </Carousel>
@@ -100,7 +100,7 @@ const OurProjects: FC = () => {
               {viewProjectsForm && (
                 <button
                   onClick={() => handleDeleteCard(project.id!)}
-                  className="mt-2 bg-red-400 text-white p-2 rounded hover:bg-red-600"
+                  className="mt-9 bg-red-400 text-white p-2 rounded hover:bg-red-600"
                 >
                   {t("careers.deleteCard")}
                 </button>
@@ -110,7 +110,7 @@ const OurProjects: FC = () => {
         </div>
 
         <div className={styles.logoCareers}>
-          <img src={logo} alt="Logo" className="max-w-full" />
+          <img src={logo} alt="Logo" className="max-w-full mb-9 mt-9" />
         </div>
       </div>
     </>
