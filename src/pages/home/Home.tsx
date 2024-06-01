@@ -5,7 +5,6 @@ import ProfileCard from "./ProfileCard"
 import styles from "./styles/Home.module.css"
 import { useTranslation } from "react-i18next"
 import { getProfile, selectProfile } from "./profileSlice"
-import logo from "../../assets/logo.png"
 
 const Home = () => {
   const { t } = useTranslation("translation")
@@ -32,7 +31,7 @@ const Home = () => {
       {viewProductsForm && (
         <div className={styles.buttonAddNewImage}>
           <button
-            id="addCard"
+            id="add-card"
             onClick={handleAddProductClick}
             className="mt-2 mb-4 bg-blue-400 text-white p-2 hover:bg-yellow-400 rounded-md"
           >
@@ -43,52 +42,44 @@ const Home = () => {
           )}
         </div>
       )}
-      <div className="container mx-auto px-4">
-      <ul className="space-y-6">
-    {profile?.map((profileItem, index) => (
-        <li
-        key={profileItem?.id}
-        className={` shadow-md rounded-lg ${
-            index === 0 ? "bg-black text-white" : "bg-white text-black"
-        } flex items-stretch space-x-4`}
-    >
-          {index === 1 && (
-                <div className="flex flex-col bg-black">
-                  
-                    <img src={logo} alt="Logo" className="w-46 h-auto mt-72"/>
-                </div>
-            )}
-            {index % 2 === 0 ? (
+      <div className="container mx-auto px-4 bg-black text-white">
+        <ul className="space-y-6">
+          {profile?.map((profileItem, index) => (
+            <li
+              key={profileItem?.id}
+              className="shadow-md rounded-lg bg-black text-white flex flex-col md:flex-row items-center md:items-stretch space-x-0 md:space-x-4 border-b border-white p-9 gap-5"
+            >
+              {index % 2 === 0 ? (
                 <>
-                    {profileItem?.url && (
-                        <img
-                            src={profileItem?.url}
-                            alt={profileItem?.name}
-                            className={`w-36 h-auto sm:w-36 md:w-56 lg:w-56 xl:w-64 rounded ml-4 ${index === 0 ? '-mt-6' : ''}`}
-                        />
-                    )}
-                    <div className="flex-grow">
-                        <p>{profileItem?.description}</p>
-                    </div>
+                  {profileItem?.url && (
+                    <img
+                      src={profileItem?.url}
+                      alt={profileItem?.name}
+                      className={`w-full sm:w-48 md:w-56 lg:w-56 xl:w-64 h-auto object-cover rounded md:ml-4 mx-auto`}
+                    />
+                  )}
+                  <div className="flex-grow mt-4 md:mt-0 text-center md:text-left flex items-center">
+                    <p>{profileItem?.description}</p>
+                  </div>
                 </>
-            ) : (
+              ) : (
                 <>
-                    <div className="flex-grow">
-                        <p>{profileItem?.description}</p>
-                    </div>
-                    {profileItem?.url && (
-                        <img
-                            src={profileItem?.url}
-                            alt={profileItem?.name}
-                            className={`w-36 h-auto sm:w-36 md:w-56 lg:w-56 xl:w-64 rounded ml-4 ${index === 0 ? '-mr-6 -mt-6' : ''}`}
-                        />
-                    )}
+                  <div className="flex-grow mt-4 md:mt-0 text-center md:text-left flex items-center">
+                    <p>{profileItem?.description}</p>
+                  </div>
+                  {profileItem?.url && (
+                    <img
+                      src={profileItem?.url}
+                      alt={profileItem?.name}
+                      className={`w-full sm:w-48 md:w-56 lg:w-56 xl:w-64 h-auto object-cover rounded md:ml-4 mx-auto`}
+                    />
+                  )}
                 </>
-            )}
-        </li>
-    ))}
-</ul>
-</div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }

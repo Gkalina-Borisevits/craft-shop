@@ -107,12 +107,14 @@
     "buttonUpdateCard": "Редагувати картку",
     "addToCart": "Додати до кошика",
     "editPage": "Редагувати сторінку",
-    "closeForm": "Закрити форму"
+    "closeForm": "Закрити форму",
+    "count" : "Наявна кількість"
   },
   "whoWeAre": {
     "uploadPhoto": "Завантажити фото",
     "addDescription": "Додати опис",
-    "linkToVideo": "Посилання на відео"
+    "linkToVideo": "Посилання на відео",
+    "watchAVideo": "Подивитися відео, що стосується цієї теми"
   },
   "selectRole": {
     "emailRequired": "Email обов'язковий",

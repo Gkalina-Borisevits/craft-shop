@@ -107,12 +107,14 @@
     "buttonUpdateCard": "Редактировать карточку",
     "editPage": "Редактировать страницу",
     "addToCart": "Добавить в корзину",
-    "closeForm": "Закрыть форму"
+    "closeForm": "Закрыть форму",
+    "count": "Имеющееся в наличии количество"
   },
   "whoWeAre": {
     "uploadPhoto": "Загрузить фото",
     "addDescription": "Добавить описание",
-    "linkToVideo": "Ссылка на видео"
+    "linkToVideo": "Ссылка на видео",
+    "watchAVideo": "Посмотреть видео, относящееся к этой теме"
   },
   "selectRole": {
     "emailRequired": "Email обязателен",

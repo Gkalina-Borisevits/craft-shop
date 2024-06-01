@@ -107,12 +107,14 @@
     "buttonUpdateCard": "Edit Card",
     "addToCart": "Add to Cart",
     "editPage": "Edit Page",
-    "closeForm": "Close form"
+    "closeForm": "Close form",
+    "count" : "Available Quantity"
   },
   "whoWeAre": {
     "uploadPhoto": "Upload Photo",
     "addDescription": "Add Description",
-    "linkToVideo": "Link to Video"
+    "linkToVideo": "Link to Video",
+    "watchAVideo": "Watch a video related to this topic"
   },
   "selectRole": {
     "emailRequired": "Email is required",

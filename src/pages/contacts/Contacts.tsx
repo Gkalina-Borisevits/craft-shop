@@ -26,38 +26,44 @@ const Contacts: FC = () => {
     question: "",
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target
+    setFormData(prevState => ({
       ...prevState,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.question) {
-      alert(t('contacts.fillAllFields'));
-      return;
+    e.preventDefault()
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.question
+    ) {
+      alert(t("contacts.fillAllFields"))
+      return
     }
 
-    console.log('Contacts: ', formData);
+    console.log("Contacts: ", formData)
     dispatch(sendContacts(formData))
       .unwrap()
       .then(() => {
-        toast.success(t('contacts.thankQuestion'));
+        toast.success(t("contacts.thankQuestion"))
         setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          question: '',
-        });
+          firstName: "",
+          lastName: "",
+          email: "",
+          question: "",
+        })
       })
       .catch(() => {
-        toast.error(t('toasty.noUpdatedContact'));
-      });
-  };
-
+        toast.error(t("toasty.noUpdatedContact"))
+      })
+  }
 
   return (
     <div className={styles.bigContactsContainer}>
@@ -72,7 +78,7 @@ const Contacts: FC = () => {
             <div className="max-w-md mx-auto my-10 p-4 bg-black">
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col space-y-3 text-black">
-                  <p>
+                  <p className="text-gray-600 text-left">
                     {t("contacts.name")} {"*"}
                   </p>
                   <input
@@ -83,7 +89,7 @@ const Contacts: FC = () => {
                     required
                     className="px-4 py-2 border border-black rounded w-full pl-2"
                   />
-                  <p>
+                  <p className="text-gray-600 text-left">
                     {t("contacts.surname")} {"*"}
                   </p>
                   <input
@@ -94,7 +100,7 @@ const Contacts: FC = () => {
                     required
                     className="px-4 py-2 border border-black rounded w-full pl-2"
                   />
-                  <p>
+                  <p className="text-gray-600 text-left">
                     {t("contacts.email")} {"*"}
                   </p>
                   <input
@@ -105,7 +111,7 @@ const Contacts: FC = () => {
                     required
                     className="px-4 py-2 border border-black rounded w-full pl-2"
                   />
-                  <p>
+                  <p className="text-gray-600 text-left">
                     {t("contacts.yourQuestion")} {"*"}
                   </p>
                   <textarea
@@ -116,6 +122,7 @@ const Contacts: FC = () => {
                     className="px-4 py-2 border border-black rounded w-full pl-2"
                   />
                   <button
+                    id="send-contacts"
                     type="submit"
                     className="bg-blue-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded"
                   >

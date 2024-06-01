@@ -77,7 +77,7 @@ const QuestionsForm: React.FC<Props> = ({ onClose }) => {
           {card.photo && (
             <div className="mt-3 flex flex-col items-center">
               <img
-                src={URL.createObjectURL(card.photo)}
+                src={URL.createObjectURL(card?.photo)}
                 alt="Uploaded"
                 className="w-auto h-48 object-cover rounded-md"
               />

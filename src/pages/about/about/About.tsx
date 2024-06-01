@@ -61,69 +61,76 @@ const About: FC = () => {
             >
               {t("storeProduct.buttonAddCard")}
             </button>
-           
             {isAddingWhoWeAre && (
               <WhoWeAreForm onClose={handleCloseProductCreator} />
             )}
           </>
         )}
-         </div>
+      </div>
 
-        <Carousel
-          responsive={{
-            desktop: {
-              breakpoint: { max: 3000, min: 1024 },
-              items: 3,
-              partialVisibilityGutter: 40,
-            },
-            tablet: {
-              breakpoint: { max: 1024, min: 464 },
-              items: 2,
-              partialVisibilityGutter: 30,
-            },
-            mobile: {
-              breakpoint: { max: 464, min: 0 },
-              items: 1,
-              partialVisibilityGutter: 30,
-            },
-          }}
-        >
-         <ul className="flex flex-col items-center bg-black p-4 rounded-md border border-white">
-            {whoWeAreForm?.map(card => (
-              <li key={card.id} className="bg-gray-800 text-white p-4 rounded mb-4 flex items-center">
-                <div className="w-1/3">
-
+      <ul className="flex flex-wrap justify-center gap-4 p-4 bg-black rounded-md gap-8 mt-9">
+        {whoWeAreForm
+          ?.slice()
+          .reverse()
+          .map(card => (
+            <li
+              key={card.id}
+              className="flex flex-col items-center justify-center w-full md:w-1/3 p-4 bg-gray-800 text-white rounded-md mb-4 border border-white"
+            >
+              <div className="w-3/4">
+                <Carousel
+                  responsive={responsive}
+                  swipeable={true}
+                  draggable={true}
+                  showDots={true}
+                  infinite={true}
+                  autoPlay={true}
+                  autoPlaySpeed={9000}
+                  keyBoardControl={true}
+                  containerClass="carousel-container"
+                  itemClass="carousel-item"
+                >
                   {card?.photos?.map((photo, index) => (
                     // eslint-disable-next-line jsx-a11y/img-redundant-alt
                     <img
                       key={index}
-                      src={photo}
+                      src={
+                        photo instanceof File
+                          ? URL.createObjectURL(photo)
+                          : photo
+                      }
                       alt={`Photo ${index + 1}`}
                       className="w-full h-auto object-cover rounded border border-white"
                     />
                   ))}
-                 
-                </div>
-                
-                <div className="w-2/3 ml-4">
-                  <p className="text-center font-semibold">{card?.description}</p>
-                  {card?.videoLink && (
-                    <a href={card?.videoLink} target="_blank" rel="noopener noreferrer" className="mt-2 text-blue-500 hover:text-blue-700">
-                       {card.description}
-                    </a>
-                )}
-                  <button
-                    onClick={() => handleDeleteCard(card.id!)}
-                    className="mt-2 bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                </Carousel>
+              </div>
+
+              <div className="w-full flex flex-col items-center mt-9">
+                <p className="mt-2 text-center font-semibold">
+                  {card?.description}
+                </p>
+                {card?.videoLink && (
+                  <a
+                    href={card?.videoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 text-blue-500 hover:text-blue-700 block"
                   >
-                    {t("careers.deleteCard")}
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </Carousel>
-      
+                    {t("whoWeAre.watchAVideo")}
+                  </a>
+                )}
+                <button
+                  id="delete-card"
+                  onClick={() => handleDeleteCard(card.id!)}
+                  className="mt-2 bg-red-500 text-white p-2 rounded hover:bg-red-600 block text-center md:text-left mt-9"
+                >
+                  {t("careers.deleteCard")}
+                </button>
+              </div>
+            </li>
+          ))}
+      </ul>
     </div>
   )
 }

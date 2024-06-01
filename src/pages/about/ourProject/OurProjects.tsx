@@ -69,46 +69,53 @@ const OurProjects: FC = () => {
         )}
 
         <div className="flex flex-col flex-wrap justify-center items-center mr-4">
-          {projectsForm?.map((project, index) => (
-            <div
-              key={project.id}
-              className="w-full border-2 border-white m-2 rounded p-9 bg-gray-800"
-            >
-              <Carousel
-                responsive={responsive}
-                swipeable={false}
-                draggable={false}
-                showDots={true}
-                infinite={true}
-                autoPlay={true}
-                autoPlaySpeed={3000}
-                keyBoardControl={true}
+          {projectsForm
+            ?.slice()
+            .reverse()
+            .map((project, index) => (
+              <div
+                key={project.id}
+                className="w-full border-2 border-white m-2 rounded p-9 bg-gray-800"
               >
-                {project?.photos.map((photo, idx) => (
-                  // eslint-disable-next-line jsx-a11y/img-redundant-alt
-                  <img
-                    key={idx}
-                    src={photo}
-                    alt={`Project ${index} Photo ${idx}`}
-                    className="mx-auto w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 h-auto object-cover"
-                  />
-                ))}
-              </Carousel>
-              <p className="text-white text-center p-2 mt-9">
-                {project?.description}
-              </p>
-              {viewProjectsForm && (
-                <button
-                  onClick={() => handleDeleteCard(project.id!)}
-                  className="mt-9 bg-red-400 text-white p-2 rounded hover:bg-red-600"
+                <Carousel
+                  responsive={responsive}
+                  swipeable={false}
+                  draggable={false}
+                  showDots={true}
+                  infinite={true}
+                  autoPlay={true}
+                  autoPlaySpeed={3000}
+                  keyBoardControl={true}
                 >
-                  {t("careers.deleteCard")}
-                </button>
-              )}
-            </div>
-          ))}
+                  {project?.photos.map((photo, idx) => (
+                    // eslint-disable-next-line jsx-a11y/img-redundant-alt
+                    <img
+                      key={idx}
+                      src={
+                        photo instanceof File
+                          ? URL.createObjectURL(photo)
+                          : photo
+                      }
+                      alt={`Project ${idx + 1} Photo`}
+                      className="mx-auto w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 h-auto object-cover"
+                    />
+                  ))}
+                </Carousel>
+                <p className="text-white text-center p-2 mt-9">
+                  {project?.description}
+                </p>
+                {viewProjectsForm && (
+                  <button
+                    id="delete-card"
+                    onClick={() => handleDeleteCard(project.id!)}
+                    className="mt-9 bg-red-400 text-white p-2 rounded hover:bg-red-600"
+                  >
+                    {t("careers.deleteCard")}
+                  </button>
+                )}
+              </div>
+            ))}
         </div>
-
         <div className={styles.logoCareers}>
           <img src={logo} alt="Logo" className="max-w-full mb-9 mt-9" />
         </div>

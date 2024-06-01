@@ -107,12 +107,14 @@
     "buttonUpdateCard": "Karte bearbeiten",
     "addToCart": "In den Warenkorb",
     "editPage": "Seite bearbeiten",
-    "closeForm": "Formular schließen"
+    "closeForm": "Formular schließen",
+    "count" : " Verfügbare Menge"
   },
   "whoWeAre": {
     "uploadPhoto": "Foto hochladen",
     "addDescription": "Beschreibung hinzufügen",
-    "linkToVideo": "Link zum Video"
+    "linkToVideo": "Link zum Video",
+    "watchAVideo": "Ein Video zu diesem Thema ansehen"
   },
   "selectRole": {
     "emailRequired": "E-Mail ist erforderlich",

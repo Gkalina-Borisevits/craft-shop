@@ -75,6 +75,11 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
       const urlPreviews = urls.map(url => url || undefined)
 
       setUrlPreviews([...filePreviews, ...urlPreviews])
+      return () => {
+        filePreviews.forEach(url => {
+          if (url) URL.revokeObjectURL(url)
+        })
+      }
     } else {
       setProduct({
         id: 1,
@@ -217,22 +222,25 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
         >
           <div className="flex flex-col md:flex-row md:items-start w-full">
             <div className="flex flex-col items-center md:w-1/3">
-              <div className="mb-4">\
-              {viewUserRoleForm && (
-                    <>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange(0)}
-                  id="file-upload-main"
-                  className="hidden"
-                />
+              <div className="mb-4">
+                {viewUserRoleForm && (
+                  <>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileChange(0)}
+                      id="file-upload-main"
+                      className="hidden"
+                    />
 
-                <label htmlFor="file-upload-main" className={styles.addImage}>
-                  {t("storeProduct.file")}
-                </label>
-                </>
-              )}
+                    <label
+                      htmlFor="file-upload-main"
+                      className={styles.addImage}
+                    >
+                      {t("storeProduct.file")}
+                    </label>
+                  </>
+                )}
                 {urlPreviews[0] && (
                   <img
                     src={urlPreviews[0]}
@@ -273,6 +281,9 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
               ))}
             </div>
             <div className="flex flex-col md:w-1/2 md:ml-4 space-y-4 mt-4">
+              <p className="text-gray-600 text-left">
+                {t("storeProduct.title")}:
+              </p>
               <input
                 type="text"
                 name="title"
@@ -282,6 +293,9 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
                 required
               />
+              <p className="text-gray-600 text-left">
+                {t("storeProduct.description")}:
+              </p>
               <textarea
                 name="description"
                 value={product.description}
@@ -290,6 +304,9 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                 className="textarea-underline mb-4 p-2 bg-black text-white rounded-none"
                 required
               />
+              <p className="text-gray-600 text-left">
+                {t("storeProduct.size")}:
+              </p>
               <input
                 type="text"
                 name="size"
@@ -299,6 +316,9 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
                 required
               />
+              <p className="text-gray-600 text-left">
+                {t("storeProduct.dimensions")}:
+              </p>
               <input
                 type="text"
                 name="dimensions"
@@ -308,6 +328,9 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
                 required
               />
+              <p className="text-gray-600 text-left">
+                {t("storeProduct.material")}:
+              </p>
               <input
                 type="text"
                 name="material"
@@ -317,6 +340,9 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
                 required
               />
+              <p className="text-gray-600 text-left">
+                {t("storeProduct.price")}:
+              </p>
               <input
                 type="text"
                 name="price"
@@ -326,6 +352,9 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                 className="mb-4 p-2 bg-black text-white border border-gray-300 rounded-md"
                 required
               />
+              <p className="text-gray-600 text-left">
+                {t("storeProduct.count")}:
+              </p>
               <input
                 type="number"
                 name="count"
@@ -337,7 +366,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
               />
               {viewUserRoleForm ? (
                 <button
-                  id="addCard"
+                  id="add-card"
                   type="submit"
                   className="bg-indigo-500 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300"
                 >
@@ -348,7 +377,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
               ) : null}
 
               <button
-                id="addToCart"
+                id="add-to-cart"
                 onClick={addCardToCart}
                 type="button"
                 className="bg-blue-400 text-white p-2 rounded-md hover:bg-blue-600 transition duration-300"
@@ -357,7 +386,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
               </button>
 
               <button
-                id="closeWindow"
+                id="close-window"
                 onClick={productById ? handleNavigate : onClose}
                 className="mt-4 bg-yellow-400 text-white p-2 rounded-md hover:bg-yellow-600 transition duration-200"
               >

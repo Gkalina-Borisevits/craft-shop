@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react"
+import { useEffect, useState } from "react"
 import styles from "./styles/ProfileCard.module.css"
 import { useTranslation } from "react-i18next"
 import logo from "../../assets/logo.png"
@@ -250,10 +250,11 @@ const ProfileCard: React.FC<Props> = ({ onClose }) => {
           </div>
           {viewProfileForm && (
             <button
+              id="submit-card"
               type="submit"
               className="w-full bg-blue-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 mt-9 rounded"
             >
-              Submit
+              {t("storeProduct.buttonUpdateCard")}
             </button>
           )}
         </form>

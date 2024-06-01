@@ -60,29 +60,43 @@ const Careers: FC = () => {
         )}
 
         <ul className="flex flex-col">
-          {careersForm?.map(card => (
-            <li
-              key={card.id}
-              className="bg-gray-800 text-white p-4 rounded mb-4 flex flex-col sm:flex-row items-center"
-            >
-              <div className="flex justify-center items-center mb-4 sm:mb-0 sm:mr-4">
-                <img src={card?.photo} alt={card.description} />
-              </div>
-              <div className="w-full sm:w-2/3">
-                <p className="text-center sm:text-left font-semibold">
-                  {card?.description}
-                </p>
-                {viewCareersForm && (
-                  <button
-                    onClick={() => handleDeleteCard(card.id!)}
-                    className="mt-9 bg-red-500 text-white p-2 rounded hover:bg-red-600"
-                  >
-                    {t("careers.deleteCard")}
-                  </button>
-                )}
-              </div>
-            </li>
-          ))}
+          {careersForm
+            ?.slice()
+            .reverse()
+            .map(card => (
+              <li
+                key={card.id}
+                className="bg-gray-800 text-white p-4 rounded mb-4 flex flex-col sm:flex-row items-center"
+              >
+                <div className="flex justify-center items-center mb-4 sm:mb-0 sm:mr-4">
+                  {card.photo && (
+                    <img
+                      src={
+                        typeof card.photo === "string"
+                          ? card.photo
+                          : URL.createObjectURL(card?.photo)
+                      }
+                      alt={card.description}
+                      className="w-89 h-auto sm:mr-4 mb-4 sm:mb-0"
+                    />
+                  )}
+                </div>
+                <div className="w-full sm:w-2/3">
+                  <p className="text-center sm:text-left font-semibold">
+                    {card?.description}
+                  </p>
+                  {viewCareersForm && (
+                    <button
+                      id="delete-card"
+                      onClick={() => handleDeleteCard(card.id!)}
+                      className="mt-9 bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                    >
+                      {t("careers.deleteCard")}
+                    </button>
+                  )}
+                </div>
+              </li>
+            ))}
         </ul>
 
         <div className={styles.logoCareers}>

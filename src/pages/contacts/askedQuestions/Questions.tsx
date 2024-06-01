@@ -9,7 +9,7 @@ import {
   selectQuestions,
 } from "../../../components/contactForm/slice/questionSlice"
 import { toast } from "react-toastify"
-
+import YouTube from "react-youtube"
 import styles from "./Questions.module.css"
 import QuestionsForm from "../../../components/contactForm/QuestionsForm"
 
@@ -41,6 +41,14 @@ const Questions: FC = () => {
       toast.error(t("toasty.notUpdatedCard"))
     }
   }
+
+  const youTubeVideoId = (url: string) => {
+    const videoIdMatch = url.match(
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/,
+    )
+    return videoIdMatch ? videoIdMatch[1] : undefined
+  }
+
   return (
     <div className={styles.buttonAddNewInfoCard}>
       {questionForm && (
@@ -58,46 +66,57 @@ const Questions: FC = () => {
         </>
       )}
 
-<ul className="mt-4 text-white p-2 rounded flex flex-col items-center">
-    {questions?.map(card => (
-        <li
-            key={card.id}
-            className="flex flex-col sm:flex-row items-center justify-around border border-white w-full p-4 m-2 rounded-lg"
-        >
-            <img
-                src={card?.photo}
-                alt={card.description}
-                className="w-64 h-auto sm:mr-4 mb-4 sm:mb-0"
-            />
-            <div className="text-center sm:text-left">
+      <ul className="mt-4 text-white p-2 rounded flex flex-col items-center">
+        {questions
+          ?.slice()
+          .reverse()
+          .map(card => (
+            <li
+              key={card.id}
+              className="flex flex-col sm:flex-row items-center justify-around border border-white w-full p-4 m-2 rounded-lg"
+            >
+              {card.photo && (
+                <img
+                  src={
+                    typeof card.photo === "string"
+                      ? card.photo
+                      : URL.createObjectURL(card.photo)
+                  }
+                  alt={card.description}
+                  className="w-64 h-auto sm:mr-4 mb-4 sm:mb-0"
+                />
+              )}
+              <div className="text-center sm:text-left">
                 <p>{card?.description}</p>
                 {card?.videoLink && (
-                    <iframe
-                        title={`Video for ${card.description}`} 
-                        src={card?.videoLink}
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="w-full h-64 mt-4" 
-                        style={{ border: 'none' }} 
-                    ></iframe>
+                  <YouTube
+                    videoId={youTubeVideoId(card?.videoLink)}
+                    className="w-full h-auto mt-4"
+                  />
                 )}
-                 {card?.videoLink && (
-                    <a href={card?.videoLink} target="_blank" rel="noopener noreferrer" className="mt-2 text-blue-500 hover:text-blue-700">
-                       {card.description}
-                    </a>
-                )}
+                {/* {card?.videoLink && (
+                  <a
+                    href={card?.videoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 text-blue-500 hover:text-blue-700"
+                  >
+                    {card.description}
+                  </a>
+                )} */}
                 {questionForm && (
-                    <button
-                        onClick={() => handleDeleteCard(card.id!)}
-                        className="mt-9 bg-red-400 text-white p-2 rounded hover:bg-red-600"
-                    >
-                      {t("careers.deleteCard")}
-                    </button>
+                  <button
+                    id="delete-card"
+                    onClick={() => handleDeleteCard(card.id!)}
+                    className="mt-9 bg-red-400 text-white p-2 rounded hover:bg-red-600"
+                  >
+                    {t("careers.deleteCard")}
+                  </button>
                 )}
-            </div>
-        </li>
-    ))}
-</ul>
+              </div>
+            </li>
+          ))}
+      </ul>
     </div>
   )
 }

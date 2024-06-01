@@ -124,7 +124,9 @@ const PersonalPage: FC = () => {
             id="updateForm"
             className="flex justify-between"
           >
+            
             <div className="space-y-4 w-1/2 pr-2 mt-6">
+            <p className="text-gray-400">{t("personalPage.name")}</p>
               <input
                 type="text"
                 name="firstName"
@@ -133,6 +135,7 @@ const PersonalPage: FC = () => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded "
               />
+              <p className="text-gray-400">{t("personalPage.phone")}</p>
               <input
                 type="text"
                 name="phone"
@@ -141,7 +144,9 @@ const PersonalPage: FC = () => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded mt-10"
               />
+
               <div className={styles.addressForm}></div>
+              <p className="text-gray-400">{t("personalPage.street")}</p>
               <input
                 type="text"
                 name="addressDto.street"
@@ -150,7 +155,7 @@ const PersonalPage: FC = () => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded"
               />
-
+              <p className="text-gray-400">{t("personalPage.building")}</p>
               <input
                 type="text"
                 name="addressDto.building"
@@ -159,6 +164,7 @@ const PersonalPage: FC = () => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded"
               />
+              <p className="text-gray-400">{t("personalPage.numberApartment")}</p>
               <input
                 type="number"
                 name="addressDto.numberApartment"
@@ -169,6 +175,7 @@ const PersonalPage: FC = () => {
               />
             </div>
             <div className="space-y-4 w-1/2 pl-2 mt-6">
+              <p className="text-gray-400">{t("personalPage.lastName")}</p>
               <input
                 type="text"
                 name="lastName"
@@ -177,6 +184,7 @@ const PersonalPage: FC = () => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded"
               />
+              <p className="text-gray-400">{t("personalPage.dataOfBirth")}</p>
               <input
                 type="date"
                 name="birthdate"
@@ -188,6 +196,7 @@ const PersonalPage: FC = () => {
               />
               <div className={styles.addressForm}></div>
 
+              <p className="text-gray-400">{t("personalPage.code")}</p>
               <input
                 type="text"
                 name="addressDto.indexNum"
@@ -196,7 +205,7 @@ const PersonalPage: FC = () => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded"
               />
-
+              <p className="text-gray-400">{t("personalPage.city")}</p>
               <input
                 type="text"
                 name="addressDto.city"
@@ -205,6 +214,7 @@ const PersonalPage: FC = () => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded"
               />
+              <p className="text-gray-400">{t("personalPage.country")}</p>
               <input
                 type="text"
                 name="addressDto.country"
