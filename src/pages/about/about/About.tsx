@@ -75,7 +75,7 @@ const About: FC = () => {
           .map(card => (
             <li
               key={card.id}
-              className="flex flex-col items-center justify-center w-full md:w-1/3 p-4 bg-gray-800 text-white rounded-md mb-4 border border-white"
+              className="flex flex-col items-center justify-center w-full md:w-1/3 p-4 bg-gray-900 text-white rounded-md mb-4 border border-white"
             >
               <div className="w-3/4">
                 <Carousel
@@ -120,13 +120,15 @@ const About: FC = () => {
                     {t("whoWeAre.watchAVideo")}
                   </a>
                 )}
-                <button
-                  id="delete-card"
-                  onClick={() => handleDeleteCard(card.id!)}
-                  className="mt-2 bg-red-500 text-white p-2 rounded hover:bg-red-600 block text-center md:text-left mt-9"
-                >
-                  {t("careers.deleteCard")}
-                </button>
+                {viewWeAreForm && (
+                  <button
+                    id="delete-card"
+                    onClick={() => handleDeleteCard(card.id!)}
+                    className="mt-2 bg-red-500 text-white p-2 rounded hover:bg-red-600 block text-center md:text-left mt-9"
+                  >
+                    {t("careers.deleteCard")}
+                  </button>
+                )}
               </div>
             </li>
           ))}

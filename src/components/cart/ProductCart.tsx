@@ -30,7 +30,7 @@ const ProductCart: FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-6 bg-red-300">
+    <div className="max-w-4xl mx-auto px-4 py-6 bg-gray-300">
       {products.map((product, index) => (
         <CartItem key={product.id} product={product} />
       ))}
@@ -41,14 +41,14 @@ const ProductCart: FC = () => {
               className="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
               onClick={goToPayment}
             >
-              {t("menu.payOrder")}
+              {t("cart.payOrder")}
             </button>
           ) : (
             <button
               className="bg-blue-400 hover:bg-yellow-400 text-white font-bold py-2 px-4 rounded"
               onClick={saveCart}
             >
-              {t("menu.confirmOrder")}
+              {t("cart.confirmOrder")}
             </button>
           )}
         </div>

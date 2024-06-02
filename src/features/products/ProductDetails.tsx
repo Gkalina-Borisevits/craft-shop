@@ -50,8 +50,10 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
   ])
 
   useEffect(() => {
-    dispatch(getProductById(id))
-  }, [dispatch, id])
+    if (id) {
+      dispatch(getProductById(id));
+    }
+  }, [dispatch, id]);
 
   useEffect(() => {
     if (productById) {
@@ -114,37 +116,49 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
           return newPreviews
         })
 
-        setProduct(prev => ({
-          ...prev,
-          files: [
-            ...prev.files.slice(0, index),
-            file,
-            ...prev.files.slice(index + 1),
-          ],
-        }))
+        setProduct(prev => {
+          if (!prev.files) {
+            return prev;
+          }
+  
+          return {
+            ...prev,
+            files: [
+              ...prev.files.slice(0, index),
+              file,
+              ...prev.files.slice(index + 1),
+            ],
+          };
+        });
       }
     },
     [],
-  )
+  );
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const formData = new FormData()
-    formData.append("id", product.id.toString() || "")
+    if (product.id === undefined) {
+      console.error("Product ID is undefined");
+      return; 
+    }
+    formData.append("id", product.id.toString());
     formData.append("title", product.title || "")
     formData.append("description", product.description || "")
     formData.append("size", product.size || "")
     formData.append("dimensions", product.dimensions || "")
     formData.append("material", product.material || "")
-    formData.append("count", product.count.toString() || "")
-    formData.append("price", product.price.toString() || "")
+    formData.append("count", (product.count ?? 0).toString());
+    formData.append("price", (product.price ?? 0).toString());
 
-    product.files.forEach((file, index) => {
-      if (file) {
-        formData.append(`files[${index}]`, file, file.name)
-      }
-    })
+    if (product.files) {
+      product.files.forEach((file, index) => {
+        if (file) {
+          formData.append(`files[${index}]`, file, file.name);
+        }
+      });
+    }
 
     for (let entry of formData.entries()) {
       console.log(entry[0], entry[1])
@@ -166,7 +180,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
         //     toast.error("Failed to add product to cart");
         //   });
       } else if (productById) {
-        dispatch(updateProduct(formData))
+        dispatch(updateProduct({formData}))
           .unwrap()
           .then(() => {
             toast.success(t("toasty.updateCard"))
@@ -179,7 +193,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
             toast.error(t("toasty.notUpdatedCard"))
           })
       } else {
-        await dispatch(addNewProduct(formData)).unwrap()
+        await dispatch(addNewProduct({formData})).unwrap()
         toast.success(t("toasty.cardSuccessfully"))
         if (onClose) {
           onClose()
@@ -198,7 +212,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
 
   const addCardToCart = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    if (!product.id || !product.title || product.price === 0) {
+    if (!product.id || !product.title || product.price === undefined) {
       toast.error(t("toasty.addedToCart"))
       return
     }

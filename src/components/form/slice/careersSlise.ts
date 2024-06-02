@@ -5,13 +5,17 @@ import {
   getAllCareersCards,
   getCareerCardById,
 } from "../api"
-import type { CareersFormData, CareersState } from "../types/CareersFormData"
+import type { CareersState } from "../types/CareersFormData"
 
 const initialState: CareersState = {
-  careers: undefined,
-  career: undefined,
+  careers: [],
+  career: null,
   loading: false,
   error: null,
+}
+
+interface ThunkArg {
+  formData: FormData
 }
 
 export const careerSlice = createAppSlice({
@@ -20,7 +24,7 @@ export const careerSlice = createAppSlice({
 
   reducers: create => ({
     addCareers: create.asyncThunk(
-      async (formData: CareersFormData) => {
+      async ({ formData }: ThunkArg, thunkAPI) => {
         const response = await addCareersCard(formData)
         return response
       },
@@ -88,7 +92,7 @@ export const careerSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.loading = false
-          state.career = undefined
+          state.career = null
         },
         rejected: state => {
           state.loading = false

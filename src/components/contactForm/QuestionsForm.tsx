@@ -57,7 +57,7 @@ const QuestionsForm: React.FC<Props> = ({ onClose }) => {
     formData.append("videoLink", card.videoLink)
 
     try {
-      await dispatch(addQuestion(formData)).unwrap()
+      await dispatch(addQuestion({formData})).unwrap()
       toast.success(t("toasty.cardSuccessfully"))
       if (onClose) {
         onClose()

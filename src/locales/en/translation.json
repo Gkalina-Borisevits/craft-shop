@@ -108,7 +108,7 @@
     "addToCart": "Add to Cart",
     "editPage": "Edit Page",
     "closeForm": "Close form",
-    "count" : "Available Quantity"
+    "count": "Available Quantity"
   },
   "whoWeAre": {
     "uploadPhoto": "Upload Photo",
@@ -134,6 +134,12 @@
     "googleMaps": "Google Maps Screenshot of the Office",
     "videoLink": "Video Link",
     "description": "Description"
+  },
+  "cart": {
+    "itemCost": "Item cost",
+    "quantity": "Quantity",
+    "confirmOrder": "Confirm Order",
+    "payOrder": "Pay for order"
   },
   "errorPage": {
     "accessDenied": "Access Denied",

@@ -45,12 +45,12 @@ export const cartSlice = createAppSlice({
         state.cartItems.push(tempItem)
       }
     },
-    deleteItemFromCart: (state, action: PayloadAction<string>) => {
+    deleteItemFromCart: (state, action: PayloadAction<number>) => {
       state.cartItems = state.cartItems.filter(
         item => item.id !== action.payload,
       )
     },
-    removeOneItemFromCart: (state, action: PayloadAction<string>) => {
+    removeOneItemFromCart: (state, action: PayloadAction<number>) => {
       const existingIndex = state.cartItems.findIndex(
         item => item.id === action.payload,
       )

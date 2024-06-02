@@ -4,8 +4,8 @@ export interface OurProjectData {
   description: string
 }
 export interface ProjectState {
-  projects: OurProjectData[] | undefined
-  project: OurProjectData | undefined
+  projects: OurProjectData[] | null
+  project: OurProjectData | null
   loading: boolean
   error: string | null
 }

@@ -47,10 +47,10 @@ export const profileSlice = createAppSlice({
     getProfile: create.asyncThunk(
       async (_, thunkAPI) => {
         try {
-          const response = await fetchProfile();
-          return response;
+          const response = await fetchProfile()
+          return response
         } catch (error) {
-          return thunkAPI.rejectWithValue("Failed to fetch profiles");
+          return thunkAPI.rejectWithValue("Failed to fetch profiles")
         }
       },
       {

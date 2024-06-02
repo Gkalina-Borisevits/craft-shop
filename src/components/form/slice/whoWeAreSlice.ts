@@ -5,13 +5,21 @@ import {
   getAllWhoWeAreCards,
   getWhoWeAreCardById,
 } from "../api"
-import type { WhoWeAreFormData, WhoWeAreState } from "../types/WhoWeAreFormData"
+import type { WhoWeAreState } from "../types/WhoWeAreFormData"
 
 const initialState: WhoWeAreState = {
-  whoWeAres: undefined,
-  whoWeAre: undefined,
+  whoWeAres: [],
+  whoWeAre: {
+    photos: [],
+    description: "",
+    videoLink: "",
+  },
   loading: false,
   error: null,
+}
+
+interface ThunkArg {
+  formData: FormData
 }
 
 export const whoWeAreSlice = createAppSlice({
@@ -20,7 +28,7 @@ export const whoWeAreSlice = createAppSlice({
 
   reducers: create => ({
     addWhoWeAre: create.asyncThunk(
-      async (formData: WhoWeAreFormData) => {
+      async ({ formData }: ThunkArg, thunkAPI) => {
         const response = await addWhoWeAreCard(formData)
         return response
       },
@@ -88,7 +96,11 @@ export const whoWeAreSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.loading = false
-          state.whoWeAre = undefined
+          state.whoWeAre = {
+            photos: [],
+            description: "",
+            videoLink: "",
+          }
         },
         rejected: state => {
           state.loading = false

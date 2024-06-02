@@ -5,8 +5,8 @@ export interface WhoWeAreFormData {
   videoLink: string
 }
 export interface WhoWeAreState {
-  whoWeAres: WhoWeAreFormData[] | undefined
-  whoWeAre: WhoWeAreFormData | undefined
+  whoWeAres: WhoWeAreFormData[] 
+  whoWeAre: WhoWeAreFormData 
   loading: boolean
   error: string | null
 }

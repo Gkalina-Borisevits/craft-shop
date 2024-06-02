@@ -1,14 +1,19 @@
 import api from "../../../../axios.config"
-import type { Profile, ProfileState } from "../types/Profile"
+import type { Profile} from "../types/Profile"
 
 export async function updateProfilePage(
   name: string,
-  formData: ProfileState,
+  formData: FormData,
 ): Promise<Profile> {
   try {
     const response = await api.put<Profile>(
       `/profile/card?name=${encodeURIComponent(name)}`,
       formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      },
     )
     return response.data
   } catch (error) {
@@ -16,12 +21,11 @@ export async function updateProfilePage(
   }
 }
 
-export async function fetchProfile(): Promise<ProfileState> {
+export async function fetchProfile(): Promise<Profile[]> {
   try {
-    const response = await api.get("/profile/cards")
-
+    const response = await api.get<Profile[]>("/profile/cards")
     return response.data
   } catch (error) {
-    throw new Error("Failed to fetch homepage products")
+    throw new Error("Failed to fetch profiles")
   }
 }

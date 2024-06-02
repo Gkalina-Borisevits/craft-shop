@@ -75,7 +75,7 @@ const OurProjects: FC = () => {
             .map((project, index) => (
               <div
                 key={project.id}
-                className="w-full border-2 border-white m-2 rounded p-9 bg-gray-800"
+                className="w-full border-2 border-white m-2 rounded p-9 bg-gray-900 "
               >
                 <Carousel
                   responsive={responsive}
@@ -84,7 +84,7 @@ const OurProjects: FC = () => {
                   showDots={true}
                   infinite={true}
                   autoPlay={true}
-                  autoPlaySpeed={3000}
+                  autoPlaySpeed={9000}
                   keyBoardControl={true}
                 >
                   {project?.photos.map((photo, idx) => (

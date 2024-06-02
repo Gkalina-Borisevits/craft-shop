@@ -46,7 +46,7 @@ const Products: FC = () => {
       )}
       <div>
         <div className="container mx-auto px-4">
-          <ul className="flex flex-wrap ml-9 gap-9">
+          <ul className="flex flex-wrap ml-9 gap-9 mt-12">
             {products?.map((product, index) => {
               const isFourth = (index + 1) % 3 === 0
               const imageSizeClass = isFourth

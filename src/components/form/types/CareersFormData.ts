@@ -5,8 +5,8 @@ export interface CareersFormData {
 }
 
 export interface CareersState {
-  careers: CareersFormData[] | undefined
-  career: CareersFormData | undefined
+  careers: CareersFormData[] | null
+  career: CareersFormData | null
   loading: boolean
   error: string | null
 }

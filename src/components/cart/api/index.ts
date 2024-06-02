@@ -3,7 +3,7 @@ import type { CartItemProps } from "../types/CartItemProps"
 
 export async function sendCartItems(products: CartItemProps[]): Promise<void> {
   try {
-    const response = await api.post("/save-cart", products)
+    const response = await api.post("/order", products)
 
     if (response.status !== 200) {
       throw new Error("Failed to save cart")

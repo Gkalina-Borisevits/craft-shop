@@ -108,7 +108,7 @@
     "addToCart": "Додати до кошика",
     "editPage": "Редагувати сторінку",
     "closeForm": "Закрити форму",
-    "count" : "Наявна кількість"
+    "count": "Наявна кількість"
   },
   "whoWeAre": {
     "uploadPhoto": "Завантажити фото",
@@ -134,6 +134,12 @@
     "googleMaps": "Скріншот Google Карт офісу",
     "videoLink": "Опис",
     "description": "Опис"
+  },
+  "cart": {
+    "itemCost": "Вартість позиції",
+    "quantity": "Кількість",
+    "confirmOrder": "Підтвердити замовлення",
+    "payOrder": "Оплатити замовлення"
   },
   "errorPage": {
     "accessDenied": "Відмовлено у доступі",

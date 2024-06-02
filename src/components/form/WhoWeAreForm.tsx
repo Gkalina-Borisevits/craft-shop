@@ -58,7 +58,7 @@ const WhoWeAreForm: React.FC<Props> = ({ onClose }) => {
     formData.append("description", card.description)
     formData.append("videoLink", card.videoLink)
     try {
-      await dispatch(addWhoWeAre(formData)).unwrap()
+      await dispatch(addWhoWeAre({ formData })).unwrap()
       
       toast.success(t("toasty.cardSuccessfully"))
       if (onClose) {

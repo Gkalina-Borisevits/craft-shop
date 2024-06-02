@@ -135,6 +135,12 @@
     "videoLink": "Ссылка на видео",
     "description": "Описание"
   },
+  "cart": {
+    "itemCost": "Стоимость позиции",
+    "quantity": "Количество",
+    "confirmOrder": "Подтвердить заказ",
+    "payOrder": "Оплатить заказ"
+  },
   "errorPage": {
     "accessDenied": "Доступ запрещен",
     "notPermission": "У вас нет разрешения на просмотр этой страницы."

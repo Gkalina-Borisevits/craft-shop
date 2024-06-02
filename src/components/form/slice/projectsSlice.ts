@@ -5,13 +5,17 @@ import {
   getAllProjectCards,
   getProjectCardById,
 } from "../api"
-import type { OurProjectData, ProjectState } from "../types/OurProjectData"
+import type { ProjectState } from "../types/OurProjectData"
 
 const initialState: ProjectState = {
-  projects: undefined,
-  project: undefined,
+  projects: [],
+  project: null,
   loading: false,
   error: null,
+}
+
+interface ThunkArg {
+  formData: FormData
 }
 
 export const projectSlice = createAppSlice({
@@ -20,7 +24,7 @@ export const projectSlice = createAppSlice({
 
   reducers: create => ({
     addProject: create.asyncThunk(
-      async (formData: OurProjectData) => {
+      async ({ formData }: ThunkArg, thunkAPI) => {
         const response = await addProjectCard(formData)
         return response
       },
@@ -88,7 +92,7 @@ export const projectSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.loading = false
-          state.project = undefined
+          state.project = null
         },
         rejected: state => {
           state.loading = false

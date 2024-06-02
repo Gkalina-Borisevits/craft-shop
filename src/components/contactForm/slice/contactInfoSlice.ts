@@ -1,6 +1,11 @@
 import { createAppSlice } from "../../../app/createAppSlice"
-import { addContactInfoCard, deleteContactInfoCard, getAllContactInfoCards, getContactInfoCardById } from "../api"
-import type { ContactInfo, ContactInfoState } from "../types/ContactInfo"
+import {
+  addContactInfoCard,
+  deleteContactInfoCard,
+  getAllContactInfoCards,
+  getContactInfoCardById,
+} from "../api"
+import type { ContactInfoState } from "../types/ContactInfo"
 
 const initialState: ContactInfoState = {
   contactsInfo: undefined,
@@ -9,13 +14,17 @@ const initialState: ContactInfoState = {
   error: null,
 }
 
+interface ThunkArg {
+  formData: FormData
+}
+
 export const contactInfoSlice = createAppSlice({
   name: "contactInfo",
   initialState,
 
   reducers: create => ({
     addContactInfo: create.asyncThunk(
-      async (formData: ContactInfo) => {
+      async ({ formData }: ThunkArg, thunkAPI) => {
         const response = await addContactInfoCard(formData)
         return response
       },
@@ -98,7 +107,12 @@ export const contactInfoSlice = createAppSlice({
   },
 })
 
-export const { addContactInfo, getContactsInfo, getContactInfoById, deleteContactInfo } =
-  contactInfoSlice.actions
+export const {
+  addContactInfo,
+  getContactsInfo,
+  getContactInfoById,
+  deleteContactInfo,
+} = contactInfoSlice.actions
 
-export const { selectContactsInfo, selectContactInfo } = contactInfoSlice.selectors
+export const { selectContactsInfo, selectContactInfo } =
+  contactInfoSlice.selectors

@@ -28,14 +28,15 @@ const Header: FC = () => {
   const cartRef = useRef<HTMLDivElement>(null)
 
   const items = useAppSelector(selectCartItems)
-  const cartTotalAmount = (products: CartProduct[]): any => {
-    return products
-      .reduce(
-        (total, product) =>
-          total + parseFloat(product.price) * product.cartQuantity,
-        0,
-      )
-      .toFixed(2)
+  
+  const cartTotalAmount = (products: CartProduct[]): number => {
+    return products.reduce((total, product) => {
+      if (typeof product.price === "number") {
+        return total + product.price * product.cartQuantity
+      } else {
+        return total
+      }
+    }, 0)
   }
 
   const languages = [
@@ -212,22 +213,26 @@ const Header: FC = () => {
 
           <button
             onClick={toggleCart}
-            className="flex items-center justify-center p-3 text-white"
+            className="flex items-center justify-center p-3 text-white relative"
           >
             <i className="fas fa-cart-plus text-2xl "></i>
+            {items.length > 0 && (
+              <span className="absolute bg-red-500 text-white rounded-full h-6 w-6 flex items-center justify-center -top-2 -right-2">
+                {items.length}
+              </span>
+            )}
           </button>
           {isCartOpen && (
             <div
-              className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center absolute mt-48"
+              className="fixed inset-0 z-40 flex  justify-end absolute mt-24 p-2"
               ref={cartRef}
             >
-              <div className="bg-white  rounded shadow-lg z-50 overflow-auto">
+              <div className="bg-white rounded shadow-lg z-50">
                 <ProductCart />
-                <p className="text-black">price</p>
+                <p className="text-black">Price: {cartTotalAmount(items)} $ </p>
               </div>
             </div>
           )}
-
           <div
             className={`flex items-center ${styles.languageIcon}`}
             onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}

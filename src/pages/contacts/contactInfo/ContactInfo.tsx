@@ -59,11 +59,11 @@ const ContactInfo: FC = () => {
         )}
       </div>
 
-      <ul className="mt-4 text-white p-2 rounded flex flex-col items-center gap-6">
+      <ul className="mt-4 text-white p-2 rounded flex justify-center gap-12 mt-9">
         {contactInfo?.map(card => (
           <li
             key={card.id}
-            className="flex flex-col items-center justify-between border border-white w-1/2 p-4 m-2 rounded-lg bg-gray-800"
+            className="flex flex-col items-center justify-between border border-white w-1/4 p-4 m-2 rounded-lg bg-gray-900"
           >
             {card.photo && (
               <img

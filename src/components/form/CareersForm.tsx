@@ -46,7 +46,7 @@ const CareersForm: React.FC<Props> = ({ onClose }) => {
     }
     formData.append("description", card.description)
     try {
-      await dispatch(addCareers(formData)).unwrap()
+      await dispatch(addCareers({ formData })).unwrap()
       toast.success(t("toasty.cardSuccessfully"))
       if (onClose) {
         onClose()

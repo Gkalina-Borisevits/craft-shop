@@ -47,7 +47,7 @@ const OurProjectForm: React.FC<Props> = ({ onClose }) => {
     })
     formData.append("description", card.description)
     try {
-      await dispatch(addProject(formData)).unwrap()
+      await dispatch(addProject({formData})).unwrap()
       toast.success(t("toasty.cardSuccessfully"))
       if (onClose) {
         onClose()

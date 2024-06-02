@@ -59,42 +59,74 @@ const Careers: FC = () => {
           </div>
         )}
 
-        <ul className="flex flex-col">
+        <ul className="flex lg:flex-row flex-col flex-wrap m-4">
           {careersForm
             ?.slice()
             .reverse()
-            .map(card => (
+            .map((card, index) => (
               <li
                 key={card.id}
-                className="bg-gray-800 text-white p-4 rounded mb-4 flex flex-col sm:flex-row items-center"
+                className="text-white p-4 mb-4 flex flex-col sm:flex-row items-center mt-9 border-b border-white sm:w-full"
               >
-                <div className="flex justify-center items-center mb-4 sm:mb-0 sm:mr-4">
-                  {card.photo && (
-                    <img
-                      src={
-                        typeof card.photo === "string"
-                          ? card.photo
-                          : URL.createObjectURL(card?.photo)
-                      }
-                      alt={card.description}
-                      className="w-89 h-auto sm:mr-4 mb-4 sm:mb-0"
-                    />
-                  )}
-                </div>
-                <div className="w-full sm:w-2/3">
-                  <p className="text-center sm:text-left font-semibold">
-                    {card?.description}
-                  </p>
-                  {viewCareersForm && (
-                    <button
-                      id="delete-card"
-                      onClick={() => handleDeleteCard(card.id!)}
-                      className="mt-9 bg-red-500 text-white p-2 rounded hover:bg-red-600"
-                    >
-                      {t("careers.deleteCard")}
-                    </button>
-                  )}
-                </div>
+                {index % 2 === 0 ? (
+                  <>
+                    <div className="flex justify-center items-center mb-4 sm:mb-0 sm:mr-4">
+                      {card.photo && (
+                        <img
+                          src={
+                            typeof card.photo === "string"
+                              ? card.photo
+                              : URL.createObjectURL(card?.photo)
+                          }
+                          alt={card.description}
+                          className="w-2/3 h-auto sm:mr-4 mb-4 sm:mb-0"
+                        />
+                      )}
+                    </div>
+                    <div className="w-full sm:w-2/3">
+                      <p className="text-center sm:text-left">
+                        {card?.description}
+                      </p>
+                      {viewCareersForm && (
+                        <button
+                          id="delete-card"
+                          onClick={() => handleDeleteCard(card.id!)}
+                          className="mt-9 bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                        >
+                          {t("careers.deleteCard")}
+                        </button>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-full sm:w-2/3 text-center sm:text-right">
+                      <p>{card?.description}</p>
+                      {viewCareersForm && (
+                        <button
+                          id="delete-card"
+                          onClick={() => handleDeleteCard(card.id!)}
+                          className="mt-9 bg-red-500 text-white p-2 rounded hover:bg-red-600"
+                        >
+                          {t("careers.deleteCard")}
+                        </button>
+                      )}
+                    </div>
+                    <div className="flex justify-center items-center mb-4 sm:mb-0 sm:mr-4">
+                      {card.photo && (
+                        <img
+                          src={
+                            typeof card.photo === "string"
+                              ? card.photo
+                              : URL.createObjectURL(card?.photo)
+                          }
+                          alt={card.description}
+                          className="w-2/3 h-auto sm:mr-4 mb-4 sm:mb-0"
+                        />
+                      )}
+                    </div>
+                  </>
+                )}
               </li>
             ))}
         </ul>

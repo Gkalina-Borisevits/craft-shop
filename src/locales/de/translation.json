@@ -108,7 +108,7 @@
     "addToCart": "In den Warenkorb",
     "editPage": "Seite bearbeiten",
     "closeForm": "Formular schließen",
-    "count" : " Verfügbare Menge"
+    "count": " Verfügbare Menge"
   },
   "whoWeAre": {
     "uploadPhoto": "Foto hochladen",
@@ -134,6 +134,12 @@
     "googleMaps": "Screenshot von Google Maps des Büros",
     "videoLink": "Link zum Video",
     "description": "Beschreibung"
+  },
+  "cart": {
+    "itemCost": "Positionskosten",
+    "quantity": "Menge",
+    "confirmOrder": "Bestellung bestätigen",
+    "payOrder": "Bestellung bezahlen"
   },
   "errorPage": {
     "accessDenied": "Zugriff verweigert",

@@ -25,7 +25,7 @@ export async function updateUserFormRole(formData: User): Promise<User> {
 }
 
 export const addCareersCard = async (
-  formData: CareersFormData,
+  formData: FormData
 ): Promise<CareersFormData> => {
   const response = await api.post<CareersFormData>('/careers', formData)
   return response.data
@@ -48,7 +48,7 @@ export const deleteCareersCard = async (id: number): Promise<null> => {
 
 
 export const addProjectCard = async (
-  formData: OurProjectData,
+  formData: FormData
 ): Promise<OurProjectData> => {
   const response = await api.post<OurProjectData>('/projects', formData)
   return response.data
@@ -72,11 +72,11 @@ export const deleteProjectCard = async (id: number): Promise<null> => {
 
 
 export const addWhoWeAreCard = async (
-  formData: WhoWeAreFormData,
+  formData: FormData
 ): Promise<WhoWeAreFormData> => {
-  const response = await api.post<WhoWeAreFormData>('/cards', formData)
-  return response.data
-}
+  const response = await api.post<WhoWeAreFormData>('/cards', formData);
+  return response.data;
+};
 
 export const getAllWhoWeAreCards = async (): Promise<WhoWeAreFormData[]> => {
   const response = await api.get<WhoWeAreFormData[]>('/cards')

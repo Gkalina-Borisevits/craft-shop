@@ -47,7 +47,7 @@ const Home = () => {
           {profile?.map((profileItem, index) => (
             <li
               key={profileItem?.id}
-              className="shadow-md rounded-lg bg-black text-white flex flex-col md:flex-row items-center md:items-stretch space-x-0 md:space-x-4 border-b border-white p-9 gap-5"
+              className="shadow-md bg-black text-white flex flex-col md:flex-row items-center md:items-stretch space-x-0 md:space-x-4 border-b border-white p-9 gap-5"
             >
               {index % 2 === 0 ? (
                 <>

@@ -1,7 +1,7 @@
 import api from "../../../../axios.config"
 import type { Product } from "../types/Product"
 
-export async function addStoreProduct(formData: Product): Promise<Product> {
+export async function addStoreProduct(formData: FormData): Promise<Product> {
   try {
     const res = await api.post("/gallery", formData)
 
@@ -31,7 +31,7 @@ export async function fetchStoreProductById(id: string): Promise<Product> {
   }
 }
 
-export async function updateStateProduct(formData: Product): Promise<Product> {
+export async function updateStateProduct(formData: FormData): Promise<Product> {
   try {
     const res = await api.put("/gallery", formData)
 

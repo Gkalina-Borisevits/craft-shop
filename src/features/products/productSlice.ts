@@ -4,16 +4,21 @@ import {
   fetchStoreProducts,
   updateStateProduct,
 } from "./api"
-import type { Product, ProductState } from "./types/Product"
+import type { ProductState } from "./types/Product"
 import { createAppSlice } from "../../app/createAppSlice"
 
 
 const initialState: ProductState = {
   products: [],
-  product: undefined,
+  product: null,
   loading: false,
   error: null,
 }
+
+interface ThunkArg {
+  formData: FormData
+}
+
 
 export const productSlice = createAppSlice({
   name: "storeProducts",
@@ -22,13 +27,13 @@ export const productSlice = createAppSlice({
  
   reducers: create => ({
     addNewProduct: create.asyncThunk(
-      async (formData: Product, { rejectWithValue }) => {
+      async ({ formData }: ThunkArg, thunkAPI) => {
         try {
         const response = await addStoreProduct(formData)
 
         return response
       } catch (error) {
-        return rejectWithValue('Failed to add store product slice');
+        return thunkAPI.rejectWithValue("Failed to update profile")
       }
     },
       {
@@ -67,7 +72,7 @@ export const productSlice = createAppSlice({
       },
     ),
     updateProduct: create.asyncThunk(
-      async (formData: Product) => {
+      async ({ formData }: ThunkArg, thunkAPI) => {
         const response = await updateStateProduct(formData)
 
         return response

@@ -20,30 +20,27 @@ const CartItem: React.FC<CartItemProps> = ({ product }) => {
       dispatch(addToCart(product));
     };
   
-    if (!product || !product.title || !product.price || !product.cartQuantity) {
-      return null;
-    }
-  
+    
     return (
         <div className="bg-white shadow-lg rounded-lg p-4 flex justify-between items-center mb-4">
         <div className="flex-1">
-          <span className="text-lg font-bold">{product.title}, </span>
-          <p className="text-sm text-gray-600">{t("menu.itemCost")}: {product.price}</p>
-          <p className="text-sm text-gray-600">{t("menu.quantity")}: {product.cartQuantity}</p>
+          <span className="text-lg font-bold">{product.title} </span>
+          <p className="text-sm text-gray-600">{t("cart.itemCost")}: {product.price} $</p>
+          <p className="text-sm text-gray-600">{t("cart.quantity")}: {product.cartQuantity}</p>
         </div>
         <div className="flex gap-2">
           <button
-            className="p-2 text-white bg-blue-500 hover:bg-blue-600 rounded"
+            className="p-2 text-white bg-blue-400 hover:bg-indigo-600 rounded ml-5"
             onClick={handleAddDish}>
             <i className="fas fa-plus"></i>
           </button>
           <button
-            className="p-2 text-white bg-yellow-500 hover:bg-yellow-600 rounded"
+            className="p-2 text-white bg-yellow-400 hover:bg-yellow-500 rounded"
             onClick={handleRemoveOne}>
             <i className="fas fa-minus"></i>
           </button>
           <button
-            className="p-2 text-white bg-red-500 hover:bg-red-600 rounded"
+            className="p-2 text-white bg-red-400 hover:bg-red-500 rounded"
             onClick={handleDelete}>
             <i className="fas fa-trash"></i>
           </button>

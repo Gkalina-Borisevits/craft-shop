@@ -4,7 +4,7 @@ import type { Question } from "../types/Question"
 
 
 export const addContactInfoCard = async (
-    formData: ContactInfo,
+    formData: FormData,
   ): Promise<ContactInfo> => {
     const response = await api.post<ContactInfo>('/contacts-info', formData)
     return response.data
@@ -26,7 +26,7 @@ export const addContactInfoCard = async (
   }
 
   export const addQuestionCard = async (
-    formData: Question,
+    formData: FormData,
   ): Promise<Question> => {
     const response = await api.post<Question>('/question', formData)
     return response.data
