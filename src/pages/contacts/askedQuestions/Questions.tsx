@@ -73,7 +73,7 @@ const Questions: FC = () => {
           .map(card => (
             <li
               key={card.id}
-              className="flex flex-col sm:flex-row items-center justify-around border border-white w-full p-4 m-2 rounded-lg"
+              className="flex flex-col sm:flex-row items-center justify-around border border-white w-full p-9 m-2 rounded-lg bg-gray-900"
             >
               {card.photo && (
                 <img
@@ -83,27 +83,18 @@ const Questions: FC = () => {
                       : URL.createObjectURL(card.photo)
                   }
                   alt={card.description}
-                  className="w-64 h-auto sm:mr-4 mb-4 sm:mb-0"
+                  className="w-64 h-auto sm:mr-2 mb-4 sm:mb-0"
                 />
               )}
-              <div className="text-center sm:text-left">
+             
                 <p>{card?.description}</p>
                 {card?.videoLink && (
                   <YouTube
                     videoId={youTubeVideoId(card?.videoLink)}
-                    className="w-full h-auto mt-4"
+                    className="w-full sm:w-auto h-auto mt-4"
                   />
                 )}
-                {/* {card?.videoLink && (
-                  <a
-                    href={card?.videoLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 text-blue-500 hover:text-blue-700"
-                  >
-                    {card.description}
-                  </a>
-                )} */}
+                
                 {questionForm && (
                   <button
                     id="delete-card"
@@ -113,7 +104,7 @@ const Questions: FC = () => {
                     {t("careers.deleteCard")}
                   </button>
                 )}
-              </div>
+         
             </li>
           ))}
       </ul>

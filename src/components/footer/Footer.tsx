@@ -2,7 +2,7 @@ import type { FC } from "react"
 import styles from "./Footer.module.css"
 import { useTranslation } from "react-i18next"
 import { NavLink } from "react-router-dom"
-import logoFooter from "../../assets/logoFooter.jpeg";
+import logoFooter from "../../assets/logoFooter.png";
 import EmailForm from "../form/EmailForm";
 
 const Footer: FC = () => {
@@ -49,8 +49,8 @@ const Footer: FC = () => {
         <div className={styles.footerMayHelpYou}>
           <h3>{t("footer.mayHelpYou")}</h3>
           <nav>
-            <NavLink to="/about">FAQ`s</NavLink>
-            <NavLink to="/contacts">{t("footer.contactUs")}</NavLink>
+            <NavLink to="/contacts/asked-questions">FAQ`s</NavLink>
+            <NavLink to="/contacts/contact-us">{t("footer.contactUs")}</NavLink>
             <NavLink to="/payment-info">{t("footer.paymentOptions")}</NavLink>
             <NavLink to="/shipping-services">
               {t("footer.shippingServices")}
@@ -60,9 +60,9 @@ const Footer: FC = () => {
         <div className={styles.footerAboutCompany}>
           <h3>{t("footer.aboutCompany")}</h3>
           <nav>
-            <NavLink to="/about">{t("footer.aboutHarmanCoal")}</NavLink>
-            <NavLink to="/careers">{t("footer.careers")}</NavLink>
-            <NavLink to="/contacts">{t("footer.contacts")}</NavLink>
+            <NavLink to="/about/who-we-are">{t("footer.aboutHarmanCoal")}</NavLink>
+            <NavLink to="/about/careers">{t("footer.careers")}</NavLink>
+            <NavLink to="/contacts/support">{t("footer.contacts")}</NavLink>
           </nav>
         </div>
         <div className={styles.logoFooter}>
