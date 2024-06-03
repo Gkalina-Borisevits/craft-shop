@@ -4,7 +4,7 @@ import { Provider } from "react-redux"
 import App from "./App"
 import { store } from "./app/store"
 import "./index.css"
-import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter, HashRouter } from "react-router-dom"
 import { I18nextProvider } from "react-i18next"
 import i18next from "./i18next.ts/i18next"
 import "slick-carousel/slick/slick.css"
@@ -19,7 +19,7 @@ if (container) {
 
   root.render(
     <React.StrictMode>
-      <BrowserRouter>
+      <HashRouter>
         <I18nextProvider i18n={i18next}>
           <ToastContainer
             position="top-center"
@@ -31,7 +31,7 @@ if (container) {
             <App />
           </Provider>
         </I18nextProvider>
-      </BrowserRouter>
+      </HashRouter>
     </React.StrictMode>,
   )
 } else {
