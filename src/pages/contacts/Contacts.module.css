@@ -3,14 +3,15 @@
   flex-direction: column;
   width: 100%;
   align-items: flex-start;
-  border: 1px solid rgb(254, 255, 255);
-  margin-top: 30px;
+
   background-color: black;
+  min-height: 120vh;
 }
 .contactsContainer {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  border-top: 1px solid rgb(254, 255, 255);
 }
 .formContainer {
   flex: 1;
@@ -44,6 +45,15 @@
 .textContainer h1 {
   font-size: 34px;
   font-weight: bold;
+}
+.footerBorder {
+  border-top: 1px solid rgb(254, 255, 255);
+  width: 100%;
+}
+.socialAndLogoContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 @media screen and (max-width: 768px) {
   .bigContactsContainer {

@@ -25,16 +25,16 @@ export async function loginUser(formData: User): Promise<User> {
       },
     })
     return response.data
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      const message = error.response.data.message
-      throw new Error(message)
+  } catch (error: unknown) {
+    const axiosError = error as { response?: { data: { message: string } } };
+    if (axiosError.response) {
+      const message = axiosError.response.data.message;
+      throw new Error(message);
     } else {
-      throw new Error("An unexpected error occurred")
+      throw new Error("An unexpected error occurred");
     }
   }
 }
-
 
 interface APIError {
   message: string;

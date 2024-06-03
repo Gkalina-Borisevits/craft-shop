@@ -1,5 +1,7 @@
 .personalPageContainer {
-  margin-top: 40px;
+  top: 40px;
+  background-color: black;
+  min-height: 110vh;
 }
 .headerUpdateAccount {
   display: flex;

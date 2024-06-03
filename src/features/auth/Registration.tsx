@@ -54,7 +54,7 @@ const Registration: React.FC = () => {
 
   return (
     <div className={styles.bigContainerRegistration}>
-      <p className="mt-6 text-center text-3xl text-white font-extrabold text-gray-900">
+      <p className="mt-6 text-center text-3xl text-white font-extrabold">
         {t("registration.registration")}
       </p>
       <div className="max-w-md mx-auto my-10 p-4">

@@ -2,7 +2,12 @@
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+  background-color: black;
 }
 .buttonAddNewImage button {
   width: 200px;
+}
+.productContainer {
+  background-color: black;
+  min-height: 110vh;
 }

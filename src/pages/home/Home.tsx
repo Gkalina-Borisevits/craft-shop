@@ -27,13 +27,14 @@ const Home = () => {
     setIsAddingProduct(false)
   }
   return (
-    <div className="container mx-auto px-4 mt-9">
+    <div className={styles.homeContainer}>
+    <div className="container mx-auto px-4 bg-black">
       {viewProductsForm && (
         <div className={styles.buttonAddNewImage}>
           <button
             id="add-card"
             onClick={handleAddProductClick}
-            className="mt-2 mb-4 bg-blue-400 text-white p-2 hover:bg-yellow-400 rounded-md"
+            className="mt-9 mb-4 bg-blue-400 text-white p-2 hover:bg-yellow-400 rounded-md"
           >
             {t("storeProduct.editPage")}
           </button>
@@ -55,7 +56,7 @@ const Home = () => {
                     <img
                       src={profileItem?.url}
                       alt={profileItem?.name}
-                      className={`w-full sm:w-48 md:w-56 lg:w-56 xl:w-64 h-auto object-cover rounded md:ml-4 mx-auto`}
+                      className={`w-full sm:w-48 md:w-56 lg:w-56 xl:w-64 h-auto object-cover rounded md:ml-4 mx-auto mt-12 shadow-white`}
                     />
                   )}
                   <div className="flex-grow mt-4 md:mt-0 text-center md:text-left flex items-center">
@@ -71,7 +72,7 @@ const Home = () => {
                     <img
                       src={profileItem?.url}
                       alt={profileItem?.name}
-                      className={`w-full sm:w-48 md:w-56 lg:w-56 xl:w-64 h-auto object-cover rounded md:ml-4 mx-auto`}
+                      className={`w-full sm:w-48 md:w-56 lg:w-56 xl:w-64 h-auto object-cover rounded md:ml-4 mx-auto shadow-white`}
                     />
                   )}
                 </>
@@ -80,6 +81,7 @@ const Home = () => {
           ))}
         </ul>
       </div>
+    </div>
     </div>
   )
 }

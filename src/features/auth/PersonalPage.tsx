@@ -12,7 +12,7 @@ import UserRoleForm from "../../components/form/UserRoleForm"
 import { useNavigate } from "react-router-dom"
 
 const PersonalPage: FC = () => {
-  const today = new Date().toISOString().split("T")[0]
+  
   const { t } = useTranslation("translation")
   const user = useAppSelector(selectUser)
   const role = useAppSelector(selectRole)
@@ -36,6 +36,15 @@ const PersonalPage: FC = () => {
       city: "",
     },
   })
+
+  const calculateMinBirthDate = (years: number) => {
+    const date = new Date();
+    date.setFullYear(date.getFullYear() - years);
+    return date.toISOString().split("T")[0];
+  };
+  
+  const minBirthDate = calculateMinBirthDate(5);
+
 
   useEffect(() => {
     if (user) {
@@ -114,19 +123,18 @@ const PersonalPage: FC = () => {
               {t("personalPage.updatePersonalData")}
             </p>
             <p className="text-xl mb-3 text-white">
-              {t("personalPage.emailHeader")} {user?.email} {user?.role}
+              {t("personalPage.emailHeader")} {user?.email}
               {t("personalPage.emailFooter")}
             </p>
           </div>
 
           <form
             onSubmit={handleSubmit}
-            id="updateForm"
-            className="flex justify-between"
+            id="update-form"
+            className="flex justify-around"
           >
-            
-            <div className="space-y-4 w-1/2 pr-2 mt-6">
-            <p className="text-gray-400">{t("personalPage.name")}</p>
+            <div className="space-y-4 w-1/2 pr-2 mt-6 mb-9 mr-4">
+              <p className="text-gray-400">{t("personalPage.name")}</p>
               <input
                 type="text"
                 name="firstName"
@@ -164,7 +172,9 @@ const PersonalPage: FC = () => {
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded"
               />
-              <p className="text-gray-400">{t("personalPage.numberApartment")}</p>
+              <p className="text-gray-400">
+                {t("personalPage.numberApartment")}
+              </p>
               <input
                 type="number"
                 name="addressDto.numberApartment"
@@ -192,7 +202,7 @@ const PersonalPage: FC = () => {
                 value={formData.birthdate}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded"
-                max={today}
+                max={minBirthDate}
               />
               <div className={styles.addressForm}></div>
 
@@ -235,9 +245,9 @@ const PersonalPage: FC = () => {
             {t("personalPage.update")}
           </button>
         </div>
-      </div>
-      <div className={styles.logoPersonalPage}>
-        <img src={logo} alt="Logo" className="max-w-full" />
+        <div className={styles.logoPersonalPage}>
+          <img src={logo} alt="Logo" className="max-w-full" />
+        </div>
       </div>
     </>
   )

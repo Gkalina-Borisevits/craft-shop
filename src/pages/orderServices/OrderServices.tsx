@@ -1,8 +1,9 @@
 import type { FC } from 'react';
+import styles from "./OrderServices.module.css"
 
 const OrderServices: FC = () => {
   return (
-    <div>
+    <div className={styles.orderServicesContainer}>
      OrderServices
     </div>
   )

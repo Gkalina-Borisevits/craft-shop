@@ -50,6 +50,7 @@ const Questions: FC = () => {
   }
 
   return (
+
     <div className={styles.buttonAddNewInfoCard}>
       {questionForm && (
         <>
@@ -66,15 +67,19 @@ const Questions: FC = () => {
         </>
       )}
 
-      <ul className="mt-4 text-white p-2 rounded flex flex-col items-center">
-        {questions
-          ?.slice()
-          .reverse()
-          .map(card => (
-            <li
-              key={card.id}
-              className="flex flex-col sm:flex-row items-center justify-around border border-white w-full p-9 m-2 rounded-lg bg-gray-900"
-            >
+<ul className="mt-4 text-white p-2 rounded flex flex-col items-center">
+    {questions
+      ?.slice()
+      .reverse()
+      .map((card, index) => (
+        <li
+        key={card.id}
+        className={`flex flex-col lg:flex-row items-center justify-around border border-white w-full p-9 m-2 rounded-lg bg-gray-900 ${
+          index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+        }`}
+      >
+          {index % 2 === 0 ? (
+            <>
               {card.photo && (
                 <img
                   src={
@@ -86,28 +91,54 @@ const Questions: FC = () => {
                   className="w-64 h-auto sm:mr-2 mb-4 sm:mb-0"
                 />
               )}
-             
-                <p>{card?.description}</p>
-                {card?.videoLink && (
+              <p>{card?.description}</p>
+              <div className="text-center sm:text-left sm:mx-2 color-white">
+                
+                {card.videoLink && (
                   <YouTube
                     videoId={youTubeVideoId(card?.videoLink)}
                     className="w-full sm:w-auto h-auto mt-4"
                   />
                 )}
-                
-                {questionForm && (
-                  <button
-                    id="delete-card"
-                    onClick={() => handleDeleteCard(card.id!)}
-                    className="mt-9 bg-red-400 text-white p-2 rounded hover:bg-red-600"
-                  >
-                    {t("careers.deleteCard")}
-                  </button>
-                )}
-         
-            </li>
-          ))}
-      </ul>
+              </div>
+            </>
+          ) : (
+            <div className="flex flex-col lg:flex-row items-center w-full p-3 bg-gray-900">
+            <div className="text-center sm:text-left sm:mx-2 lg:mx-4 flex-1 ">
+              {card.videoLink && (
+                <YouTube
+                  videoId={youTubeVideoId(card.videoLink)}
+                  className="w-full sm:w-auto h-auto mt-4 lg:mt-0 m-2 p-2"
+                />
+              )}
+              
+            </div>
+            <p className="mr-12">{card?.description}</p>
+            {card.photo && (
+              <img
+                src={
+                  typeof card.photo === "string"
+                    ? card.photo
+                    : URL.createObjectURL(card.photo)
+                }
+                alt={card.description}
+                className="w-64 h-auto lg:ml-2 mb-4 lg:mb-0"
+              />
+            )}
+          </div>
+          )}
+          {questionForm && (
+            <button
+              id="delete-card"
+              onClick={() => handleDeleteCard(card.id!)}
+              className="mt-9 bg-red-400 text-white p-2 rounded hover:bg-red-600"
+            >
+              {t("careers.deleteCard")}
+            </button>
+          )}
+        </li>
+      ))}
+  </ul>
     </div>
   )
 }

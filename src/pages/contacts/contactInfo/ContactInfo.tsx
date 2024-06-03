@@ -41,7 +41,7 @@ const ContactInfo: FC = () => {
   }
 
   return (
-    <>
+    <div className={styles.contactInfoContainer}>
       <div className={styles.buttonAddNewInfoCard}>
         {viewContactForm && (
           <>
@@ -58,7 +58,9 @@ const ContactInfo: FC = () => {
           </>
         )}
       </div>
-
+      <div className="mt-4 text-white p-2 rounded flex justify-center gap-12 mt-9">
+        <h1>{t("contactInfo.info")}</h1>
+      </div>
       <ul className="mt-4 text-white p-2 rounded flex justify-center gap-12 mt-9">
         {contactInfo?.map(card => (
           <li
@@ -92,7 +94,7 @@ const ContactInfo: FC = () => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   )
 }
 

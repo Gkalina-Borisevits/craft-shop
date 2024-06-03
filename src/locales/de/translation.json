@@ -141,6 +141,9 @@
     "confirmOrder": "Bestellung bestätigen",
     "payOrder": "Bestellung bezahlen"
   },
+  "contactInfo": {
+    "info": "Im Folgenden finden Sie Informationen über die Standorte unserer Büros"
+  },
   "errorPage": {
     "accessDenied": "Zugriff verweigert",
     "notPermission": "Sie haben keine Berechtigung, diese Seite anzuzeigen."

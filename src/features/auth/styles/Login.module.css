@@ -1,5 +1,7 @@
 .loginFormContainer {
-  margin-top: 150px;
+  top:100px;
+  background-color: black;
+  min-height: 100vh;
 }
 .loginFormContainer input {
   margin-bottom: 20px;

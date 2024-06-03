@@ -6,3 +6,7 @@
 .buttonAddNewInfoCard button {
   width: 200px;
 }
+.contactInfoContainer {
+  background-color: black;
+  min-height: 120vh;
+}

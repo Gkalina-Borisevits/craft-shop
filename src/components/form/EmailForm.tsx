@@ -16,10 +16,10 @@ const EmailForm: FC = () => {
   }
 
   return (
-    <div className={styles.emailFormContainer}>
+    <div className={`${styles.emailFormContainer} hidden md:block`}>
       <form
         onSubmit={handleSubmit}
-        className="max-w-lg mx-auto my-5 p-5 relative"
+        className="max-w-lg mx-auto  relative"
       >
         <h3 className="text-lg font-semibold text-center mb-6">
           {t("footer.signUpUpdates")}

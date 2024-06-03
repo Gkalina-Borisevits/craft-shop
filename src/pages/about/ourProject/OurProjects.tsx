@@ -67,8 +67,11 @@ const OurProjects: FC = () => {
             )}
           </div>
         )}
+        <div className={styles.logoCareers}>
+          <img src={logo} alt="Logo" className="max-w-full h-auto mt-9" />
+        </div>
 
-        <div className="flex flex-col flex-wrap justify-center items-center mr-4">
+        <div className="flex flex-col flex-wrap justify-center items-center mr-4 mb-36">
           {projectsForm
             ?.slice()
             .reverse()
@@ -116,9 +119,7 @@ const OurProjects: FC = () => {
               </div>
             ))}
         </div>
-        <div className={styles.logoCareers}>
-          <img src={logo} alt="Logo" className="max-w-full mb-9 mt-9" />
-        </div>
+        
       </div>
     </>
   )

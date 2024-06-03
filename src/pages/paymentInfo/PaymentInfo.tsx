@@ -1,8 +1,9 @@
 import type { FC } from 'react';
+import styles from "./PaymentInfo.module.css"
 
 const PaymentInfo: FC = () => {
   return (
-    <div>
+    <div className={styles.paymentInfoContainer}>
       PaymentInfo
     </div>
   )

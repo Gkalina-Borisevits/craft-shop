@@ -141,6 +141,9 @@
     "confirmOrder": "Confirm Order",
     "payOrder": "Pay for order"
   },
+  "contactInfo": {
+    "info": "Below you will find information about the location of our offices"
+  },
   "errorPage": {
     "accessDenied": "Access Denied",
     "notPermission": "You do not have permission to view this page."

@@ -8,16 +8,16 @@ import EmailForm from "../form/EmailForm";
 const Footer: FC = () => {
   const { t } = useTranslation("translation")
   return (
+    <>
     <div className={styles.bigContainer}>
       <div className={styles.emailFormContainer}>
         <EmailForm />
       </div>
       <div className={styles.footer}>
         <div className={styles.socialLinks}>
-          <h3>{t("footer.findUsOn")}</h3>
           <p>
             <a target="_blank" href="https://www.twitter.com" rel="noreferrer">
-              Twitter (X)
+              Twitter
             </a>
             <a target="_blank" href="https://www.instagram.com" rel="noreferrer">
               Instagram
@@ -47,7 +47,6 @@ const Footer: FC = () => {
         </div>
 
         <div className={styles.footerMayHelpYou}>
-          <h3>{t("footer.mayHelpYou")}</h3>
           <nav>
             <NavLink to="/contacts/asked-questions">FAQ`s</NavLink>
             <NavLink to="/contacts/contact-us">{t("footer.contactUs")}</NavLink>
@@ -58,7 +57,6 @@ const Footer: FC = () => {
           </nav>
         </div>
         <div className={styles.footerAboutCompany}>
-          <h3>{t("footer.aboutCompany")}</h3>
           <nav>
             <NavLink to="/about/who-we-are">{t("footer.aboutHarmanCoal")}</NavLink>
             <NavLink to="/about/careers">{t("footer.careers")}</NavLink>
@@ -68,8 +66,12 @@ const Footer: FC = () => {
         <div className={styles.logoFooter}>
           <img src={logoFooter} alt="logo" />
         </div>
-      </div>
+      </div>     
     </div>
+    <div className={styles.copyRightContainer}>
+    <span>Copyright © {new Date().getFullYear()} New Ukrainian Company&trade;</span>
+      </div>
+    </>
   )
 }
 

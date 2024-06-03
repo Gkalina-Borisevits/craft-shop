@@ -51,9 +51,9 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
 
   useEffect(() => {
     if (id) {
-      dispatch(getProductById(id));
+      dispatch(getProductById(id))
     }
-  }, [dispatch, id]);
+  }, [dispatch, id])
 
   useEffect(() => {
     if (productById) {
@@ -118,9 +118,9 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
 
         setProduct(prev => {
           if (!prev.files) {
-            return prev;
+            return prev
           }
-  
+
           return {
             ...prev,
             files: [
@@ -128,59 +128,40 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
               file,
               ...prev.files.slice(index + 1),
             ],
-          };
-        });
+          }
+        })
       }
     },
     [],
-  );
+  )
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const formData = new FormData()
     if (product.id === undefined) {
-      console.error("Product ID is undefined");
-      return; 
+      return
     }
-    formData.append("id", product.id.toString());
+    formData.append("id", product.id.toString())
     formData.append("title", product.title || "")
     formData.append("description", product.description || "")
     formData.append("size", product.size || "")
     formData.append("dimensions", product.dimensions || "")
     formData.append("material", product.material || "")
-    formData.append("count", (product.count ?? 0).toString());
-    formData.append("price", (product.price ?? 0).toString());
+    formData.append("count", (product.count ?? 0).toString())
+    formData.append("price", (product.price ?? 0).toString())
 
     if (product.files) {
       product.files.forEach((file, index) => {
         if (file) {
-          formData.append(`files[${index}]`, file, file.name);
+          formData.append(`files[${index}]`, file, file.name)
         }
-      });
-    }
-
-    for (let entry of formData.entries()) {
-      console.log(entry[0], entry[1])
+      })
     }
 
     try {
-      if (!viewUserRoleForm) {
-        // Добавление в корзину для обычных пользователей
-        // dispatch(addToCart(product.id))
-        //   .unwrap()
-        //   .then(() => {
-        //     toast.success("Product added to cart successfully");
-        //     if (onClose) {
-        //       onClose();
-        //     }
-        //   })
-        //   .catch(error => {
-        //     console.error("Failed to add product to cart:", error);
-        //     toast.error("Failed to add product to cart");
-        //   });
-      } else if (productById) {
-        dispatch(updateProduct({formData}))
+      if (productById) {
+        dispatch(updateProduct({ formData }))
           .unwrap()
           .then(() => {
             toast.success(t("toasty.updateCard"))
@@ -189,11 +170,10 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
             }
           })
           .catch(error => {
-            console.error("Failed to update store product:", error)
             toast.error(t("toasty.notUpdatedCard"))
           })
       } else {
-        await dispatch(addNewProduct({formData})).unwrap()
+        await dispatch(addNewProduct({ formData })).unwrap()
         toast.success(t("toasty.cardSuccessfully"))
         if (onClose) {
           onClose()
@@ -201,7 +181,6 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
         setUrlPreviews([undefined, undefined, undefined, undefined])
       }
     } catch (error) {
-      console.error("Failed to error product:", error)
       toast.error(t("toasty.notUpdatedCard"))
     }
   }
@@ -228,11 +207,11 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
   }
 
   return (
-    <div className="addCardContainer">
+    <div className={styles.addCardContainer}>
       <div className="container mx-auto p-4">
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col bg-black shadow-md rounded-lg p-6 border border-gray-100"
+          className="flex flex-col bg-black shadow-md rounded-lg p-6 border border-gray-100 mt-9"
         >
           <div className="flex flex-col md:flex-row md:items-start w-full">
             <div className="flex flex-col items-center md:w-1/3">
@@ -288,7 +267,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                     <img
                       src={urlPreviews[index]}
                       alt={`Product Preview ${index + 1}`}
-                      className="w-60 h-60 object-cover rounded-md shadow-md"
+                      className="w-41 h-41 object-cover rounded-md shadow-md"
                     />
                   )}
                 </div>
@@ -355,7 +334,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                 required
               />
               <p className="text-gray-600 text-left">
-                {t("storeProduct.price")}:
+                {t("storeProduct.price")} - $ :
               </p>
               <input
                 type="text"

@@ -1,5 +1,6 @@
 .addCardContainer {
   background-color: black;
+  min-height: 120vh;
 }
 .containerAddInfoImage input,
 textarea {

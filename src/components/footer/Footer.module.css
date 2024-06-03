@@ -6,7 +6,7 @@
 .footer {
   display: flex;
   justify-content: space-around;
-  background-color: rgb(19, 19, 19);
+  background: linear-gradient(to right, #848486, #313030, #000000);
   width: 100%;
   height: auto;
   box-sizing: border-box;
@@ -23,6 +23,7 @@
   color: rgb(250, 251, 252);
   gap: 30px;
   margin: 10px;
+  margin-top: 50px;
 }
 .socialLinks h3,
 .footerMayHelpYou h3,
@@ -57,7 +58,7 @@
   position: static;
   display: flex;
   align-items: flex-end;
-  margin: 10px;
+  margin: 16px;
   bottom: 0;
   right: 0;
   transform: rotate(-20deg);
@@ -69,17 +70,21 @@
 }
 .emailFormContainer {
   margin: 0;
-  border: 1px solid rgb(25, 25, 25);
 }
+.copyRightContainer{
+  background: linear-gradient(to right, #ffffff, #696868, #252525,  #000000);
+  color: white;
+}
+
 @media screen and (max-width: 900px) {
-  .bigContainer {
-    flex-wrap: wrap;
-  }
   .footer {
     flex-wrap: wrap;
     font-size: 10px;
   }
   .logoFooter img {
     max-width: 90px;
+  }
+  .copyRightContainer{
+    font-size: 12px;
   }
 }

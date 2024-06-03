@@ -78,7 +78,7 @@ const Contacts: FC = () => {
             <div className="max-w-md mx-auto my-10 p-4 bg-black">
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col space-y-3 text-black">
-                  <p className="text-gray-600 text-left">
+                  <p className="text-gray-400 text-left">
                     {t("contacts.name")} {"*"}
                   </p>
                   <input
@@ -89,7 +89,7 @@ const Contacts: FC = () => {
                     required
                     className="px-4 py-2 border border-black rounded w-full pl-2"
                   />
-                  <p className="text-gray-600 text-left">
+                  <p className="text-gray-400 text-left">
                     {t("contacts.surname")} {"*"}
                   </p>
                   <input
@@ -100,7 +100,7 @@ const Contacts: FC = () => {
                     required
                     className="px-4 py-2 border border-black rounded w-full pl-2"
                   />
-                  <p className="text-gray-600 text-left">
+                  <p className="text-gray-400 text-left">
                     {t("contacts.email")} {"*"}
                   </p>
                   <input
@@ -111,7 +111,7 @@ const Contacts: FC = () => {
                     required
                     className="px-4 py-2 border border-black rounded w-full pl-2"
                   />
-                  <p className="text-gray-600 text-left">
+                  <p className="text-gray-400 text-left">
                     {t("contacts.yourQuestion")} {"*"}
                   </p>
                   <textarea
@@ -134,28 +134,31 @@ const Contacts: FC = () => {
           </div>
         </div>
       </div>
-      <div className={styles.socialLinkContainer}>
-        <h2>{t("contacts.ourSocialMedia")}</h2>
+      <div className={styles.socialAndLogoContainer}>
+        <div className={styles.logoRegistration}>
+          <img src={logo} alt="Logo" className="max-w-full" />
+        </div>
+        <div className={styles.socialLinkContainer}>
+          <h3>{t("contacts.ourSocialMedia")}</h3>
 
-        <a target="_blank" href="https://www.twitter.com" rel="noreferrer">
-          <FaTwitter />
-        </a>
-        <a target="_blank" href="https://www.instagram.com" rel="noreferrer">
-          <FaInstagram />
-        </a>
-        <a target="_blank" href="https://www.pinterest.com " rel="noreferrer">
-          <FaPinterest />
-        </a>
-        <a target="_blank" href="https://www.facebook.com " rel="noreferrer">
-          <FaFacebook />
-        </a>
-        <a target="_blank" href="https://www.tiktok.com" rel="noreferrer">
-          <FaTiktok />
-        </a>
-      </div>{" "}
-      <div className={styles.logoRegistration}>
-        <img src={logo} alt="Logo" className="max-w-full" />
+          <a target="_blank" href="https://www.twitter.com" rel="noreferrer">
+            <FaTwitter />
+          </a>
+          <a target="_blank" href="https://www.instagram.com" rel="noreferrer">
+            <FaInstagram />
+          </a>
+          <a target="_blank" href="https://www.pinterest.com " rel="noreferrer">
+            <FaPinterest />
+          </a>
+          <a target="_blank" href="https://www.facebook.com " rel="noreferrer">
+            <FaFacebook />
+          </a>
+          <a target="_blank" href="https://www.tiktok.com" rel="noreferrer">
+            <FaTiktok />
+          </a>
+        </div>{" "}
       </div>
+      <div className={styles.footerBorder}></div>
     </div>
   )
 }

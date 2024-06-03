@@ -29,8 +29,9 @@ const Products: FC = () => {
   const viewProductsForm = role === "ADMINISTRATOR" || role === "MODERATOR"
 
   return (
-    <>
+    <div className={styles.productContainer}>
       {viewProductsForm && (
+   
         <div className={styles.buttonAddNewImage}>
           <button
             id="addCard"
@@ -44,9 +45,9 @@ const Products: FC = () => {
           )}
         </div>
       )}
-      <div>
+      <div className="bg-black">
         <div className="container mx-auto px-4">
-          <ul className="flex flex-wrap ml-9 gap-9 mt-12">
+          <ul className="flex flex-wrap ml-9 gap-9 ">
             {products?.map((product, index) => {
               const isFourth = (index + 1) % 3 === 0
               const imageSizeClass = isFourth
@@ -54,7 +55,7 @@ const Products: FC = () => {
                 : "w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64"
 
               return (
-                <li key={product.id} className="mb-8">
+                <li key={product.id} className="mb-8 mt-12">
                   <Link to={`/products/${product.id}`}>
                     {product?.pagesUrl && product.pagesUrl.length > 0 ? (
                       <img
@@ -76,7 +77,8 @@ const Products: FC = () => {
           </ul>
         </div>
       </div>
-    </>
+      
+    </div>
   )
 }
 

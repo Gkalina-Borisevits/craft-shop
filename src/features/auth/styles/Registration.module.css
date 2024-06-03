@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background-color: black;
+  min-height: 100vh;
 }
 .registrationFormContainer input {
   border-bottom: 2px solid black;
@@ -23,6 +25,6 @@
 }
 .logoRegistration {
   position: absolute;
-  top: 190px;
+  top: 150px;
   right: 40px;
 }

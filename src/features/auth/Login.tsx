@@ -40,20 +40,23 @@ const Login: FC = () => {
         toast.info(t("toasty.login"))
         navigate("/")
       })
-      .catch(error => {
-        if (error === 400) {
-          toast.error(t("toasty.noAccount"))
-          navigate("/registration")
+      .catch((error: any) => {
+        console.error("Complete error object:", error);
+        if (error?.response?.data?.password === "Invalid password format") {
+          toast.error(t("toasty.invalidPassword"));
+        } else if (error?.status === 400) {
+          toast.error(t("toasty.noAccount"));
+          navigate("/registration");
         } else {
-          toast.error(t("toasty.noCorrectData"))
+          toast.error(t("toasty.noCorrectData"));
         }
       })
-  }
+}
 
   return (
     <div className={styles.loginFormContainer}>
       <div className="flex items-center justify-center bg-black px-4">
-        <div className="max-w-md w-full space-y-8">
+        <div className="max-w-md w-full space-y-8 mt-36">
           <div>
             <h2 className="mt-6 text-center text-3xl text-white font-extrabold text-gray-900">
               {t("registration.signToAccount")}
