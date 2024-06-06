@@ -59,41 +59,41 @@ const ContactInfo: FC = () => {
         )}
       </div>
       <div className="mt-4 text-white p-2 rounded flex justify-center gap-12 mt-9">
-        <h1>{t("contactInfo.info")}</h1>
+      <h1 className="font-roboto-slab italic">{t("contactInfo.info")}</h1>
       </div>
-      <ul className="mt-4 text-white p-2 rounded flex justify-center gap-12 mt-9">
-        {contactInfo?.map(card => (
-          <li
-            key={card.id}
-            className="flex flex-col items-center justify-between border border-white w-1/4 p-4 m-2 rounded-lg bg-gray-900"
+      <ul className="text-white p-2 rounded flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-12 mt-9 pr-5">
+  {contactInfo?.map(card => (
+    <li
+      key={card.id}
+      className="flex flex-col items-center justify-between border border-white p-4 m-2 rounded-lg bg-gray-900 w-full md:w-full md:flex-col lg:w-1/3"
+    >
+      {card.photo && (
+        <img
+          src={
+            typeof card.photo === "string"
+              ? card.photo
+              : URL.createObjectURL(card.photo)
+          }
+          alt={card.description}
+          className="w-64 h-64 object-cover mr-4 md:mr-0 md:mb-4"
+        />
+      )}
+      <div className="flex flex-col justify-between flex-grow p-9">
+        <p className="font-semibold p-3">{card?.name}</p>
+        <p className="mb-4">{card?.description}</p>
+        {viewContactForm && (
+          <button
+            id="delete-card"
+            onClick={() => handleDeleteCard(card.id!)}
+            className="bg-red-400 text-white p-2 mt-9 rounded hover:bg-red-600 self-start sm:self-auto text-sm"
           >
-            {card.photo && (
-              <img
-                src={
-                  typeof card.photo === "string"
-                    ? card.photo
-                    : URL.createObjectURL(card.photo)
-                }
-                alt={card.description}
-                className="w-64 h-64 object-cover mr-4"
-              />
-            )}
-            <div className="flex flex-col justify-between flex-grow p-9">
-              <p className="font-semibold p-3">{card?.name}</p>
-              <p className="mb-4">{card?.description}</p>
-              {viewContactForm && (
-                <button
-                  id="delete-card"
-                  onClick={() => handleDeleteCard(card.id!)}
-                  className="bg-red-400 text-white p-2 mt-9 rounded hover:bg-red-600 self-start sm:self-auto text-sm"
-                >
-                  {t("careers.deleteCard")}
-                </button>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
+            {t("careers.deleteCard")}
+          </button>
+        )}
+      </div>
+    </li>
+  ))}
+</ul>
     </div>
   )
 }

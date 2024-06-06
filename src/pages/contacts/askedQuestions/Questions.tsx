@@ -88,11 +88,11 @@ const Questions: FC = () => {
                       : URL.createObjectURL(card.photo)
                   }
                   alt={card.description}
-                  className="w-64 h-auto sm:mr-2 mb-4 sm:mb-0"
+                  className="w-64 h-auto sm:mr-2 mb-4 sm:mb-0 mr-4"
                 />
               )}
               <p>{card?.description}</p>
-              <div className="text-center sm:text-left sm:mx-2 color-white">
+              <div className="text-center sm:text-left sm:mx-2 color-white ml-4">
                 
                 {card.videoLink && (
                   <YouTube
@@ -108,7 +108,7 @@ const Questions: FC = () => {
               {card.videoLink && (
                 <YouTube
                   videoId={youTubeVideoId(card.videoLink)}
-                  className="w-full sm:w-auto h-auto mt-4 lg:mt-0 m-2 p-2"
+                  className="w-full sm:w-auto h-auto mt-4 lg:mt-0 m-2 p-2 mr-4"
                 />
               )}
               
@@ -122,7 +122,7 @@ const Questions: FC = () => {
                     : URL.createObjectURL(card.photo)
                 }
                 alt={card.description}
-                className="w-64 h-auto lg:ml-2 mb-4 lg:mb-0"
+                className="w-64 h-auto lg:ml-2 mb-4 lg:mb-0 ml-4"
               />
             )}
           </div>

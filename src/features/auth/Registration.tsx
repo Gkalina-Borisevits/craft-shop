@@ -12,6 +12,12 @@ const Registration: React.FC = () => {
   const { t } = useTranslation("translation")
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useAppDispatch()
+  const [errors, setErrors] = useState<{
+    firstName?: string
+    lastName?: string
+    email?: string
+    password?: string
+  }>({})
 
   const [formData, setFormData] = useState<User>({
     firstName: "",
@@ -33,8 +39,39 @@ const Registration: React.FC = () => {
     }))
   }
 
+  const validate = (formData: User) => {
+    let errors = {}
+    const nameRegex = /^[a-zA-Zа-яА-ЯёЁ]+$/
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/
+
+    if (!formData.email) {
+      errors = { ...errors, email: t("selectRole.emailRequired") }
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors = { ...errors, email: t("selectRole.invalidEmail") }
+    }
+    if (!formData.firstName || !nameRegex.test(formData.firstName)) {
+      errors = { ...errors, firstName: t("selectRole.invalidFirstName") }
+    }
+
+    if (!formData.lastName || !nameRegex.test(formData.lastName)) {
+      errors = { ...errors, lastName: t("selectRole.invalidLastName") }
+    }
+
+    if (!formData.password || !passwordRegex.test(formData.password)) {
+      errors = { ...errors, password: t("selectRole.invalidPassword") }
+    }
+    setErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const isValid = validate(formData)
+
+    if (!isValid) {
+      return
+    }
+
     if (formData.password !== formData.confirmPassword) {
       alert(t("registration.passwordMismatch"))
       return
@@ -72,6 +109,11 @@ const Registration: React.FC = () => {
               required
               className="px-4 py-2 border-none border-b-2 border-black focus:border-blue-500 focus:outline-none w-full"
             />
+            {errors.firstName && (
+              <div className="text-red-500 text-xs italic">
+                {errors.firstName}
+              </div>
+            )}
             <input
               type="text"
               name="lastName"
@@ -81,6 +123,11 @@ const Registration: React.FC = () => {
               required
               className="px-4 py-2 border-none border-b border-black-300 focus:border-blue-500 focus:outline-none w-full"
             />
+            {errors.lastName && (
+              <div className="text-red-500 text-xs italic">
+                {errors.lastName}
+              </div>
+            )}
             <input
               type="email"
               name="email"
@@ -90,7 +137,9 @@ const Registration: React.FC = () => {
               required
               className="px-4 py-2 border-none border-b border-gray-300 focus:border-blue-500 focus:outline-none w-full"
             />
-
+            {errors.email && (
+              <div className="text-red-500 text-xs italic">{errors.email}</div>
+            )}
             <input
               type={showPassword ? "text" : "password"}
               name="password"
@@ -100,7 +149,11 @@ const Registration: React.FC = () => {
               required
               className="px-4 py-2 border-none border-b border-gray-300 focus:border-blue-500 focus:outline-none w-full"
             />
-
+            {errors.password && (
+              <div className="text-red-500 text-xs italic">
+                {errors.password}
+              </div>
+            )}
             <input
               type={showPassword ? "text" : "password"}
               name="confirmPassword"

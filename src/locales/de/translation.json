@@ -123,7 +123,10 @@
     "roleChoose": "Wählen Sie eine Rolle",
     "administrator": "Administrator",
     "user": "Benutzer",
-    "changeRole": "Rolle ändern"
+    "changeRole": "Rolle ändern",
+    "invalidFirstName" : "Der Name darf keine unzulässigen Zeichen enthalten.",
+    "invalidLastName" : "Der Nachname darf keine unzulässigen Zeichen enthalten",
+    "invalidPassword": "Stellen Sie sicher, dass das eingegebene Passwort sicher ist: Es muss länger als 8 Zeichen sein, mindestens einen Großbuchstaben und Zahlen enthalten."
   },
   "careers": {
     "deleteCard": "Karte löschen"
@@ -144,6 +147,14 @@
   "contactInfo": {
     "info": "Im Folgenden finden Sie Informationen über die Standorte unserer Büros"
   },
+  "services": {
+    "delivery1": "1 Welche Liefermethoden bieten Sie an? Wir bieten mehrere Lieferoptionen an, darunter Tür-zu-Tür-Kurierdienst, Abholpunkte und Postdienst. Sie können die für Sie bequemste Option bei der Bestellung auswählen.",
+    "delivery2": "2 Wie lange dauert die Lieferung? Die Lieferzeiten können je nach gewählter Versandart und Ihrem Standort variieren. Normalerweise dauert die Lieferung zwischen 3 und 14 Werktagen. Genauere Informationen erhalten Sie bei der Bestellung.",
+    "delivery3": "3 Kann ich meine Bestellung verfolgen? Ja, nachdem Ihre Bestellung versandt wurde, erhalten Sie eine Sendungsverfolgungsnummer, mit der Sie die Bewegung Ihres Pakets in Echtzeit verfolgen können.",
+    "delivery4": "4 Was soll ich tun, wenn meine Bestellung nicht innerhalb des zugesagten Zeitrahmens ankommt? Wenn Ihre Bestellung nicht innerhalb des zugesagten Zeitrahmens geliefert wird, wenden Sie sich bitte an unseren Kundensupport. Wir werden den Status Ihrer Bestellung überprüfen und Ihnen Informationen über die Gründe für die Verzögerung geben.",
+    "package1": "Was soll ich tun, wenn ich ein beschädigtes Paket erhalten habe? Ich habe ein beschädigtes Paket erhalten, was soll ich tun? Wenn Sie feststellen, dass der Artikel bei Erhalt des Pakets beschädigt ist, wenden Sie sich bitte sofort an unseren Kundensupport. Wir bitten Sie, Fotos der Schäden zur Bewertung bereitzustellen und den Rückversand oder Umtausch des Artikels zu arrangieren. Innerhalb welchen Zeitrahmens kann ich einen beschädigten Artikel melden? Wir bitten unsere Kunden, etwaige Schäden innerhalb von 24 Stunden nach Erhalt des Pakets zu melden. Dies ermöglicht es uns, das Problem schnell zu lösen.",
+    "package2": "Wer trägt die Kosten für die Rücksendung des beschädigten Artikels? Im Falle eines beschädigten Artikels übernimmt unser Geschäft alle Rücksendekosten. Wir werden Ihnen alle erforderlichen Anweisungen für die Rücksendung geben. Wie lange dauert die Bearbeitung meiner Rücksendung/Umtausch? Die Bearbeitung einer Rücksendung oder eines Umtauschs dauert normalerweise zwischen 5 und 14 Werktagen, nachdem wir den zurückgesendeten Artikel erhalten haben. Wir werden versuchen, diesen Prozess so schnell wie möglich zu beschleunigen."
+    },
   "errorPage": {
     "accessDenied": "Zugriff verweigert",
     "notPermission": "Sie haben keine Berechtigung, diese Seite anzuzeigen."

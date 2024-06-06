@@ -123,7 +123,10 @@
     "roleChoose": "Choose a role",
     "administrator": "Administrator",
     "user": "User",
-    "changeRole": "Change role"
+    "changeRole": "Change role",
+    "invalidFirstName" : "The first name cannot contain invalid characters.",
+    "invalidLastName" : "The last name cannot contain invalid characters",
+    "invalidPassword": "Ensure the security of the entered password: it must be longer than 8 characters, contain at least one uppercase letter, and numbers."
   },
   "careers": {
     "deleteCard": "Delete card"
@@ -143,6 +146,14 @@
   },
   "contactInfo": {
     "info": "Below you will find information about the location of our offices"
+  },
+  "services": {
+    "delivery1": "1 What delivery methods do you offer? We offer several delivery options, including door-to-door courier service, pick-up points, and postal service. You can choose the most convenient option for you when placing your order.",
+    "delivery2": "2 How long does delivery take? Delivery times may vary depending on the chosen delivery method and your location. Usually, delivery takes between 3 to 14 business days. You can see more accurate information when placing your order.",
+    "delivery3": "3 Can I track my order? Yes, after your order is shipped, you will receive a tracking number that allows you to monitor the movement of your package in real-time.",
+    "delivery4": "4 What should I do if my order doesn't arrive within the promised timeframe? If your order is not delivered within the promised timeframe, please contact our customer support. We will check the status of your order and provide you with information about the reasons for the delay.",
+    "package1": "What should I do if I received a damaged package? I received a damaged package, what should I do? If you discover that the item is damaged when receiving the package, please contact our customer support immediately. We will ask you to provide photos of the damage for assessment and arrange for the return or exchange of the item. Within what time frame can I report a damaged item? We ask our customers to report any damages within 24 hours of receiving the package. This will allow us to promptly address the issue.",
+    "package2": "Who pays for the return of the damaged item? In case of receiving a damaged item, all return expenses are covered by our store. We will provide you with all the necessary instructions for the return. How long will it take to process my return/exchange? Processing a return or exchange usually takes between 5 to 14 business days after we receive the returned item. We will try to expedite this process as much as possible."
   },
   "errorPage": {
     "accessDenied": "Access Denied",

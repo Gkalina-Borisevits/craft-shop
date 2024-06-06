@@ -52,11 +52,25 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
   useEffect(() => {
     if (id) {
       dispatch(getProductById(id))
+    } else { 
+      setProduct({
+        id: 0,
+        title: "",
+        description: "",
+        size: "",
+        dimensions: "",
+        material: "",
+        price: 0,
+        files: [],
+        count: 0,
+        pagesUrl: [],
+      })
+      setUrlPreviews([undefined, undefined, undefined, undefined])
     }
   }, [dispatch, id])
 
   useEffect(() => {
-    if (productById) {
+    if (productById && id) {
       console.log("productById:", productById)
       const urls = productById.pagesUrl || []
       setProduct({
@@ -96,7 +110,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
       })
       setUrlPreviews([])
     }
-  }, [productById])
+  }, [id, productById])
 
   const handleChange = (e: React.ChangeEvent<FormElement>) => {
     const { name, value } = e.target
@@ -267,7 +281,7 @@ const ProductDetails: React.FC<Props> = ({ onClose }) => {
                     <img
                       src={urlPreviews[index]}
                       alt={`Product Preview ${index + 1}`}
-                      className="w-41 h-41 object-cover rounded-md shadow-md"
+                      className="w-36 h-36 object-cover rounded-md shadow-md"
                     />
                   )}
                 </div>

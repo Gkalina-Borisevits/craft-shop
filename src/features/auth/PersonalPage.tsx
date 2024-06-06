@@ -12,7 +12,6 @@ import UserRoleForm from "../../components/form/UserRoleForm"
 import { useNavigate } from "react-router-dom"
 
 const PersonalPage: FC = () => {
-  
   const { t } = useTranslation("translation")
   const user = useAppSelector(selectUser)
   const role = useAppSelector(selectRole)
@@ -22,6 +21,7 @@ const PersonalPage: FC = () => {
 
   const [formData, setFormData] = useState<User>({
     id: 0,
+    email: user?.email,
     firstName: "",
     lastName: "",
     phone: "",
@@ -38,17 +38,31 @@ const PersonalPage: FC = () => {
   })
 
   const calculateMinBirthDate = (years: number) => {
-    const date = new Date();
-    date.setFullYear(date.getFullYear() - years);
-    return date.toISOString().split("T")[0];
-  };
-  
-  const minBirthDate = calculateMinBirthDate(5);
+    const date = new Date()
+    date.setFullYear(date.getFullYear() - years)
+    return date.toISOString().split("T")[0]
+  }
 
+  const minBirthDate = calculateMinBirthDate(5)
 
   useEffect(() => {
     if (user) {
-      setFormData(user)
+      setFormData({
+        id: user.id,
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
+        phone: user.phone || "",
+        role: user.role || "",
+        birthdate: user.birthdate || "1990-01-01",
+        addressDto: {
+          street: user.addressDto?.street || "",
+          building: user.addressDto?.building || "",
+          numberApartment: user.addressDto?.numberApartment || "",
+          indexNum: user.addressDto?.indexNum || "",
+          country: user.addressDto?.country || "",
+          city: user.addressDto?.city || "",
+        },
+      })
     }
   }, [user])
 
@@ -141,7 +155,7 @@ const PersonalPage: FC = () => {
                 placeholder={t("personalPage.name")}
                 value={formData.firstName}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border rounded "
+                className="w-full px-3 py-2 border rounded"
               />
               <p className="text-gray-400">{t("personalPage.phone")}</p>
               <input
@@ -159,7 +173,7 @@ const PersonalPage: FC = () => {
                 type="text"
                 name="addressDto.street"
                 placeholder={t("personalPage.street")}
-                value={formData?.addressDto?.street}
+                value={formData.addressDto?.street}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded"
               />
@@ -179,7 +193,7 @@ const PersonalPage: FC = () => {
                 type="number"
                 name="addressDto.numberApartment"
                 placeholder={t("personalPage.numberApartment")}
-                value={formData.addressDto?.numberApartment}
+                value={formData?.addressDto?.numberApartment}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded"
               />
@@ -239,7 +253,7 @@ const PersonalPage: FC = () => {
           <button
             id="update-button"
             type="submit"
-            form="updateForm"
+            form="update-form"
             className="px-4 py-2 rounded bg-blue-500 text-white hover:bg-yellow-400 mt-9"
           >
             {t("personalPage.update")}

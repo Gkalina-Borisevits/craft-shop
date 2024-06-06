@@ -63,7 +63,7 @@ const OurProjects: FC = () => {
               {t("storeProduct.buttonAddCard")}
             </button>
             {isAddingProduct && (
-              <OurProjectForm onClose={handleCloseProductCreator} />
+              <OurProjectForm onClose={handleCloseProductCreator} />           
             )}
           </div>
         )}
