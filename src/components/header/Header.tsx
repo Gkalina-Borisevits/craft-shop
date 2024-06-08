@@ -229,7 +229,7 @@ const Header: FC = () => {
             >
               <div className="bg-white rounded shadow-lg z-50">
                 <ProductCart />
-                <p className="text-black">Price: {cartTotalAmount(items)} $ </p>
+                <p className="text-black bg-white ">Price: {cartTotalAmount(items)} $ </p>
               </div>
             </div>
           )}

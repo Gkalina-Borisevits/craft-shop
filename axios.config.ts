@@ -8,9 +8,7 @@ const api = axios.create({
 
 const refreshToken = async () => {
   try {
-    const response = await api.post("/refresh", null, {
-      withCredentials: true,
-    });
+    const response = await api.post("/refresh");
     const { accessToken, refreshToken } = response.data;
 
     Cookies.set("Access-Token", accessToken);
@@ -37,7 +35,9 @@ api.interceptors.response.use(
         error.config.headers.Authorization = `Bearer ${newAccessToken}`;
         return api(error.config);
       } catch (refreshError) {
+        console.error("Не удалось обновить токен", refreshError);
         return Promise.reject(refreshError);
+      
       }
     }
     return Promise.reject(error);
