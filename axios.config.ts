@@ -2,13 +2,15 @@ import axios from "axios"
 import Cookies from "js-cookie"
 
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: "http://localhost:8080/api",
   withCredentials: true,
 });
 
 const refreshToken = async () => {
   try {
+    console.log("Запрос на обновление токенов");
     const response = await api.post("/refresh");
+    console.log("Ответ на обновление токенов", response.data);
     const { accessToken, refreshToken } = response.data;
 
     Cookies.set("Access-Token", accessToken);
@@ -20,6 +22,7 @@ const refreshToken = async () => {
     throw error;
   }
 };
+
 
 api.interceptors.response.use(
   response => response,
