@@ -20,12 +20,12 @@ const PersonalPage: FC = () => {
   const viewUserRoleForm = role === "ADMINISTRATOR" || role === "MODERATOR"
 
   const [formData, setFormData] = useState<User>({
-    id: 0,
+    id: user?.id,
     email: user?.email,
     firstName: "",
     lastName: "",
     phone: "",
-    role: "",
+    role: user?.role,
     birthdate: "1990-01-01",
     addressDto: {
       street: "",
@@ -49,6 +49,7 @@ const PersonalPage: FC = () => {
     if (user) {
       setFormData({
         id: user.id,
+        email: user?.email || "",
         firstName: user.firstName || "",
         lastName: user.lastName || "",
         phone: user.phone || "",
